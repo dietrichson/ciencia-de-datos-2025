@@ -1,0 +1,10 @@
+---
+title: "presentacion"
+author: "Agustina Franconieri"
+date: 2025-08-04
+format: html
+---
+
+## Presentacion
+
+Soy Agustina Franconieri. Me llaman agus. Soy estudiante de comunicacion en la Universidad de San Martin(UNSAM)
