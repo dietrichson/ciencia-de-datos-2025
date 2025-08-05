@@ -9,7 +9,7 @@ Este repositorio contiene los archivos y códigos del seminario de ciencia de da
 
 ## Materiales de apoyo:
 
-Métodos cuantitativos (https://dietrichson.github.io/metodos_cuantitativos_2/)[link]
+Métodos cuantitativos [https://dietrichson.github.io/metodos_cuantitativos_2/](link)
 
 ## Presentaciones y notas:
 
