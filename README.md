@@ -9,10 +9,14 @@ Este repositorio contiene los archivos y códigos del seminario de ciencia de da
 
 ## Materiales de apoyo:
 
-Métodos cuantitativos
-Presentaciones y notas:
-Seminario de Ciencia de Datos: Presentaciones y Notas
-Antes de empezar
+Métodos cuantitativos (https://dietrichson.github.io/metodos_cuantitativos_2/)[link]
+
+## Presentaciones y notas:
+
+Aparecerán acá las presentaciones y notas de clase
+
+## Antes de empezar
+
 Abrir una cuenta en github (https://github.com/)
 Abrir una cuenta en posit.cloud (https://posit.cloud/)
 Asociar la cuenta de github con la de posit
