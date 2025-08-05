@@ -7,7 +7,4 @@ format: html
 
 ## Presentacion
 
-Soy Agustina Franconieri. Me llaman agus. Soy estudiante de comunicacion en la Universidad de San Martin(UNSAM)
-Soy Agustina Franconieri. Me llaman agus. Soy estudiante de comunicacion en la Universidad de San Martin(UNSAM).
-
 ## Tipos de datos que me gustan
