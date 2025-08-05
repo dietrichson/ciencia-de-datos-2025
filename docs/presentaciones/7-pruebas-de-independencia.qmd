@@ -1,0 +1,191 @@
+---
+title: "Pruebas de independencia"
+author: "Aleksander Dietrichson, PhD"
+format: 
+  revealjs: 
+    code-line-numbers: false
+    echo: true
+    theme: dark
+    chalkboard: true
+editor: visual
+---
+
+```{r}
+#| include: false
+
+library(tidyverse)
+library(bayestestR)
+library(ggdark)
+theme_set(ggdark::dark_theme_bw())
+
+options(scipen=999)
+set.seed(98)
+```
+
+## Agenda de hoy
+
+-   Prueba the T de Student
+
+-   Prueba de U de Mann-Whitney
+
+-   Nuevos datos
+
+-   Revisión de las tares
+
+## Prueba de T de Student
+
+Si las muestras son independientes
+
+-   Compara dos muestras de una variable de nivel de *ratio*
+
+-   Permite determinar si las dos muestras provinieron de la misma población (estadística) o no.
+
+-   La hipótesis nula siempre es que no hay diferencia entre *la media* de las dos muestras
+
+## Requisitos
+
+Para usar el test de t es necesario que:
+
+-   La variable sea de nivel de medición *ratio*
+
+-   Las muestras tengan varianza parecida.
+
+-   Las muestras tengan una distribución razonablemente similar a una normal[^1].
+
+-   otros...
+
+[^1]: Esto es negociable
+
+## Ejemplo
+
+Quiero saber si el ingreso total familiar es igual en las grandes ciudades que en las pequeñas.
+
+```{r}
+  my_data <- readRDS("/cloud/project/data/datos_indec.rds") 
+  my_data <- my_data |> select(ITF,MAS_500) #Seleciono columnas relevantes
+```
+
+```{r}
+my_data |>
+  group_by(MAS_500) |> 
+  summarize(
+    Media = mean(ITF)
+  )
+```
+
+Parecería haber una diferencia
+
+## ¿Tienen la misma varianza?
+
+Tenemos a disposición el test de Fisher
+
+En R: `var.test`. La hipótesis nula es:\
+$$
+{\sigma²_1\over{\sigma²_2}} = 1
+$$
+
+-   Si las varianzas de las dos muestras son iguales su ration debe ser 1.
+
+## ¿Tienen la misma varianza?
+
+```{r}
+  # Hacemos dos conjuntos de datos
+  grandes <- my_data |> filter(MAS_500=="S")
+  peques  <- my_data |> filter(MAS_500 == "N")
+  # Aplicamos test
+  var.test(grandes$ITF, peques$ITF)
+```
+
+Acá **NO** la tiene. ¿qué más podemos interpretar?
+
+## ¿Es normal la distribución?
+
+Usando el test de Shapiro-Wilks (para muestras N\<5000)
+
+Nuestra hipotesis nula acá es que la distribución se asemeja a **normal**
+
+$$
+H_0: X\sim{\mathcal{N}}
+$$
+
+## Ejemplo
+
+```{r}
+my_data <- readRDS("/cloud/project/data/datos_indec.rds") |> 
+  sample_n(1000) #hago una muestra de mil
+shapiro.test(my_data$ITF)
+
+```
+
+Rechazamos la hipotesis nula
+
+## Conclusiones
+
+La prueba de T de Student **NO** es apropriado para comparar los ingresos de estas dos poblaciones.
+
+### Opciones:
+
+-   Transformar los datos (p.e. con log)
+
+-   Eliminar observaciones extremas (outliers)
+
+-   Usar un test no paramétrico
+
+## Prueba U de Mann-Whitney
+
+-   Compara dos muestras de una variable de nivel de *ratio*, *ordinal* o *intervalo*
+
+-   Permite determinar si las dos muestras provinieron de la misma población (estadística) o no, comparando *la mediana*.
+
+-   La hipótesis nula siempre es que no hay diferencia entre las dos muestras.
+
+-   También se conoce como Wilcox y de ahí proviene la nombre de la función en R.
+
+## Algoritmo
+
+Se ordenan las observaciones por magnitud (Se rankean?). Si no hay diferencia ($H_0$) entre las dos muestras deberían aparecer intercaladamente. Si hay diferencia una de las dos muestras va a predominar uno en el lado inferior y otra en el lado superior.
+
+Ej: beberían aparecer GPGPGPGPGPGPGPG.... ($H_0$)
+
+## Ejemplo
+
+```{r}
+  my_data <- readRDS("/cloud/project/data/datos_indec.rds") 
+  my_data <- my_data |> select(ITF,MAS_500) #Seleciono columnas relevantes
+  grandes <- my_data |> filter(MAS_500=="S")
+  peques  <- my_data |> filter(MAS_500 == "N")
+
+```
+
+```{r}
+wilcox.test(grandes$ITF,peques$ITF)
+```
+
+Rechazamos la hipótesis nula y nos quedamos con la hipotesis alternativa de una diferencia.
+
+Si R tira una `warning` la vamos a ignorar por ahora (hay otro paquete que podemos usar más adelante para tener un valor p exacto).
+
+## Datos nuevos
+
+Hay datos «frescos» del indec. Son del cuarto trimestre de 2023.
+
+Vamos a acceder a la encuesta *individual* ya que tiene algunas variables adicionales que pueden ser interesantes:
+
+-   Sexo (genero)
+
+-   Nivel educativo
+
+-   Escolaridad
+
+-   etc...
+
+## Datos nuevos ETL
+
+```{r}
+#| eval: false
+# ETL para procesar datos del indec
+library(tidyverse)
+my_data <- readr::read_delim("./data/usu_individual_T423.txt",
+                             delim = ";", guess_max = 10000)
+readr::write_rds(my_data, file = "./data/usu_individual_T423.rds")
+```

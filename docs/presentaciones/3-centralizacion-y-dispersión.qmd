@@ -1,0 +1,206 @@
+---
+title: "Revisión de la teoría"
+author: "Aleksander Dietrichson, PhD"
+date: 2025-04-14
+format: 
+  revealjs: 
+    code-line-numbers: false
+    echo: true
+    theme: dark
+    chalkboard: true
+editor: visual
+---
+
+## Agenda de hoy
+
+-   El concepto de variable
+
+    -   en estadística (y otras disciplinas)
+
+    -   en lenguajes de programación
+
+-   Centralización y Dispersión
+
+-   Instalar y acceder al `tidyverse`
+
+-   Aplicar conceptos a los datos del Indec
+
+## Variables: Estadística
+
+-   Nominal
+
+    -   Ej: Sexo (M/F), nombre, DNI (¿podés sumarlos?)
+
+-   Ordinal
+
+    -   Ej: «star-rating»
+
+-   Intervalo
+
+    -   Temperatura
+
+-   Razón (Ratio o racional)
+
+    -   Ej: Edad, ingreso, numero de hijos
+
+## Variables nominales en R
+
+Se expresan con vectores de tipo character (eventualmente factor)
+
+```{r}
+sexo <- c("M","F","M","F")
+nombre <- c("Jorge","Marìa","Jorge","Cecilia")
+```
+
+Se pueden armar tablas de frecuencias con `table`
+
+```{r}
+table(sexo)
+```
+
+```{r}
+table(nombre)
+```
+
+## Variables nominales en R
+
+Se pueden visualizar con p.ej. `barplot`
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+barplot(table(sexo))
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+barplot(table(nombre))
+```
+:::
+:::::
+
+## Variables ordinales en R
+
+Se pueden expresar como vectores de characteres con niveles asignados.
+
+```{r}
+ratings <- c("muy bueno","muy  bueno","muy  bueno","bueno","regular",
+             "regular","malo","malo","muy malo")
+```
+
+Para saber qué es mejor/peor se arma una variable de tipo `factor` con los niveles y `ordered = TRUE`
+
+```{r}
+rating_con_niveles <- 
+  factor(ratings, 
+         levels = c("muy bueno","bueno", "regular", "malo", "muy malo"), #en orden acá
+         ordered = TRUE)
+```
+
+## Variables ordinales en R
+
+y visualizar
+
+```{r}
+barplot(table(rating_con_niveles))
+```
+
+A veces se expresan con números (rating 1 a 5) lo cual puede resultar confuso. La clasificación es **conceptual.**
+
+## Variables de intervalo en R
+
+Se expresan generalmente con `numeric`
+
+```{r}
+temperatura_en_buenos_aires <- sample(20:30, size = 20, replace = 2)
+```
+
+Y se pueden visualizar como histograma
+
+```{r}
+hist(temperatura_en_buenos_aires)
+```
+
+Por qué el de intervalo?
+
+## Variables de ratio en R
+
+Se expresan con numérico en R.
+
+```{r}
+cociente_de_intelligencia <- rnorm(1000,100,15)
+```
+
+```{r}
+head(cociente_de_intelligencia)
+```
+
+## Variables de ratio en R
+
+Y se visualizan con histograma
+
+```{r}
+hist(cociente_de_intelligencia)
+```
+
+## Centralización
+
+Contesta a la pregunta: ¿cuál es el valor más típico del conjunto?
+
+Las principales son:
+
+-   La media
+
+-   La mediana
+
+-   La moda
+
+## Centralización
+
+Contesta a la pregunta: ¿cuál es el valor más típico del conjunto?
+
+Las principales son:
+
+-   La media: Intervalo y ratio
+
+-   La mediana: Intervalo y ratio
+
+-   La moda: Nominales y ordinales
+
+## Dispersión
+
+Contesta a la pregunta: ¿cuán típico es el valor más típico?
+
+-   La desviación estándar
+
+-   Desviación mediana absoluta (mad)
+
+-   Rango
+
+-   Rango intercuartílico
+
+-   y muchos otros...
+
+## Tidyverse
+
+Es un conjunto de packetes que vamos a usar para análisis de datos
+
+se instala con:
+
+```{r}
+#| eval: false
+install.packages("tidyverse")
+```
+
+desde la consola.
+
+## Datos del indec
+
+Revisamos la tarea a ver qué variables vamos a analizar.
+
+-   ¿Como llamarlos?
+
+-   ¿Hay que transformar alguna?
+
+-   ¿Qué preguntas podemos hacer?

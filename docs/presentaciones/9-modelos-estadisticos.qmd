@@ -1,0 +1,130 @@
+---
+title: "Modelos Estadísticos"
+subtitle: "Regresión lineal"
+author: "Aleksander Dietrichson, PhD"
+format: 
+  revealjs: 
+    code-line-numbers: false
+    echo: true
+    theme: dark
+    chalkboard: true
+editor: visual
+---
+
+```{r}
+#| include: false
+
+library(tidyverse)
+library(bayestestR)
+library(ggdark)
+theme_set(ggdark::dark_theme_bw())
+
+options(scipen=999)
+set.seed(98)
+```
+
+## Agenda de hoy
+
+-   Modelos Estadísticos lineales
+
+-   Modelos de regressión lineal
+
+-   (Datos de texto)
+
+-   Presentación de resultados con Quarto
+
+    -   Reutilizar funciones de visualización
+
+-   Planificación del proyecto
+
+-   Revisión de las tares
+
+## Modelos estadísticos lineales
+
+Se refiere a una famila de modelos estadísticos que intentan describir la relación entre dos variables con alguna función lineal.
+
+```{r}
+my_data <- readRDS(here::here("data/usu_individual_T423.rds")) #<1>
+my_data <- my_data |> select(NIVEL_ED,P21, CH04) |> #<2>
+  filter(P21>0, NIVEL_ED <9) |> #<3>
+  mutate(NIVEL_ED = ifelse(NIVEL_ED == 7,0,NIVEL_ED)) #<4>
+```
+
+1.  Encuesta permanente individual 2023
+2.  Selecciono NIVEL_ED = nivel educativo y P21 = ingreso de la actividad principal
+3.  Removemos los ingresos 0 y el nivel educativo de 9, que es un código de «sin datos».
+4.  7 es el código de «sin instrucción» lo pongo en cero para tener una escala de 0 a 7.
+```{r}
+#| include: false
+my_data <- my_data |>   mutate(sexo = ifelse(CH04 == 1, "varón", "mujer"))
+
+```
+
+
+## Modelos estadísticos lineales
+
+```{r}
+my_data |> 
+  ggplot(aes(NIVEL_ED,P21))+
+  geom_point()+
+  geom_smooth(method = "lm")+
+  scale_y_log10()
+```
+
+## Modelos estadísticos lineales
+
+Vemos que hay una relación entre las dos variables.
+
+Fórmula:
+
+$$
+y \sim \beta_0 + \beta_1 + \epsilon
+$$
+
+-   y tiene que ser de ratio, las demás pueden ser de cualquier nivel de medición.
+
+-   $\beta_0$ a veces se denomina $\alpha$ y a veces se omite. Representa el valor de y en el punto que cruza el eje vertical.
+
+-   $\beta_1$ en este caso en «nivel educatico»
+
+-   $\epsilon$ es el «error» es decir la parte de la varianza que no se explica por las variables que hemos usado.
+
+## Modelos estadí­sticos lineales
+
+Agreguemos una variable
+
+```{r}
+#| echo: false
+my_data |> 
+  ggplot(aes(NIVEL_ED,P21, color = sexo))+
+  geom_point()+
+  geom_smooth(method = "lm")+
+  scale_y_log10()
+```
+
+## Modelos estadísticos lineales
+
+Ahroa agregamos un término en la fórmula
+
+$$
+y \sim \beta_0 + \beta_1 + \beta_2+ \epsilon
+$$
+
+-   $\beta_2$ que es «sexo»
+
+Fórmula general:
+$$
+y \sim \beta_0 + \beta_1 + ... +\beta_n + \epsilon
+$$
+Para un módelo con n variables. 
+
+## Modelos estadísticos lineales
+
+Lo podemos hacer en R con la función `lm` (lm = linear model)
+
+```{r}
+my_model <- lm(P21 ~ NIVEL_ED + sexo, data = my_data)
+my_model |> 
+  summary()
+```
+

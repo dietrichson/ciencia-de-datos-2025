@@ -1,0 +1,26 @@
+---
+title: "Seminario de Ciencia de Datos"
+format:
+  html:
+    theme: darkly
+    css: styles.css
+---
+
+## Presentaciones y Notas
+
+
+### Clase 1: Arranque
+* [Arranque](presentaciones/1-inicio-y-setup.html)
+* [Presentación Aleksander Dietrichson](presentacion.html)
+
+### Clase 2: Admin y R
+* [Admin y R](presentaciones/2-sincronizar-repositorios-primer-codigo-y-analysis.html)
+* [Presentación](notas-de-la-clase-2025-04-07.html)
+* [Primer análisis Indec](Primer-analysis.html)
+
+### Clase 3: Revisión de la teoría
+* [Revisión de la teoría](presentaciones/3-centralizacion-y-dispersión.html)
+* [Notas de la clase 2025-04-14](notas-de-la-clase-2025-04-14.html)
+
+### Clase 4: Método científico. Manipulación de datos.
+* [Método científico. Manipulación de datos.](presentaciones/4-metodo-científico.html)

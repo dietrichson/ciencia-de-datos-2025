@@ -1,0 +1,248 @@
+---
+title: "Probabilidad y estimación de parámetros"
+author: "Aleksander Dietrichson, PhD"
+format: 
+  revealjs: 
+    code-line-numbers: false
+    echo: true
+    theme: dark
+    chalkboard: true
+editor: visual
+---
+
+```{r}
+#| include: false
+
+library(tidyverse)
+library(bayestestR)
+library(ggdark)
+theme_set(ggdark::dark_theme_bw())
+
+options(scipen=999)
+```
+
+## Agenda de hoy
+
+-   Tareas de limpieza
+
+-   Revisión de las tares
+
+-   $\chi^2$ para tablas de más de 2 $\times$ 2
+
+-   Probabilidad y estimación de parámetros
+
+-   Repaso de operaciones con `dplyr`
+
+-   Visualizar relaciones entre variables
+
+-   Armar funciones en R
+
+## La curva normal
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+library(bayestestR)
+
+#library()
+x <- distribution_normal(n = 100, mean = 0, sd = 1)
+x %>% 
+  density() %>%  # Compute density function
+  as.data.frame() %>% 
+  ggplot(aes(x=x, y=y)) +
+  geom_line()+
+  ggdark::dark_theme_minimal()
+```
+
+## Propiedades de la curva normal
+
+```{r}
+#| echo: false
+x %>% 
+  density() %>%  # Compute density function
+  as.data.frame() %>% 
+  ggplot(aes(x=x, y=y)) +
+  geom_line()+
+  ggdark::dark_theme_minimal()+
+  annotate("text",x=0,y=.4,label="Media, mediana, moda",hjust=0)+
+  annotate("segment",x=0,xend=0,y=0,yend=.38)
+```
+
+## Relación con test de hipótesis
+
+```{r}
+#| label: fig-normal-curve-with-cuts
+#| echo: false
+#| warning: false
+#| fig.cap: 'Área debajo de la curva normal'
+
+x <- distribution_normal(n = 100, mean = 0, sd = 1)
+x %>% 
+  density() %>%  # Compute density function
+  as.data.frame() ->tmp
+myCuts <- sd(x)*seq(-3,3,1)
+names(myCuts) <- seq(-3,3,1)
+
+tmp %>% 
+  ggplot(aes(x=x, y=y)) +
+  geom_line()+
+  geom_area(position = "identity", data=tmp %>%  filter(between(x,myCuts[3],myCuts[5])),fill='darkred')+
+  geom_area(position = "identity", 
+            data = tmp %>%  
+              filter(between(x,myCuts[2],myCuts[3])),
+            fill='red')+
+  geom_area(position = "identity", data = tmp %>% filter(between(x,myCuts[5],myCuts[6])), fill='red')+
+  geom_area(position = "identity", data = tmp %>% filter(x<myCuts[2]), fill='pink')+
+  geom_area(position = "identity", data = tmp %>% filter(x>myCuts[6]), fill='pink')+
+  geom_area(position = "identity", data = tmp %>% filter(x>myCuts[7]), fill='gray')+
+  geom_area(position = "identity", data = tmp %>% filter(x<myCuts[1]), fill='gray')+
+  ## Add vertical line for mean
+  annotate("segment",x=0,xend=0,y=0,yend=max(tmp$y), color='white')+
+  annotate("text",x=c(myCuts[3],myCuts[4]),y=c(.2,.2),label="34,1%",hjust=-.4, color="white", cex=5)+
+  annotate("text",x=c(myCuts[2],myCuts[5]),y=c(.09,.09),label="13,6%",hjust=c(-.4,-.2), color="white", cex=5)+
+  annotate("text",x=c(myCuts[1],myCuts[6]),y=c(.1,.1),label="2,1%",hjust=c(-.4,-.5), cex=5)+
+  annotate("text",x=c(min(x),max(x)),y=c(.07,.07),label="0,1%",hjust=c(2,-1.5), cex=5)+
+  dark_theme_minimal()+
+  annotate("segment",x=sd(x)*-2.5,xend=sd(x)*-2.5,y=0.03,yend=.09)+
+  annotate("segment",x=sd(x)*2.5,xend=sd(x)*2.5,y=0.03,yend=.09)+
+  annotate("segment",x=sd(x)*-2.5,xend=sd(x)*-2.5,y=0.03,yend=.09)+
+  annotate("segment",x=sd(x)*-3.3,xend=sd(x)* -3.3,y=0,yend=.06)+
+  annotate("segment",x=sd(x)* 3.3,xend=sd(x)*  3.3,y=0,yend=.06)+
+  scale_x_continuous(breaks=myCuts,labels=paste0(names(myCuts),"\u03C3"))
+```
+
+## Variables normalizadas
+
+::: columns
+::: {.column width="50%"}
+$$
+  z = {x-\bar{x}\over{\sigma}}
+$$
+
+$$
+  z = {x-\bar{x}\over{s}}
+$$
+:::
+
+::: {.column width="50%"}
+-   z: la variable normalizada
+-   x: una observación de X
+-   $\bar{x}$: la media de las observaciones
+-   $\sigma$ o s: la desviación estándar
+:::
+:::
+
+## Variables normalizada: ejemplo
+
+```{r}
+my_data <- readRDS("/cloud/project/data/datos_indec.rds")
+ingreso <- my_data$ITF
+ingreso_relativo <- scale(ingreso)
+mean(ingreso_relativo)
+sd(ingreso_relativo)
+```
+
+-   Esto nos permite comparar variables a diferente escala
+
+-   Es la base de nuestos tests de hipótesis
+
+## Variables normalizada: ejemplo
+
+```{r}
+my_data |> 
+  mutate(ingreso_relativo = scale(ITF)) |> 
+  ggplot(aes(ingreso_relativo))+
+  geom_histogram()
+```
+
+## Variables normalizadas: ejemplo
+
+```{r}
+my_data |> 
+  mutate(ingreso_relativo = scale(ITF)) |> 
+  ggplot(aes(ingreso_relativo))+
+  geom_histogram()+
+  scale_x_log10() # escala de log10 en el eje horizontal
+```
+
+## Estimacion de parámetros
+
+```{r}
+#| echo: false
+polulation <- distribution_normal(n=100, mean=0, sd = 1)
+mySample <- distribution_normal(n=20, mean=0, sd = .7)
+
+mySample %>% 
+  density() %>%  # Compute density function
+  as.data.frame() %>% 
+  mutate(Tipo="Muestra") -> tmp
+polulation %>% 
+  density() %>% 
+  as.data.frame() %>% 
+  mutate(Tipo="Población") %>% 
+  bind_rows(tmp) %>% 
+  mutate(Tipo = fct_relevel(Tipo,"Población", "Muestra")) -> tmp
+tmp %>% 
+  ggplot(aes(x=x, y=y, color=Tipo)) +
+  geom_line()+
+  dark_theme_minimal()
+```
+
+## Error estándar
+
+::: columns
+::: {.column width="50%"}
+$$
+SE = {\sigma\over{\sqrt{N}}}
+$$
+
+$$ 
+SE = {s\over{\sqrt{N}}}
+$$
+:::
+
+::: {.column width="50%"}
+-   SE: el error estándar (por sus siglas en inglés «**S**tandard **E**rror»)
+-   $\sigma$ o s: la desviación estándar de la población
+-   N: número de observaciones de la muestra
+:::
+:::
+
+## Error estándar: ejemplo
+
+```{r}
+muestra <-sample(my_data$ITF, size = 100) #Muestra de 100
+SE <- sd(muestra)/sqrt(length(muestra))
+SE
+```
+
+```{r}
+conf68 <- c(mean(muestra)-SE, mean(muestra))
+conf95 <- c(mean(muestra)-SE*1.96, mean(muestra) + SE*1.96)
+conf99 <- c(mean(muestra)-SE*2.58, mean(muestra) + SE*2.58)
+```
+
+```{r}
+mean(muestra)
+conf95
+```
+
+## Visualizar relaciones entre variables
+
+```{r}
+my_data |> 
+  ggplot(aes(ITF,IPCF))+
+  geom_point()
+```
+
+## Visualizar relaciones entre variables
+
+```{r}
+my_data |> 
+  ggplot(aes(ITF,IPCF))+
+  geom_point()+
+  scale_x_log10()+
+  scale_y_log10()
+```

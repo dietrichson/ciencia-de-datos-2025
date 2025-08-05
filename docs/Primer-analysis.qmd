@@ -1,0 +1,38 @@
+---
+title: "Primer análisis Indec"
+date: 2025-04-07
+format: html
+editor: visual
+---
+
+## Datos
+
+Los datos son datos públicos disponibles en la pagina web del Indec. Son de la encuesta permanente de hogares.
+
+```{r}
+#| include: false
+filename <- "../data/usu_individual_T324.txt"
+file.exists(filename)
+my_data <- readr::read_delim(filename, delim = ";")
+```
+
+## Análisis de la variable Edad
+
+Es una variable de nivel de ratio o razón. Porque 2 es la mitad 4. Es una variable discreta.
+
+```{r}
+#| echo: false
+edad <- my_data$CH06
+mean(edad)
+```
+
+```{r}
+#| echo: false
+hist(edad)
+```
+
+Lo mismo "directo"
+
+```{r}
+hist(my_data$CH06, xlab = "Distribucion de Edad", main = "Edad en la Argentina")
+```

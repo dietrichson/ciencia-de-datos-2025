@@ -1,0 +1,26 @@
+---
+title: "Presentación Aleksander Dietrichson"
+author: "Aleksander Dietrichson"
+date: 2025-03-31
+format: html
+editor: visual
+---
+
+## Presentacion
+
+### Quien soy
+
+Soy Aleksander Dietichson. Soy profesor de ciencia de datos en UNSAM.
+
+Soy noruego.
+
+### Datos que me gustan analizar
+
+Datos del indec, logs de videojuegos, conjuntos de datos del banco mundial. Textos periodisticos.
+
+### Conocimientos técnicos
+
+Sé R, python, C++ (lenguajes de programación)
+
+Trabajo mucho con gemini (modelo LLM de google).\
+Hago también applicaciones de smartphone.

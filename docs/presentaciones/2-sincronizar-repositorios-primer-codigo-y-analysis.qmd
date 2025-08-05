@@ -1,0 +1,61 @@
+---
+title: "Admin y R"
+subtitle: "Sincronización de repositorios y primeros pasos en R"
+author: "Aleksander Dietrichson, PhD"
+date:  2025-04-07
+format:
+  revealjs: 
+    theme: dark
+    chalkboard: true
+editor: visual
+---
+
+## Agenda para hoy
+
+-   Sincronizar con el repositorio
+
+-   Sus introducciónes
+
+-   Primer Código en R
+
+-   Revisar las lecturas
+
+-   Análisis de datos reales.
+
+## Sincronizar
+
+Antes de empezar a trabajar en posit.cloud (instancia de Rstudio) hacemos *pull*
+
+![](images-2/Rstudio-pull.png)
+
+## Primer código R
+
+Se puede ejecutar código R de varias maneras. Las más importantes son:
+
+-   En consola
+-   En un script de R
+-   En un bloque dentro de un documento *Quarto*
+
+## Código R: consola
+
+![](images-2/en-consola.png)
+
+## Código R: Script
+
+![](images-2/en-script.png)
+
+## Código R: Dentro de archivos *quarto*.
+
+![](images-2/en-quarto.png)
+
+## Revisar lecturas
+
+Revisemos el cápitulo 1 con ejemplos en R
+
+## Análisis de datos reales
+
+Vemos datos del INDEC
+
+-   <https://www.indec.gob.ar/indec/web/Institucional-Indec-BasesDeDatos>
+
+-   <https://www.indec.gob.ar/ftp/cuadros/menusuperior/eph/EPH_registro_3T2023.pdf>

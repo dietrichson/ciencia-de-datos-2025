@@ -1,0 +1,121 @@
+---
+title: "Notas de la clase 2025-04-14"
+author: "Aleksander Dietrichson"
+date: 2025-04-14
+format: html
+editor: visual
+---
+
+## Datos
+
+```{r}
+#| include: false
+filename <- "../data/usu_individual_T324.txt"
+file.exists(filename)
+datos_crudos <- readr::read_delim(filename, delim = ";")
+```
+
+```{r}
+library(dplyr)
+my_data <- datos_crudos |>  
+  transmute(
+    salario = PP08D1, 
+    sexo = CH04,
+    nivel_educativo = NIVEL_ED,
+    edad = CH06
+  ) |>
+  mutate(salario = ifelse(salario<0,NA,salario)) |>
+  mutate(sexo = ifelse(sexo == 1, "Hombre","Mujer"))
+```
+
+## El uso de pipe
+
+Es el simbolo \|\>
+
+barplot(table(my_data))
+
+my_data \|\>
+
+table() \|\>
+
+barplot()
+
+```{r}
+my_data |>
+  group_by(sexo) |>
+  summarize(
+    Salario_promedio = mean(salario, na.rm = TRUE)
+  )
+```
+
+### Distribucion de la variable sexo
+
+```{r}
+table(my_data$sexo)
+```
+
+```{r}
+my_data$sexo |>
+  table()
+```
+
+## Visualizaciones
+
+```{r}
+my_data$sexo |>
+  table() |>
+  barplot()
+```
+
+```{r}
+my_data$sexo |>
+  table() |>
+  pie()
+```
+
+```{r}
+my_data$salario |>
+  hist()
+```
+
+## Con ggplot
+
+```{r}
+library(ggplot2)
+my_data |>
+  ggplot(aes(edad,salario, color = sexo))+
+  geom_point()
+  
+```
+
+```{r}
+my_data |>
+  ggplot(aes(edad,salario, color = sexo))+
+  geom_smooth(method = "lm")
+```
+
+```{r}
+my_data |>
+  ggplot(aes(edad,salario, color = sexo))+
+  geom_smooth()
+```
+
+## Tarea
+
+-   Generar un conjunto de datos con tres o más variables partiendo de los datos del indec.
+
+-   Usar las transformaciones que sean necesarias para poder analizar los datos.
+
+-   Analizar con `table`, `group_by` + `summarize`\`
+
+    -   Cual es la medida de centralización adecuada
+
+    -   Cómo medir la dispersión
+
+-   Realizar una vialización
+
+## Lecturas
+
+-   Capitulo 3 del libro
+
+-   Capitulo 6 (Test de hipótesis).

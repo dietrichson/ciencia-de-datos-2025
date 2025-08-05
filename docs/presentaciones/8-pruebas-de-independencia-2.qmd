@@ -1,0 +1,235 @@
+---
+title: "Pruebas de independencia II"
+subtitle: "Muestras pareadas"
+author: "Aleksander Dietrichson, PhD"
+format: 
+  revealjs: 
+    code-line-numbers: false
+    echo: true
+    theme: dark
+    chalkboard: true
+editor: visual
+---
+
+```{r}
+#| include: false
+
+library(tidyverse)
+library(bayestestR)
+library(ggdark)
+theme_set(ggdark::dark_theme_bw())
+
+options(scipen=999)
+set.seed(98)
+```
+
+## Agenda de hoy
+
+-   Prueba the T de Student para muestras pareadas
+
+-   Alternativas no-paramétricas
+
+-   Interpretación de resultados
+
+-   Presentación de resultados con Quarto
+
+    -   «decoradores» `#|`
+
+    -   Intercalar código con texto
+
+    -   yaml
+
+    -   bibliografía
+
+-   Revisión de las tares
+
+## Prueba de T de Student
+
+Si las muestras son dependientes también hay un test de t de student.
+
+-   Compara dos mediciones de la misma variable en dos tiempos distintos pero en el mismo sujeto
+
+-   Ejemplos: antes/despues, con/sin medicación
+
+-   La hipótesis nula siempre es que no hay diferencia entre *la media* de las dos muestras
+
+## Requisitos
+
+Para usar el test de t es necesario que:
+
+-   La variable sea de nivel de medición *ratio*
+
+-   Las muestras tengan varianza parecida.
+
+-   Las muestras tengan una distribución razonablemente similar a una normal[^1].\
+
+[^1]: Esto es negociable
+
+::: callout-note
+SON LOS MISMOS
+:::
+
+## ¿Qué estamos midiendo?
+
+::: columns
+::: {.column width="60%"}
+```{r}
+#| echo: false
+#| 
+data.frame(antes = sample(1:10,10,TRUE),despues = sample(1:10,10,TRUE)) |> 
+  mutate(diferencia = despues - antes) |> head(8) |> 
+  knitr::kable() 
+```
+:::
+
+::: {.column width="40%"}
+-   Nuestra hipótesis nula es que no hay diferencia ($\Delta = 0$)
+
+-   Si la diferencia ($\Delta$) es distinta a cero ($\Delta\neq0$) podemos calcular la probabilidad de que eso ocurra al azar.
+:::
+:::
+
+## Ejemplo
+
+Quiero saber si el ingreso total familiar cambió significativamente entre el 4to trimestre del 22 al 4to trimestre del 23.
+
+Conseguí en el sitio del indec los datos del 4to trimestre del 22 y del 23. Los procesé de la misma manera que antes y los guardé en archivos .rds en ./data
+
+```{r}
+usu_hogar_T423 <- readRDS(here::here("data/usu_hogar_T423.rds"))
+usu_hogar_T422 <- readRDS(here::here("data/usu_hogar_T422.rds"))
+```
+
+Vemos rápido:
+
+```{r}
+nrow(usu_hogar_T423)
+nrow(usu_hogar_T422)
+```
+
+Hay alguna discrepancia así que hay que limpiar un poco.
+
+## Ejemplo
+
+```         
+En ellas, cada registro tiene un número de identicación (CODUSU), que permite
+relacionar una vivienda con los hogares...
+```
+
+Solo nos interesan los datos que sean comparables entre los dos conjuntos.
+
+```{r}
+mis_CODUSU <- intersect(usu_hogar_T422$CODUSU,usu_hogar_T423$CODUSU) 
+length(mis_CODUSU)
+```
+
+```{r}
+usu_hogar_T422 <- usu_hogar_T422 |> 
+  filter(CODUSU %in% mis_CODUSU) |> 
+  arrange(CODUSU)
+usu_hogar_T423 <- usu_hogar_T423 |> 
+  filter(CODUSU %in% mis_CODUSU) |> 
+  arrange(CODUSU)
+```
+
+## Ejemplo
+
+Verificamos:
+
+```{r}
+nrow(usu_hogar_T422)
+nrow(usu_hogar_T423)
+```
+
+¿por qué hay discrepancia?
+
+## Ejemplo
+
+Limpiemos un poco más. Como estamos mirando sólo el ITF, podemos eliminar los CODUSU duplicados
+
+```{r}
+usu_hogar_T422 <- usu_hogar_T422 |> filter(!duplicated(CODUSU))
+usu_hogar_T423 <- usu_hogar_T423 |> filter(!duplicated(CODUSU))
+```
+
+verificamos:
+
+```{r}
+nrow(usu_hogar_T422)
+nrow(usu_hogar_T423)
+```
+
+## Ejemplo
+
+Ahora podemos hacer el test
+
+```{r}
+#| output: false
+usu_hogar_T422 <- usu_hogar_T422 |> arrange(CODUSU) # <1>
+usu_hogar_T423 <- usu_hogar_T423 |> arrange(CODUSU) # <1>
+
+t.test(usu_hogar_T423$ITF,usu_hogar_T422$ITF, paired = TRUE) # <2>
+```
+
+1.  Por las dudas usamos `arrange` de vuelta para ordenar los datos
+2.  La única diferencia en sintáxis es `paired = TRUE`
+
+## Ejemplo
+
+Resultados:
+
+```{r}
+t.test(usu_hogar_T423$ITF,usu_hogar_T422$ITF, paired = TRUE)
+```
+
+¿cómo lo interpretamos?
+
+## Alternativa no paramétrica
+
+-   Si hay pocos datos
+
+-   si no cumplen con los requisitos
+
+Tenemos la alternativa con `wilcox.test` , igual agregando el parametro `paired = TRUE`
+
+## Ejemplo
+
+```{r}
+wilcox.test(usu_hogar_T423$ITF,usu_hogar_T422$ITF, paired = TRUE)
+```
+
+Nos da básicamente el mismo resultado, ¿qué diferencias hay?
+
+## Student vs Wilcox
+
+::: columns
+::: {.column width="50%"}
+T de Student:
+
+```{r}
+#| echo: false
+t.test(usu_hogar_T423$ITF,usu_hogar_T422$ITF, paired = TRUE)
+```
+:::
+
+::: {.column width="50%"}
+Wilcox:
+
+```{r}
+#| echo: false
+wilcox.test(usu_hogar_T423$ITF,usu_hogar_T422$ITF, paired = TRUE)
+```
+:::
+:::
+
+## Presentación de resultados con Quarto
+
+Lo hacemos en vivo. Vamos a cubrir:
+
+-   «decoradores» `#|`
+
+-   Intercalar código con texto
+
+-   yaml
+
+-   bibliografía

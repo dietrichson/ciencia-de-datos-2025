@@ -1,0 +1,178 @@
+---
+title: "La prueba de $\\chi^2$"
+author: "Aleksander Dietrichson, PhD"
+format: 
+  revealjs: 
+    code-line-numbers: false
+    echo: true
+    theme: dark
+    chalkboard: true
+editor: visual
+---
+
+```{r}
+#| include: false
+
+library(tidyverse)
+
+```
+
+## Agenda de hoy
+
+-   Revisión de las tares
+
+-   La prueba de $\chi^2$
+
+-   Formulación de hipótesis sobre los datos del Indec
+
+## Formula
+
+$$
+\chi²=\sum{(O_i-E_i)\over{E_i}}
+$$
+
+O = valor observado
+
+E = valor esperado
+
+i=indice
+
+$\sum$ = «suma de»
+
+## ¿Para qué se usa?
+
+-   Determinar si una asimetría en una tabla de observaciones es significativa o no
+
+-   Nos permite poner nuestras hipótesis a prueba
+
+-   Se usa cuando las variables son de nivel nominal
+
+## Ejemplo
+
+-   Tengo la intuición o impresión de que los uruguayos toman más mate que los argentinos.
+
+-   Decido hacer una encuesta y pregunto a 100 personas (50 argentinos y 50 uruguayos) si prefieren café o mate (sin otras opciones)
+
+-   Recopilo los datos y cuento
+
+## Escenario 1
+
+Tengo una distribución perfectamente simétrica
+
+|         |          |          |        |
+|---------|----------|----------|--------|
+|         | **Café** | **Mate** | *suma* |
+| **Arg** | 25       | 25       | 50     |
+| **ROU** | 25       | 25       | 50     |
+| *suma*  | 50       | 50       | 100    |
+
+## Escenario 2
+
+Encontré solo 20 Uruguayos para mí estúdio
+
+|         |          |          |        |
+|---------|----------|----------|--------|
+|         | **Café** | **Mate** | *suma* |
+| **Arg** |          |          | 50     |
+| **ROU** |          |          | 20     |
+| *suma*  | 35       | 35       | 70     |
+
+¿cuál es el valor esperado de cada celda?
+
+## Calcular los valores esperados
+
+|         |          |          |        |
+|---------|----------|----------|--------|
+|         | **Café** | **Mate** | *suma* |
+| **Arg** |          |          | C      |
+| **ROU** | ?        |          | D      |
+| *suma*  | A        | B        |        |
+
+$$
+A\times D \over{A+B+C+D}
+$$
+
+## Calcular los valores esperados
+
+|         |          |          |        |
+|---------|----------|----------|--------|
+|         | **Café** | **Mate** | *suma* |
+| **Arg** |          |          | 50     |
+| **ROU** |          |          | 20     |
+| *suma*  | 35       | 35       | 70     |
+
+-   Arge café: ${50\times35\over{70}}=25$
+
+-   Arg mate: ${50\times35\over{70}}=25$
+
+-   ROU café: ${20\times35\over{70}}=10$
+
+-   ROU mate: ${20\times35\over{70}}=10$
+
+## Calcular los valores esperados
+
+|         |          |          |        |
+|---------|----------|----------|--------|
+|         | **Café** | **Mate** | *suma* |
+| **Arg** | 25       | 25       | 50     |
+| **ROU** | 10       | 10       | 20     |
+| *suma*  | 35       | 35       | 70     |
+
+## Valores observados
+
+Vamos, preguntamos y armamos la misma tabla
+
+```{r}
+#| echo: false
+# Son datos simulados
+my_data <- data.frame(
+  Pais = c(rep("Arg",50),rep("ROU",20)),
+  pref = sample(c("Cafe","Mate"),size = 70, replace = TRUE)
+  )
+my_data |> head(10)
+```
+
+...
+
+## Llegar a la tabla
+
+```{r}
+# Simulamos resultados
+my_data <- data.frame(
+  Pais = c(rep("Arg",50),rep("ROU",20)),
+  pref = sample(c("Cafe","Mate"),size = 70, replace = TRUE)
+  ) 
+```
+
+Generamos la tabla con `table`
+
+```{r}
+table(my_data$Pais, my_data$pref)
+```
+
+-   Los datos no son exactamente simétricos porque los simulé con `sample`.
+
+## Llegar a la tabla
+
+```{r}
+# Lo mismo en dplyr
+my_data |>
+  group_by(Pais,pref) |> 
+  count() |> 
+  pivot_wider(values_from = c(n),names_from = c(pref))
+```
+
+## Formular hipótesis
+
+$H_0$ : El café y el mate gustan por igual en ambos países
+
+$H_1$ : El mate gusta más en Uruguay
+
+## Usar la $\chi²$ para probarla
+
+```{r}
+table(my_data$Pais,my_data$pref) |> 
+  chisq.test()
+```
+
+Con estos datos **NO** logramos refutar la hipótesis nula.
