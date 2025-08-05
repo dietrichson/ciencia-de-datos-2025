@@ -1,4 +1,9 @@
-CLAUDE.md
+
+# Posit
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
 
 # macOS
 .DS_Store
@@ -9,3 +14,6 @@ Icon
 
 # Thumbnails
 Thumbs.db
+
+# Claude
+CLAUDE.md
