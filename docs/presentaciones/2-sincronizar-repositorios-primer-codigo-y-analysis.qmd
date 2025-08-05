@@ -2,7 +2,6 @@
 title: "Admin y R"
 subtitle: "Sincronización de repositorios y primeros pasos en R"
 author: "Aleksander Dietrichson, PhD"
-date:  2025-04-07
 format:
   revealjs: 
     theme: dark

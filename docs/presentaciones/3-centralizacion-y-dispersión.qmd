@@ -1,7 +1,6 @@
 ---
 title: "Revisión de la teoría"
 author: "Aleksander Dietrichson, PhD"
-date: 2025-04-14
 format: 
   revealjs: 
     code-line-numbers: false

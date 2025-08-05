@@ -1,7 +1,6 @@
 ---
 title: "Método científico. Manipulación de datos."
 author: "Aleksander Dietrichson, PhD"
-date: 2025-04-21
 format: 
   revealjs: 
     code-line-numbers: false
