@@ -1,0 +1,7 @@
+---
+title: "Presentación | Loncarica "
+format: html
+---
+
+git config - global user.email "trinidadloncarica@gmail.com"
+git config --global user name "Trinidad Loncarica"
