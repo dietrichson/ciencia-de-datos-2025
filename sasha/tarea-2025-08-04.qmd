@@ -1,0 +1,15 @@
+---
+title: "Tarea para el 11 de agosto 2025"
+author: "Aleksander Dietrichson"
+format: html
+date: 2025-08-04
+---
+
+## Tarea 
+
+Tarea para la próxima clase:
+
+* Terminar la presentación y subirla al repositorio dentro de una carpeta con su nombre.
+* Leer el capítulo 1 y 2 del libro de texto.
+
+
