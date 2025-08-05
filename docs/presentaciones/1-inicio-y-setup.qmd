@@ -1,7 +1,7 @@
 ---
 title: "Arranque"
 author: "Aleksander Dietrichson, PhD"
-date: 2025-03-31
+date: 2025-08-05
 format:
   revealjs: 
     theme: dark
@@ -31,7 +31,7 @@ editor: visual
 
 -   Cada estudiante tendrá su instancia de github y su instancia de posit.cloud
 
--   Las tareas, ejercicios y demás entregables se realizarán por medio de un «pull request» al repositorio de la clase.
+-   Las tareas, ejercicios y demás entregables se realizarán por medio de un «commit» y «push» al repositorio de la clase.
 
 ## Agenda para hoy
 
@@ -39,17 +39,13 @@ editor: visual
 
     -   Conseguir un PAT
 
-    -   Hacer un «fork» del repositorio de la clase
-
 -   Abrir una cuenta en posit.cloud
 
-    -   Crear un projecto de Rstudio
-
-    -   Clonar el repositorio desde su fork a rstudio
+    -   Clonar el repositorio de la clase en un projecto nuevo
 
     -   Crear una carpeta con su nombre y (dentro de esta) documento con una presentación
 
-    -   Configurar git hacer «commit», «push» y luego «pull request»
+    -   Configurar git hacer «commit» y «push».
 
 ## Github
 
