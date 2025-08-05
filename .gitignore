@@ -1,19 +1,16 @@
-
 # Posit
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
-
 # macOS
 .DS_Store
 .AppleDouble
 .LSOverride
 Icon
 ._*
-
 # Thumbnails
 Thumbs.db
-
 # Claude
 CLAUDE.md
+project.Rproj
