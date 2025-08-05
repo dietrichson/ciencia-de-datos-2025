@@ -9,14 +9,5 @@ format:
 ## Presentaciones y Notas
 
 
-### Clase 2: Admin y R
-* [Admin y R](presentaciones/2-sincronizar-repositorios-primer-codigo-y-analysis.html)
-
-### Clase 3: Revisión de la teoría
-* [Revisión de la teoría](presentaciones/3-centralizacion-y-dispersión.html)
-
-### Clase 4: Método científico. Manipulación de datos.
-* [Método científico. Manipulación de datos.](presentaciones/4-metodo-científico.html)
-
 ### Clase 1: Arranque
 * [Arranque](presentaciones/1-inicio-y-setup.html)
