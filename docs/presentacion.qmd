@@ -1,0 +1,26 @@
+---
+title: "presentacion"
+author: "Aleksander Dietrichson"
+date: 2025-08-04
+format: html
+---
+
+## Presentación
+
+Soy Aleksander Dietrichson. Me llaman Sasha. Soy profesor de estadísticas y ciencia de datos.
+
+## Tipo de datos que me gustan
+
+Me gusta mucho analizar datos linguisticos con métodos cuantitativos.
+
+## Lenguajes y tecnologías que uso
+
+IA, R, Python, dart, java.
+
+Rstudio. Git, github,
+
+## Ejemplo de código intercalado
+
+```{r}
+plot(1:10)
+```

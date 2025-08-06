@@ -8,6 +8,8 @@ format:
 
 ## Presentaciones y Notas
 
+* [presentacion](presentacion.html)
+* [Tarea para el 11 de agosto 2025](tarea-2025-08-04.html)
 
 ### Clase 1: Arranque
 * [Arranque](presentaciones/1-inicio-y-setup.html)
