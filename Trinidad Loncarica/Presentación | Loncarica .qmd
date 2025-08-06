@@ -1,7 +1,16 @@
 ---
-title: "Presentación | Loncarica "
+title: "Presentación \| Loncarica "
 format: html
 ---
 
-git config - global user.email "trinidadloncarica@gmail.com"
-git config --global user name "Trinidad Loncarica"
+## 
+
+# **Precentación**
+
+Mi nombre es Maria Trinidad Loncarica, pero todo el mundo me dice Trini. Tengo 19 años y actualmente me encuetro estudiando la licenciatura en Estudio en la Comunicacion en la Universidad Nacional de San Martin (UNSAM)
+
+### Pasatiempos
+
+En mi tiempo libre disfruto de pintar y leer. A su vez, tambien consumo
+
+git config - global user.email "trinidadloncarica\@gmail.com" git config --global user name "Trinidad Loncarica"
