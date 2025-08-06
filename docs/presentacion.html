@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Aleksander Dietrichson">
+<meta name="dcterms.date" content="2025-08-04">
 
-<title>Seminario de Ciencia de Datos</title>
+<title>presentacion</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,23 +22,57 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="index_files/libs/clipboard/clipboard.min.js"></script>
-<script src="index_files/libs/quarto-html/quarto.js" type="module"></script>
-<script src="index_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="index_files/libs/quarto-html/popper.min.js"></script>
-<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="index_files/libs/quarto-html/anchor.min.js"></script>
-<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-dark-748b535e376f14d4692bf2b2e5fd6380.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="index_files/libs/bootstrap/bootstrap-489438d73ee9fcbaf9f366878debe9da.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script src="presentacion_files/libs/clipboard/clipboard.min.js"></script>
+<script src="presentacion_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="presentacion_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="presentacion_files/libs/quarto-html/popper.min.js"></script>
+<script src="presentacion_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="presentacion_files/libs/quarto-html/anchor.min.js"></script>
+<link href="presentacion_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="presentacion_files/libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="presentacion_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="presentacion_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="presentacion_files/libs/bootstrap/bootstrap-2546a5edb573abd25b53f29b13f71942.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
-<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="fullcontent quarto-light">
@@ -47,14 +83,26 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Seminario de Ciencia de Datos</h1>
+<h1 class="title">presentacion</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Aleksander Dietrichson </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 4, 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -64,18 +112,31 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="presentaciones-y-notas" class="level2">
-<h2 class="anchored" data-anchor-id="presentaciones-y-notas">Presentaciones y Notas</h2>
-<ul>
-<li><a href="presentacion.html">presentacion</a></li>
-<li><a href="tarea-2025-08-04.html">Tarea para el 11 de agosto 2025</a></li>
-</ul>
-<section id="clase-1-arranque" class="level3">
-<h3 class="anchored" data-anchor-id="clase-1-arranque">Clase 1: Arranque</h3>
-<ul>
-<li><a href="presentaciones/1-inicio-y-setup.html">Arranque</a></li>
-</ul>
+<section id="presentación" class="level2">
+<h2 class="anchored" data-anchor-id="presentación">Presentación</h2>
+<p>Soy Aleksander Dietrichson. Me llaman Sasha. Soy profesor de estadísticas y ciencia de datos.</p>
 </section>
+<section id="tipo-de-datos-que-me-gustan" class="level2">
+<h2 class="anchored" data-anchor-id="tipo-de-datos-que-me-gustan">Tipo de datos que me gustan</h2>
+<p>Me gusta mucho analizar datos linguisticos con métodos cuantitativos.</p>
+</section>
+<section id="lenguajes-y-tecnologías-que-uso" class="level2">
+<h2 class="anchored" data-anchor-id="lenguajes-y-tecnologías-que-uso">Lenguajes y tecnologías que uso</h2>
+<p>IA, R, Python, dart, java.</p>
+<p>Rstudio. Git, github,</p>
+</section>
+<section id="ejemplo-de-código-intercalado" class="level2">
+<h2 class="anchored" data-anchor-id="ejemplo-de-código-intercalado">Ejemplo de código intercalado</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="presentacion_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 
 </main>
