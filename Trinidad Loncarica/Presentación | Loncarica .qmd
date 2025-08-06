@@ -7,10 +7,14 @@ format: html
 
 # **Precentación**
 
-Mi nombre es Maria Trinidad Loncarica, pero todo el mundo me dice Trini. Tengo 19 años y actualmente me encuetro estudiando la licenciatura en Estudio en la Comunicacion en la Universidad Nacional de San Martin (UNSAM)
+Mi nombre es Maria Trinidad Loncarica, pero todo el mundo me dice Trini. Tengo 19 años y actualmente me encuetro estudiando la licenciatura en Estudios en la Comunicacion en la Universidad Nacional de San Martin (UNSAM)
 
-### Pasatiempos
+#### Pasatiempos
 
-En mi tiempo libre disfruto de pintar y leer. A su vez, tambien consumo
+En mi tiempo libre disfruto de leer y pintar; me encuentro practicando actualmente este último hobby en clases de arte los dias martes por la mañana. A su vez, tambien me encanta ver pelicular e ir al cine con amigos, pese a que no sea algo que pueda hacer todos los días.
+
+#### Lenguajes y tecnologias
+
+Por el momento no tengo lenguajes de programacion favoritos, ya que no poseo concocimientos sobre los mismos. De igual forma, me encantaria aprender, y siento que seminario me lo va a permitir de una manera integra.
 
 git config - global user.email "trinidadloncarica\@gmail.com" git config --global user name "Trinidad Loncarica"
