@@ -5,3 +5,15 @@ format: html
 
 git config --global user.email "melinavarhulik@gmail.com"
 git config --global user.name "melina varhulik"
+
+# **Presentación**
+
+Mi nombre es Melina Varhulik. Tengo 19 años y actualmente me encuetro estudiando la licenciatura en Estudios en la Comunicacion en la Universidad Nacional de San Martin (UNSAM) mientras trabajo como Pasante Comercial en GDN.
+
+#### Pasatiempos
+
+En mi tiempo libre suelo juntarme con amigas y estar en familia.
+
+#### Lenguajes y tecnologias
+
+Notengo lenguajes de programacion favoritos, ya que no poseo concocimientos sobre los mismos. 
