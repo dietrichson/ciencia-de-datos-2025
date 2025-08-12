@@ -2,6 +2,7 @@
 title: "Admin y R"
 subtitle: "Sincronización de repositorios y primeros pasos en R"
 author: "Aleksander Dietrichson, PhD"
+date: 2025-08-11
 format:
   revealjs: 
     theme: dark
@@ -49,12 +50,8 @@ Se puede ejecutar código R de varias maneras. Las más importantes son:
 
 ## Revisar lecturas
 
-Revisemos el cápitulo 1 con ejemplos en R
+Revisemos el cápitulo 1 y 2 con ejemplos en R
 
-## Análisis de datos reales
+## Análisis de datos
 
-Vemos datos del INDEC
-
--   <https://www.indec.gob.ar/indec/web/Institucional-Indec-BasesDeDatos>
-
--   <https://www.indec.gob.ar/ftp/cuadros/menusuperior/eph/EPH_registro_3T2023.pdf>
+Analicemos unos datos

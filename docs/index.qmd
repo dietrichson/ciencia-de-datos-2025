@@ -13,3 +13,6 @@ format:
 
 ### Clase 1: Arranque
 * [Arranque](presentaciones/1-inicio-y-setup.html)
+
+### Clase 2: Admin y R
+* [Admin y R](presentaciones/2-sincronizar-repositorios-primer-codigo-y-analysis.html)
