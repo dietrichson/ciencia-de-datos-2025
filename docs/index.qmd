@@ -16,3 +16,4 @@ format:
 
 ### Clase 2: Admin y R
 * [Admin y R](presentaciones/2-sincronizar-repositorios-primer-codigo-y-analysis.html)
+* [Notas de la clase 12 de agosto 2025](notas-2025-08-12.html)
