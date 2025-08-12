@@ -2,7 +2,7 @@
 title: "Tarea para el 11 de agosto 2025"
 author: "Aleksander Dietrichson"
 format: html
-date: 2025-08-04
+date: 2025-08-05
 ---
 
 ## Tarea 
