@@ -1,0 +1,94 @@
+---
+title: "Notas de la clase 12 de agosto 2025"
+date: 2025-08-12
+author: "Aleksander Dietrichson"
+lang: es
+format: html
+---
+
+## Datos
+
+Los datos son simulados, pretenden representar los estudiantes un curso en UNSAM. Fueron eligidos (supuestamente) por haberse inscripto en la materia del profe.
+
+```{r}
+#| include: false
+
+library(readr)
+my_data <- read_csv("../data/student-dataset.csv")
+```
+
+Esto corresponde a una *muestra por conveniencia*.
+
+```{r}
+#| include: false
+ nrow(my_data)
+```
+
+Fueron 30 estudiantes.
+
+```{r}
+my_data$Weight_kg
+my_data$Height_cm
+```
+
+## Promedio
+
+```{r}
+mean(my_data$Weight_kg)
+```
+
+```{r}
+library(dplyr)
+my_data |> 
+  group_by(Gender) |> 
+  summarize(
+    Peso = mean(Weight_kg)
+  )
+```
+
+```{r}
+my_data |> 
+  group_by(Gender) |> 
+  summarize(
+    Estatura = mean(Height_cm)
+  )
+```
+
+```{r}
+plot( my_data$Weight_kg, my_data$Height_cm )
+```
+
+```{r}
+library(ggplot2)
+my_data |> 
+  ggplot( aes(Weight_kg, Height_cm ))+
+  geom_point()
+```
+
+```{r}
+my_data |> 
+  ggplot( aes(Weight_kg, Height_cm, color=Gender ))+
+  geom_point()
+```
+
+```{r}
+my_data |> 
+  ggplot( aes(Weight_kg, Height_cm, color=Preferred_Beverage ))+
+  geom_point()
+```
+
+```{r}
+table(my_data$Preferred_Beverage)
+```
+
+```{r}
+my_data |> 
+  ggplot(aes(Preferred_Beverage))+
+  geom_bar()
+```
+
+```{r}
+my_data |> 
+  ggplot(aes(Preferred_Beverage, fill = Gender))+
+  geom_bar()
+```
