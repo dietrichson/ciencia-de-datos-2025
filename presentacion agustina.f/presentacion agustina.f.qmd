@@ -1,0 +1,18 @@
+---
+title: "presentacion"
+author: "Agustina Franconieri"
+date: 2025-08-04
+format: html
+---
+
+## Presentacion
+
+Mi nombre es Agustina Franconieri, pero todo el mundo me dice agus. Tengo 19 años y actualmente me encuetro estudiando la licenciatura en Estudios en la Comunicacion en la Universidad Nacional de San Martin (UNSAM)
+
+## Pasatiempos
+
+Mi pasatiempo favorito es mirar serie y peliculas. La realidad es que no tengo mucho tiempo libre, ya que estoy constantemete haciendo cosas de la facultad.
+
+## Lenguaje y programacion
+
+Por el momento no tengo lenguajes de programacion favoritos, ya que no poseo concocimientos sobre los mismos. De igual forma, me encantaria aprender sobre este mundo.
