@@ -1,0 +1,51 @@
+```{r}
+
+
+
+#Datos
+# include:false
+
+library(readr)
+my_data <- read_csv("../data/student-dataset.csv")
+
+# 1-Descibirlas en cuanto a su nivel de medición.
+
+    #-   Nominal –\> Gender, Preferred_Beverage, Name
+
+    #-   Ordinal –\> No hay
+
+    #-   Intervalo –\> ID
+
+    #-   Razón –\> Age, Weight_kg, Height_cm, Household_size
+
+# 2-Indicar si son variables continuas o discretas
+
+ #-   Variable continua: Weight_kg y Height_cm 
+
+  #  - Variable discreta: Household_size, ID, Age, Name, Gender, Preferred_Beverage
+
+#3- Eligir por lo menos una variable y visualizarla.
+
+```
+
+```{library(ggplot2)}
+
+ggplot(my_data, aes(x = Gender, y = Age)) +
+  geom_boxplot() +
+  geom_jitter(width = 0.15, alpha = 0.3) +
+  labs(
+    title = "Edad por género",
+    x = "Género",
+    y = "Edad (años)"
+  )
+```
+
+```{}
+```
+
+---
+title: "Tarea 20 de agosto"
+format: html
+autor: Melina Varhulik
+date: 20/08/2025
+---
