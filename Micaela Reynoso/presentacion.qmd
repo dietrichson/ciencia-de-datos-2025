@@ -1,0 +1,9 @@
+---
+title: "presentacion"
+format: html
+dotte: 2025-08-05
+---
+
+[**PRESENTACION**]{.underline}
+
+Soy Micaela Reynoso.
