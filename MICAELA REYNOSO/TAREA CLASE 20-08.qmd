@@ -1,5 +1,5 @@
 ---
-title: "NOTAS MICAELA"
+title: "TAREA CLASE MICAELA"
 date: 2025-08-12
 author: "Micaela Reynoso"
 lang: es
