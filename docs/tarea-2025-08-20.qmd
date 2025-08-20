@@ -1,0 +1,13 @@
+---
+title: "tarea-2025-08-20"
+date: 2025-08-20
+format: html
+---
+
+## Tarea
+
+Partiendo de los datos sintécos usar tidyverse (dplyr) para traducir los nombres de las columnas a español. Y transformar los datos nominales con etiquetas en castellano también. 
+
+### Lectura 
+
+Capítulo 4 del libro. 

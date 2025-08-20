@@ -1,0 +1,143 @@
+---
+title: "notas-2025-08-20"
+author: "Aleksander Dietrichson"
+lang: es
+date: 2025-08-20
+format: html
+---
+
+## Datos del indec:
+
+Están acá
+https://www.indec.gob.ar/indec/web/Institucional-Indec-BasesDeDatos
+y el manual está acá:
+https://www.indec.gob.ar/ftp/cuadros/menusuperior/eph/EPH_registro_1T2025.pdf
+
+## Datos sintéticos
+
+```{r}
+my_data <- readr::read_csv("../data/student-dataset.csv")
+```
+## Medidas de centralización
+
+```{r}
+#  my_data$Gender
+# como gender es una variable dicotomica, no hay tendencia central, simplemente hay que contar cual es la observación más frecuente. Y enventualmente que pororción guarda con el otro. 
+
+mean(my_data$Age)
+```
+```{r}
+median(my_data$Age)
+```
+
+Por qué usar mediana y no la media?
+
+
+```{r}
+edad <- my_data$Age
+edad <- c(edad,c(75,89,80,75,89,80) )
+
+mean(edad)
+```
+```{r}
+median(edad)
+```
+
+## Dispersión
+
+### Desviación Estándar
+```{r}
+sd(my_data$Age)
+```
+
+```{r}
+sd(edad)
+```
+
+### Desviación Absoluta media
+```{r}
+mad(edad)
+```
+
+## Transformaciones
+
+Usando el paquete dplyr (que es parte del tidyverse)
+
+```{r}
+library(dplyr)
+mis_datos <- my_data |> 
+  rename(
+    edad = Age,
+    sexo = Gender
+         )
+
+mis_datos
+```
+```{r}
+mis_datos <- mis_datos |> 
+  transform(
+    sexo = ifelse(sexo=="Female","Mujer","Hombre")
+  )
+mis_datos
+```
+
+## Datos del indec
+
+```{r}
+datos_indec <- readr::read_delim("../data/usu_individual_T125.txt", delim = ";")
+```
+
+```{r}
+mean(datos_indec$CH06)
+```
+
+```{r}
+table(datos_indec$CH04)
+```
+
+```{r}
+minidatos <- datos_indec |> 
+  select(CH04,CH06,PP08D1) |> 
+  rename(sexo = CH04,
+         edad = CH06,
+         Salario = PP08D1)
+```
+
+```{r}
+minidatos <- minidatos |> 
+  transform(
+    sexo = ifelse (sexo == 1, "Hombre", "Mujer")
+  )
+```
+
+## Limpieza de datos
+```{r}
+minidatos <- minidatos |> 
+  filter(edad > 0) |> 
+  filter(!is.na(Salario))
+
+minidatos <- minidatos |> 
+  filter(Salario > 0)
+
+```
+
+
+## Mini analisis
+```{r}
+minidatos |> 
+  group_by(sexo) |> 
+  summarize(
+    Salario_medio = mean(Salario),
+    Salario_mediano = median(Salario)
+  )
+```
+
+```{r}
+minidatos |> 
+  group_by(sexo) |> 
+  summarize(
+    Edad_media = mean(edad),
+    Edad_mediano = median(edad)
+  )
+```
+
