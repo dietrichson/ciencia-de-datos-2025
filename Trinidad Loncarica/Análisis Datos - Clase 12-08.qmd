@@ -46,7 +46,7 @@ ggplot(my_data, aes(x = Gender, y = Household_Size)) +
     title = "Tamaño del hogar por género",
     x = "Género",
     y = "Tamaño del hogar (personas)"
-  )
+  ) 
 ```
 
 # Borrador clase *( no leer )*
