@@ -1,0 +1,46 @@
+---
+title: "notas-agustina"
+date: 2025-08-12
+author: "Agustina Franconieri"
+format: html
+---
+
+```{r}
+#| include: false
+
+library(readr)
+my_data <- read_csv("../data/student-dataset.csv")
+```
+
+1.  ***Descibirlas en cuanto a su nivel de medición.***
+
+    -   *Nominal* –\> Gender, Preferred_Beverage, Name
+
+    -   *Ordinal* –\> No hay
+
+    -   *Intervalo* –\> ID
+
+    -   *Razón* –\> Age, Weight_kg, Height_cm, Household_size
+
+2.  ***Indicar si son variables continuas o discretas***.
+
+    -   *Variable continua*: Weight_kg y Height_cm
+
+    -   *Variable discreta*: Household_size y Age
+
+3.  ***Eligir por lo menos una variable y visualizarla.***
+
+    -   Este es un grafico es el peso por genero.
+
+```{r}
+library(ggplot2)
+
+ggplot(my_data, aes(x = Gender, y = Weight_kg)) +
+  geom_boxplot() +
+  geom_jitter(width = 0.15, alpha = 0.3) +
+  labs(
+    title = "Peso por genero",
+    x = "Género",
+    y = "Peso (personas)"
+  )
+```
