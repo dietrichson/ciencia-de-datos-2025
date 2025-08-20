@@ -1,0 +1,20 @@
+---
+title: "presentacion lola pizarro"
+autor: Lola Pizarro
+date:  12-08-2025
+format: html
+---
+
+## Precentación  
+
+Mi nombre es Lola Pizarro Lareo, pero todos me dicen Lola. Tengo 19 años y actualmente me encuetro estudiando la licenciatura en Estudios en la Comunicacion en la Universidad Nacional de San Martin (UNSAM)\
+\
+
+##  Pasatiempos  
+
+En mi tiempo libre disfruto de armar rompecabezas, ver series y caminar; me encuentro practicando actualmente este hobby de armar rompecabezas en competencias una vez al mes. A su vez, tambien me encanta ver pelicular e ir al cine con amigos, pese a que no sea algo que pueda hacer todos los días.\
+\
+
+##  Lenguajes y tecnologias  
+
+Por el momento no tengo lenguajes de programacion favoritos, ya que no poseo concocimientos sobre los mismos. De igual forma, me encantaria aprender, y siento que seminario me lo va a permitir de una manera integra.
