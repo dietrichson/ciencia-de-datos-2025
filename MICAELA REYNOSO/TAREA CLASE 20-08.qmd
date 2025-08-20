@@ -1,0 +1,132 @@
+---
+title: "TAREA CLASE MICAELA"
+date: 2025-08-12
+author: "Micaela Reynoso"
+lang: es
+format: html
+---
+
+*TAREA CLASE:*
+
+***Niveles de medición:***
+
+ID, Name, Gender, Preferred_Beverage → Nominal.
+
+Age, Weight_kg, Height_cm, Household_Size → De Razón .
+
+***Continuas o discretas:***
+
+Nominales → siempre discretas.
+
+Age, Household_Size → discretas (por precisión cero).
+
+Weight_kg, Height_cm → continuas (pueden tener decimales)
+
+```{r}
+library(readr)
+library(ggplot2)
+
+```
+
+```{r}
+df <- read_csv("../data/student-dataset.csv")
+```
+
+```{r}
+ggplot(df, aes(x = Age)) +
+  geom_histogram(binwidth = 1, fill = "skyblue", color = "black") +
+  labs(title = "Distribución de la Edad de los estudiantes",
+       x = "Edad (años)",
+       y = "Cantidad de estudiantes")
+```
+
+NOTAS DE CLASE:
+
+***Datos***
+
+Los datos son simulados, pretenden representar los estudiantes un curso en UNSAM. Fueron eligidos (supuestamente) por haberse inscripto en la materia del profe.
+
+```{r}
+#| include: false
+
+library(readr)
+library(readr)
+my_datamica <- read_csv("../data/student-dataset.csv")
+
+```
+
+Esto corresponde a una *muestra por conveniencia*.
+
+```{r}
+#| include: false
+ nrow(my_datamica)
+```
+
+Fueron 30 estudiantes.
+
+```{r}
+my_datamica$Weight_kg
+my_datamica$Height_cm
+```
+
+## Promedio
+
+```{r}
+mean(my_datamica$Weight_kg)
+```
+
+```{r}
+library(dplyr)
+my_datamica |> 
+  group_by(Gender) |> 
+  summarize(
+    Peso = mean(Weight_kg)
+  )
+```
+
+```{r}
+my_datamica |> 
+  group_by(Gender) |> 
+  summarize(
+    Estatura = mean(Height_cm)
+  )
+```
+
+```{r}
+plot( my_datamica$Weight_kg, my_datamica$Height_cm )
+```
+
+```{r}
+library(ggplot2)
+my_datamica |> 
+  ggplot( aes(Weight_kg, Height_cm ))+
+  geom_point()
+```
+
+```{r}
+my_datamica |> 
+  ggplot( aes(Weight_kg, Height_cm, color=Gender ))+
+  geom_point()
+```
+
+```{r}
+my_datamica |> 
+  ggplot( aes(Weight_kg, Height_cm, color=Preferred_Beverage ))+
+  geom_point()
+```
+
+```{r}
+table(my_datamica$Preferred_Beverage)
+```
+
+```{r}
+my_datamica |> 
+  ggplot(aes(Preferred_Beverage))+
+  geom_bar()
+```
+
+```{r}
+my_datamica |> 
+  ggplot(aes(Preferred_Beverage, fill = Gender))+
+  geom_bar()
+```

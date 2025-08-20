@@ -1,0 +1,97 @@
+---
+title: "Análisis Datos - Clase 12-08"
+format: html
+autor: Trinidad Loncarica
+lang: es
+date: 12/08/25
+---
+
+# Datos
+
+```{r}
+#| include: false
+
+library(readr)
+my_data<- read_csv("../data/student-dataset.csv")
+
+```
+
+1.  ***Descibirlas en cuanto a su nivel de medición.***
+
+    -   *Nominal* –\> Gender, Preferred_Beverage, Name
+
+    -   *Ordinal* –\> No hay
+
+    -   *Intervalo* –\> ID
+
+    -   *Razón* –\> Age, Weight_kg, Height_cm, Household_size
+
+2.  ***Indicar si son variables continuas o discretas***.
+
+    -   *Variable continua*: Weight_kg y Height_cm
+
+    -   *Variable discreta*: Household_size y Age
+
+3.  ***Eligir por lo menos una variable y visualizarla.***
+
+    -   Este es un grafico tamaño del hogar por genero.
+
+```{r}
+library(ggplot2)
+
+ggplot(my_data, aes(x = Gender, y = Household_Size)) +
+  geom_boxplot() +
+  geom_jitter(width = 0.15, alpha = 0.3) +
+  labs(
+    title = "Tamaño del hogar por género",
+    x = "Género",
+    y = "Tamaño del hogar (personas)"
+  )
+```
+
+# Borrador clase *( no leer )*
+
+```{r}
+#| include: false
+ nrow(my_data)
+```
+
+```{r}
+my_data |>
+my_data (Age)
+```
+
+## Promedio
+
+```{r}
+mean(my_data$Weight_kg) 
+```
+
+```{r}
+library(dplyr)
+my_data |>
+  group_by(Gender) |> 
+  ggplot(student_dataset, aes(x = .data[[var_num]])) +
+    geom_histogram(bins = 30) +
+    labs(
+      title = paste("Distribución de", var_num),
+      x = var_num,
+      y = "Frecuencia"
+```
+
+```{r}
+ggplot(student_dataset, aes(x = .data[[var_num]])) +
+    geom_histogram(bins = 30) +
+    labs(
+      title = paste("Distribución de", var_num),
+      x = var_num,
+      y = "Frecuencia"
+```
+
+```{r}
+library(ggplot2)
+my_data |>
+ggplot(aes(Weight_kg, Height_cm, color=Gender ))+ geom
+geom_plot()
+
+```
