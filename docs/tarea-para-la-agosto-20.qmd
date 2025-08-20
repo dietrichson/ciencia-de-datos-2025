@@ -1,0 +1,18 @@
+---
+title: "Tarea para agosto 20"
+author: "Aleksander Dietrichson"
+date: 2025-08-12
+format: html
+---
+
+## Tarea para la próxima
+
+En el conjunto de datos que vimos hoy (student-dataset.csv) hay ocho columnas (variables)
+
+1. Descibirlas en cuanto a su nivel de medición.  
+2. Indicar si son variables continuas o discretas.
+3. Eligir por lo menos una variable y visualizarla.
+
+## Lectura
+
+El capítulo 3 del libro. 

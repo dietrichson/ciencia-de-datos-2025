@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.7.29">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Aleksander Dietrichson">
 
-<title>Seminario de Ciencia de Datos</title>
+<title>Notas de la clase 12 de agosto 2025</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,20 +24,19 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="index_files/libs/clipboard/clipboard.min.js"></script>
-<script src="index_files/libs/quarto-html/quarto.js" type="module"></script>
-<script src="index_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="index_files/libs/quarto-html/popper.min.js"></script>
-<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="index_files/libs/quarto-html/anchor.min.js"></script>
-<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-dark-748b535e376f14d4692bf2b2e5fd6380.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="index_files/libs/bootstrap/bootstrap-489438d73ee9fcbaf9f366878debe9da.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script src="notas-2025-08-12_files/libs/clipboard/clipboard.min.js"></script>
+<script src="notas-2025-08-12_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="notas-2025-08-12_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="notas-2025-08-12_files/libs/quarto-html/popper.min.js"></script>
+<script src="notas-2025-08-12_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="notas-2025-08-12_files/libs/quarto-html/anchor.min.js"></script>
+<link href="notas-2025-08-12_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="notas-2025-08-12_files/libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="notas-2025-08-12_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="notas-2025-08-12_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="notas-2025-08-12_files/libs/bootstrap/bootstrap-2546a5edb573abd25b53f29b13f71942.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
-<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="fullcontent quarto-light">
@@ -47,14 +47,26 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Seminario de Ciencia de Datos</h1>
+<h1 class="title">Notas de la clase 12 de agosto 2025</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>Aleksander Dietrichson </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Fecha de publicación</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">12 de agosto de 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -64,30 +76,10 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="presentaciones-y-notas" class="level2">
-<h2 class="anchored" data-anchor-id="presentaciones-y-notas">Presentaciones y Notas</h2>
-<section id="clase-1-arranque" class="level3">
-<h3 class="anchored" data-anchor-id="clase-1-arranque">Clase 1: Arranque</h3>
-<ul>
-<li><a href="presentaciones/1-inicio-y-setup.html">Arranque</a></li>
-<li><a href="presentacion.html">presentacion</a></li>
-<li><a href="tarea-2025-08-04.html">Tarea para el 11 de agosto 2025</a></li>
-</ul>
-</section>
-<section id="clase-2-admin-y-r" class="level3">
-<h3 class="anchored" data-anchor-id="clase-2-admin-y-r">Clase 2: Admin y R</h3>
-<ul>
-<li><a href="presentaciones/2-sincronizar-repositorios-primer-codigo-y-analysis.html">Admin y R</a></li>
-<li><a href="notas-2025-08-12.html">Notas de la clase 12 de agosto 2025</a></li>
-<li><a href="tarea-para-la-agosto-20.html">Tarea para agosto 20</a></li>
-</ul>
-</section>
-<section id="clase-3-revisión-de-la-teoría" class="level3">
-<h3 class="anchored" data-anchor-id="clase-3-revisión-de-la-teoría">Clase 3: Revisión de la teoría</h3>
-<ul>
-<li><a href="presentaciones/3-centralizacion-y-dispersión.html">Revisión de la teoría</a></li>
-</ul>
-</section>
+<section id="datos" class="level2">
+<h2 class="anchored" data-anchor-id="datos">Datos</h2>
+<p>Los datos son simulados, pretenden representar los estudiantes un curso en UNSAM. Fueron eligidos (supuestamente) por haberse inscripto en la materia del profe.</p>
+<p>Esto corresponde a una <em>muestra por conveniencia</em>.</p>
 </section>
 
 </main>
@@ -117,12 +109,12 @@ ul.task-list li input[type="checkbox"] {
       // flash "checked"
       button.classList.add('code-copy-button-checked');
       var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copied!");
+      button.setAttribute("title", "Copiado");
       let tooltip;
       if (window.bootstrap) {
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copied!");
+        button.setAttribute("data-bs-title", "Copiado");
         tooltip = new bootstrap.Tooltip(button, 
           { trigger: "manual", 
             customClass: "code-copy-button-tooltip",

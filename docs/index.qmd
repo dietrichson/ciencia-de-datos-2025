@@ -16,3 +16,8 @@ format:
 
 ### Clase 2: Admin y R
 * [Admin y R](presentaciones/2-sincronizar-repositorios-primer-codigo-y-analysis.html)
+* [Notas de la clase 12 de agosto 2025](notas-2025-08-12.html)
+* [Tarea para agosto 20](tarea-para-la-agosto-20.html)
+
+### Clase 3: Revisión de la teoría
+* [Revisión de la teoría](presentaciones/3-centralizacion-y-dispersión.html)
