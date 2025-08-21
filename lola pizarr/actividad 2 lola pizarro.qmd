@@ -1,0 +1,42 @@
+---
+title: "actividad 2 lola pizarro"
+autor: Lola pizarro 
+format: html
+---
+
+```{r}
+#| include: false
+
+library(readr)
+my_data<- read_csv("../data/student-dataset.csv")
+
+```
+
+1.  ***Descibirlas en cuanto a su nivel de medición.***
+
+    -   *Nominal* –\> Gender, Preferred_Beverage, Name
+
+    -   *Ordinal* –\> No hay
+
+    -   *Intervalo* –\> ID
+
+    -   *Razón* –\> Age, Weight_kg, Height_cm, Household_size
+
+2.  ***Indicar si son variables continuas o discretas***.
+
+    -   *Variable continua*: Weight_kg y Height_cm
+
+    -   *Variable discreta*: Household_size y Age
+
+3.  ***Eligir por lo menos una variable y visualizarla.***
+
+```{r}
+ggplot(mis_datos, aes(x = Gender, y = Preferred_Beverage)) +
+  geom_boxplot() +
+  geom_jitter(width = 0.15, alpha = 0.3) +
+  labs(
+    title = "Bebida referida por genero",
+    x = "Género",
+    y = "Bebida preferedida (personas)"
+  )
+```
