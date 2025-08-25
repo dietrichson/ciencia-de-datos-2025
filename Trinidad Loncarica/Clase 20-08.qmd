@@ -1,0 +1,92 @@
+---
+title: "Clase 20-08"
+format: html
+author: Trinidad Loncarica 
+date: 20-08-25
+lang: es
+---
+
+# Tarea para el 26/8
+
+*Partiendo de los datos sintécos usar tidyverse (dplyr) para traducir los nombres de las columnas a español. Y transformar los datos nominales con etiquetas en castellano también*
+
+```{r}
+
+#| include: false
+
+library(readr)
+my_data<- read_csv("../data/student-dataset.csv")
+```
+
+install.packages("tidyverse") –\> Para que pueda ejecutar de la libreria los diferentes comandos
+
+```{r}
+library(dplyr)
+
+my_data <- my_data |>
+  rename(
+    DNI = ID,
+    Nombre = Name,
+    sexo = Gender,
+    edad = Age,
+    Peso = Weight_kg,
+    Altura = Height_cm,
+    Bebida_preferida = Preferred_Beverage,
+    Tamano_del_Hogar = Household_Size
+  ) |>
+  mutate(
+    sexo = recode(sexo,
+                  "Female" = "Femenino",
+                  "Male"   = "Masculino"),
+    Bebida_preferida = recode(Bebida_preferida,
+                              "mate"   = "Mate",
+                              "coffee" = "Café",
+                              "tea"    = "Té")
+  ) 
+)
+```
+
+# Datos del INDEC (notas clase) (no leer)
+
+```{r}
+datos_indec <- readr::read_delim("data/usu_individual_T125.txt", delim = ";")
+
+```
+
+```{r}
+table(datos_indec$CH04)
+```
+
+```{r}
+minidatos <- datos_indec |>
+  select(CH04,CH06,PP08D1) |>
+  rename (sexo=CH04, edad=CH06, salario= PP08D1)
+```
+
+```{r}
+minidatos <- minidatos |>
+  transform(sexo= ifelse (sexo == 1, "Hombre, "Mujer""))
+```
+
+##Limpieza de datos
+
+```{r}
+minidatos <- minidatos |>
+  filter (edad > 0)
+filter (!is.na(salario))
+
+minidatos <- minidatos |>
+  filter ( salario > 0)
+```
+
+```{r}
+minidatos |>
+  group_by(sexo) |>
+  summarize (salario_medio = mean(salario)salario_mediano = median (salario))
+```
+
+```{r}
+
+```
+
+)
