@@ -1,0 +1,43 @@
+---
+title: "actividad 20-08-2025"
+autor: "agustina franconieri"
+format: html
+---
+
+Tarea para el 26/8
+
+*Partiendo de los datos sintécos usar tidyverse (dplyr) para traducir los nombres de las columnas a español. Y transformar los datos nominales con etiquetas en castellano también*
+
+```{r}
+#| include: false
+
+library(readr)
+my_data<- read_csv("../data/student-dataset.csv")
+```
+
+install.packages("tidyverse") –\> Para que pueda ejecutar de la libreria los diferentes comandos
+
+```{r}
+library(dplyr)
+
+my_data <- my_data |>
+  rename(
+    DNI = ID,
+    Nombre = Name,
+    sexo = Gender,
+    edad = Age,
+    Peso = Weight_kg,
+    Altura = Height_cm,
+    Bebida_preferida = Preferred_Beverage,
+    Tamano_del_Hogar = Household_Size
+  ) |>
+  mutate(
+    sexo = recode(sexo,
+                  "Female" = "Femenino",
+                  "Male"   = "Masculino"),
+    Bebida_preferida = recode(Bebida_preferida,
+                              "mate"   = "Mate",
+                              "coffee" = "Café",
+                              "tea"    = "Té")
+  ) 
+```
