@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.29">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Aleksander Dietrichson">
+<meta name="dcterms.date" content="2025-08-26">
+
+<title>Notas de la clase 2025-08-26</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="notas-2025-08-26_files/libs/clipboard/clipboard.min.js"></script>
+<script src="notas-2025-08-26_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="notas-2025-08-26_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="notas-2025-08-26_files/libs/quarto-html/popper.min.js"></script>
+<script src="notas-2025-08-26_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="notas-2025-08-26_files/libs/quarto-html/anchor.min.js"></script>
+<link href="notas-2025-08-26_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="notas-2025-08-26_files/libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="notas-2025-08-26_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="notas-2025-08-26_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="notas-2025-08-26_files/libs/bootstrap/bootstrap-2546a5edb573abd25b53f29b13f71942.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Notas de la clase 2025-08-26</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Aleksander Dietrichson </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 26, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="generar-una-distribución-normal" class="level2">
+<h2 class="anchored" data-anchor-id="generar-una-distribución-normal">Generar una distribución normal</h2>
+<p>Se usa <code>rnorm</code> para generar una distribución normal:</p>
+<p>r = “random”, norm = “normal”</p>
+<p>n = ¿cuantas observaciones?,</p>
+<p>mean = ¿cual es el promedio?</p>
+<p>sd = ¿cual es la desviación estándar?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   [1] 102.44669 127.69650 107.11421  85.43454  82.38951  86.55990  77.59221
+   [8] 116.15865 109.49403  91.09404 114.14727 109.26241 134.00381  86.14731
+  [15]  89.24864 105.81102  86.01559 115.53460  87.64930  98.84471 107.65406
+  [22] 102.09451  73.24744 116.37814  93.30021  99.00590 129.80895 112.23809
+  [29] 118.07711  94.29884  64.00008 113.31387  70.62271  83.64611  90.93342
+  [36] 115.48379  96.82823 100.91121  87.98682  82.33961 120.09178 105.59852
+  [43] 127.09125  86.27383 101.67649  89.29776  94.13017 122.97440 101.75939
+  [50]  87.04784  83.19344 106.48364 113.67731  84.02862  84.08790 123.06766
+  [57] 106.14762 130.89202 106.59536  83.64983  80.42470 109.51315  80.48288
+  [64] 121.10609  84.56450  84.44887  89.51166  84.17218  84.85746 115.97805
+  [71]  95.31918 104.28599  72.67356  86.49704 113.89314  84.67836 103.67981
+  [78] 119.56990 126.01431 109.25815  82.36287 121.71143  93.46876  94.55480
+  [85] 100.42021  88.19983 107.30253 107.47106  86.51074  91.29977  96.86861
+  [92] 110.33219 111.39205 103.16900 118.47274  67.45212  89.08182 133.99398
+  [99]  87.88966 104.62373 103.01155  99.50002  91.16455 120.14693 110.54701
+ [106]  56.56240  77.25853 105.52238 100.33032  93.76436  89.38283  89.11696
+ [113] 118.39790  88.79753 101.66795  93.56142  89.37181 114.88805  75.80519
+ [120]  89.02121  95.57367 114.42888 105.09692 103.38706  94.14089 105.75276
+ [127] 102.33635 114.04618  72.15784  98.49526  81.81693  96.49402  87.19355
+ [134]  95.83482 137.64397  89.54897 111.09089 101.14001  78.67759  98.15824
+ [141]  80.29592 100.00982 108.25336  69.90353 104.38269  95.57109 105.39740
+ [148] 109.93554  73.85090 105.03496 107.98186  78.73069 102.87270  95.84257
+ [155]  95.75610 107.56118  89.10559 117.78488  99.72443  86.07759  95.66095
+ [162]  70.21427  71.08226 126.36421  90.58837  77.17247 116.85387 104.98344
+ [169] 100.68481  95.37169  96.42075  87.01655  98.51902 111.14538  81.12385
+ [176] 106.63053 116.63514 115.92228 103.72690 116.42469 106.03824  98.29627
+ [183]  90.03725  97.96711 117.22916  93.93618 103.15376 113.29250 107.96399
+ [190] 123.35375 100.07648 114.92723 109.24317  87.86858 112.95114 100.96883
+ [197]  88.31368  87.08920  85.41469 111.75784  93.20322 130.09562 100.47713
+ [204] 117.25765  90.27176  59.08442  98.06730  97.66954 102.43241 123.24504
+ [211]  90.50382 110.74731  84.95139 102.85775 115.23854  81.56848  78.03474
+ [218] 110.78141  91.82845 109.86343  81.71346 104.21228  75.21916  96.46448
+ [225]  97.12884 115.82600 104.92821 111.09102  91.28913  88.22897  70.89368
+ [232]  68.00375 110.75916  82.98093  94.69119  93.89737 106.55479 117.57914
+ [239] 103.39140  87.68520  83.90184 119.05872 117.43167 115.16496 124.68009
+ [246]  75.44479  97.90822 104.85353 122.97377  95.52835 105.28558 107.07032
+ [253] 106.23484 106.10921 106.02318  78.08829 109.47135 101.15454  82.15473
+ [260]  94.99302 103.71965 103.94294 110.39960  83.57208  88.41068  81.90922
+ [267]  93.78957  80.50330  98.44643  93.51677 105.60111  84.49245 105.53703
+ [274] 100.69633  67.69147 108.88818  89.43713 110.39424 122.07422  72.94022
+ [281] 109.63275  78.88421 143.28376  78.98316  81.32294 130.34994  84.68326
+ [288]  87.32513 108.84469  99.62892  90.70962 101.48351  82.76376  95.90033
+ [295]  80.87717  94.06820  91.30375 111.84478  77.33232 128.87636 101.90714
+ [302]  99.69726  97.98084 116.37058  98.23266  76.94701 112.63937 102.43453
+ [309] 109.24654 127.36355  92.94840 117.35416 137.04400 117.05452  93.96417
+ [316]  78.21461 102.56872 127.03500  97.42847 102.85500  93.48660  96.67475
+ [323]  99.61978  93.39666  87.94747  97.51739 101.28003 112.54443 121.12339
+ [330] 131.98075 116.56590  81.38762 100.14055 100.13963  99.62908  89.73951
+ [337]  87.37110 109.52075 123.77358 112.05897  89.05505 116.03296 117.03670
+ [344] 107.12535  76.04953 113.62437  90.75578  95.30136  93.76546  81.87042
+ [351] 107.52745  94.76757 101.25592  79.35790  77.71852  84.72413  77.68041
+ [358]  95.32639 104.85014  89.02499 108.38323  94.23084  94.13752  99.42649
+ [365]  91.80538 109.88998  86.45066  99.73005 117.59407 109.12472  80.08855
+ [372]  96.12198  97.90564 109.73705  86.14716  99.38547  88.50348 103.17949
+ [379] 104.58799 109.16953  90.17467  92.45629  79.95116 109.21502 100.24168
+ [386]  97.24202 113.70590  92.83163 115.57102  98.28979  75.95550 104.90451
+ [393]  92.81368  98.85905 106.32585  75.27436 108.87595 108.10160  94.29009
+ [400]  80.69927  99.89706  81.06536 105.16836 106.42156 101.95600  99.94322
+ [407] 112.34235 123.49612  94.98657  96.31518 119.20370 106.02512  84.32111
+ [414] 107.39955  81.65203  95.38792  92.75083 122.25013  90.56523  95.22422
+ [421] 102.25346 122.60453 123.60803  79.48817  91.49765 112.67490 111.01463
+ [428]  96.10174  92.60902 106.39055  76.22125  96.24688  89.91160 122.84672
+ [435] 102.60663  73.81285  91.88277 111.35115 109.86578  95.40886 106.68430
+ [442]  79.74819  83.93782 125.46688 132.37923 103.75103 119.21830 104.29481
+ [449]  69.61248  98.42256 102.36421 102.40866  95.33352  70.69918 135.38494
+ [456]  90.13661  93.50752  94.22986  85.11342  99.01671  84.99780 117.34943
+ [463] 117.35738 100.12607  90.08689  92.08271  99.14924 101.47239  94.28172
+ [470]  91.79806 109.63501 123.50867 102.13761  89.21885  98.55302  91.82294
+ [477] 100.90594  96.25962 107.21487  70.86577  97.78059 109.78384  90.29863
+ [484]  92.60346  81.83145  81.33178  97.84702 108.88508  88.80615  66.80064
+ [491]  86.90823 102.38566 104.80316  73.65109 107.66727 121.57871 110.80278
+ [498]  83.37095  77.27684  98.64469 106.03641 104.37789 111.84036 100.95046
+ [505] 101.77455  85.40013 127.50724 110.18833 132.93045 100.72721 104.19779
+ [512] 122.28539 129.45837 105.68904  92.22450 100.93690  88.64052 113.24949
+ [519]  92.34680  94.75065 111.08924  88.76720 115.82959 119.87772  97.62557
+ [526] 109.17902 120.24642  86.82861  95.20015 113.28545 101.15929 106.33511
+ [533] 105.85352  95.87174 124.27313  95.90629  70.91909 102.32530  83.50142
+ [540] 107.61896 112.50823 113.59412 106.52497 104.94458 119.93439  79.15017
+ [547]  84.87024  84.65002  95.28684 100.21045 116.07965 108.75687 108.10248
+ [554]  98.78059  89.35433  76.78186 111.10990 106.57463  82.13599  79.22132
+ [561]  88.04729  79.30841 109.03662 101.45481 107.22493  94.29546  92.10543
+ [568] 131.92858 102.87538 114.54307 104.15988 111.37647  99.68173  93.48016
+ [575] 105.82393 103.67896  73.79560  95.85255 103.00069  96.31625 110.73343
+ [582]  98.11888  91.79446 106.08494 127.18916 100.52275 102.43636 102.16336
+ [589] 112.65885  79.76283 108.41516  97.48740 111.04101 104.83115  91.30612
+ [596]  95.46837 101.96125  87.89871  93.53008  96.27727  83.62111  92.88692
+ [603]  98.25550 110.79856 117.79123 115.80267  88.00749  81.01928  83.61353
+ [610]  87.03113 108.27794 103.25333  82.59295 109.79401  82.59892 107.29746
+ [617] 106.64930 100.97014 131.23956  70.57930 101.35904 116.84395  95.60556
+ [624] 131.38218 121.61457 115.70502 127.70902 118.63388  92.41983 108.85641
+ [631]  93.29549  97.83415 131.38669  99.00475 131.25799 112.61805  82.28838
+ [638]  78.74608  93.32579  80.41236  77.42077 108.51368  96.29548  95.21691
+ [645] 128.93635 115.83212 101.89075  82.84192  97.30316  99.90152 112.08313
+ [652] 100.25312 110.65391  96.49739  86.04489 120.64529  95.88891  83.58497
+ [659]  82.31665  92.06662  88.00020  73.94897 119.61522  98.39418 118.79396
+ [666] 105.65831  68.95997 111.61935  86.76184  98.95235  99.15947 112.80753
+ [673]  86.57722 108.49161 104.05856 108.25372  99.56486  95.98223 109.81362
+ [680] 120.07371  77.68957 115.72683  90.80149  91.89123 120.42823  88.27999
+ [687]  97.06175  99.21214  96.91068 103.59019  85.00027  99.40345 112.66598
+ [694] 113.35244  94.08775 116.74992 105.04442 127.27084  84.15241  83.93420
+ [701] 108.57560 105.51818  97.12178 118.50593 129.61206 105.53682  76.16306
+ [708]  98.04699 125.07685 113.68658 103.77102  88.90795 113.68560  97.03280
+ [715] 108.23159  85.80888  82.14103  78.88430 110.80248 108.26887 100.91470
+ [722]  87.40130 106.68480  92.32841  92.21004  94.29149 112.57295  90.89598
+ [729]  75.47271 125.61524 114.81944 102.80584 113.82420 112.82354 106.50188
+ [736] 115.13217  79.36943 105.07476  98.74192  74.38102 130.28802  74.14938
+ [743]  65.57074  95.92465  73.96636  86.64143 106.35014  75.82340  74.79192
+ [750] 102.22486 129.72270  88.19649 110.42914  69.23748 114.01777  89.97415
+ [757] 102.62302  83.40271  70.73109 118.27846 120.93828  95.25501  86.07411
+ [764]  97.55010 104.72637  84.96004  89.32398 118.41639 107.05296 100.88016
+ [771] 103.05068  96.89258  94.58187  94.13115 110.04016 113.00059 116.95010
+ [778] 103.79598 131.08552 105.62393 106.42676  81.89221  90.69623  88.87215
+ [785] 103.72366  98.32123 108.42971 131.45165  78.36140  99.59444 125.14021
+ [792]  71.52286 104.49923 122.69367 128.85089 107.18683 100.08783 107.56575
+ [799]  86.87918 102.69515  92.56655  95.00565  94.97187 101.23528 122.99144
+ [806]  94.53872  98.08034 117.25750 109.55488 101.38496 112.71429 108.61796
+ [813] 105.94461  75.19916 112.10485  86.31916 114.03248 126.89801  74.84562
+ [820] 109.61790  77.80154 109.85628  79.35750  89.33848 101.90999 109.18635
+ [827]  86.76789 108.43031  88.70411 101.29460 124.77093 103.41770 127.02940
+ [834] 122.94740 112.19344 123.93928  85.83375  86.15745  73.25845 119.85079
+ [841]  86.16754 120.71578  74.92481  99.05665 105.77522  96.22354 119.42182
+ [848] 116.67474  90.23792  85.86376 129.28579  93.91598 109.52963 105.89051
+ [855]  85.06672 132.01697  97.40049 115.27417 101.24343  80.18409  84.81155
+ [862]  79.37538 117.80566 113.52829  87.79699  90.95479 117.35766 107.27328
+ [869]  96.01833  96.08120  84.62992  96.26646 103.25239  96.83742  97.28103
+ [876]  81.40963  64.88389  93.40948  93.64281 110.06355 113.29792  99.77819
+ [883]  95.66221  69.48239  91.60526 104.41483  79.13144 100.22671  87.87599
+ [890] 117.65789 116.57651 103.35978  74.05399 104.75023  97.69702  86.46423
+ [897] 112.40327  95.81426 111.81547  92.57282  99.42030  74.82493  90.39758
+ [904] 115.23681  80.66797 108.31533  93.04412  85.67277 110.62049 129.38439
+ [911]  91.98647  70.79600 112.95986 102.96514 112.46570  56.56527 120.13596
+ [918]  89.26354  95.19187 103.31667 108.68837 118.80109 116.14343  97.85882
+ [925]  91.06934  93.26610  89.98807 100.60852  96.19277  83.62377 100.92157
+ [932] 107.07897 126.17105  92.37246  91.67258  91.46745  95.34869  86.92989
+ [939]  91.80464 140.78809  90.63519 105.64159 112.18214 108.71616 128.17888
+ [946]  97.53545  84.06187 104.63502  96.45230 113.57819 117.93021 101.59605
+ [953]  97.02006  89.34741 140.61894 107.63570  85.52673  97.43849  65.26499
+ [960]  92.35427 100.36578  92.87903 114.67905 131.97084 103.08769 109.62152
+ [967] 115.68699 102.30984  79.37263 120.25718 124.58169 102.71912 104.59082
+ [974] 112.96626  88.69217 109.64396 100.13246 125.10384 106.66752 112.19457
+ [981]  87.51382 126.44200 102.51606 105.87458  96.11485  99.25873 135.90862
+ [988] 114.43013 102.36814  85.91825  99.57212 120.53569  99.56479  98.72794
+ [995]  84.08650 125.46954 113.44796  80.83992 117.22139  94.11767</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a> CI <span class="ot">=</span>  <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span> )</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a> my_data1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">CI=</span>CI)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a> my_data2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">CI =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>))</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a> my_data3 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>( <span class="at">CI =</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="dv">100</span>, <span class="dv">15</span>)) <span class="co"># es posible pero no recomendable.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="visualizar-los-datos" class="level2">
+<h2 class="anchored" data-anchor-id="visualizar-los-datos">Visualizar los datos</h2>
+<p>La distribución se puede visualizar con “geom_density”</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>my_data1 <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>( <span class="at">x =</span> CI) )<span class="sc">+</span> <span class="co"># aes = aesthetic -&gt; estéstica</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="notas-2025-08-26_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>my_data2 <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> CI))<span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="notas-2025-08-26_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>my_data1 <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> CI))<span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="notas-2025-08-26_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(my_data1<span class="sc">$</span>CI)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="notas-2025-08-26_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>my_data1 <span class="sc">|&gt;</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(CI))<span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="notas-2025-08-26_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizar-variables-de-student-data" class="level2">
+<h2 class="anchored" data-anchor-id="visualizar-variables-de-student-data">Visualizar variables de “student data”</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>student_data <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Weight_kg))<span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="notas-2025-08-26_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>student_data <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Weight_kg))<span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="notas-2025-08-26_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>datos_indec <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_delim</span>(<span class="st">"../data/usu_individual_T125.txt"</span>, <span class="at">delim =</span> <span class="st">";"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: One or more parsing issues, call `problems()` on your data frame for details,
+e.g.:
+  dat &lt;- vroom(...)
+  problems(dat)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 45425 Columns: 235
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ";"
+chr   (5): CODUSU, MAS_500, CH05, CH14, PP09C_ESP
+dbl (228): ANO4, TRIMESTRE, NRO_HOGAR, COMPONENTE, H15, REGION, AGLOMERADO, ...
+num   (1): IPCF
+lgl   (1): PP09A_ESP
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>datos_indec <span class="sc">|&gt;</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(CH06))<span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="notas-2025-08-26_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>datos_indec <span class="sc">|&gt;</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(CH06))<span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="notas-2025-08-26_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

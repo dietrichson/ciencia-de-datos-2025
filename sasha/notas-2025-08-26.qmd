@@ -1,0 +1,104 @@
+---
+title: "Notas de la clase 2025-08-26"
+author: "Aleksander Dietrichson"
+date: 2025-08-26
+format: html
+---
+
+## Generar una distribución normal
+
+```{r}
+#| include: false
+library(tidyverse)
+# luego cargar datos
+```
+
+Se usa `rnorm` para generar una distribución normal:
+
+r = "random", norm = "normal"
+
+n = ¿cuantas observaciones?,
+
+mean = ¿cual es el promedio?
+
+sd = ¿cual es la desviación estándar?
+
+```{r}
+
+
+ rnorm(n = 1000, mean = 100, sd = 15 )
+ CI =  rnorm(n = 1000, mean = 100, sd = 15 )
+ my_data1 <- data.frame(CI=CI)
+ my_data2 <- data.frame(CI = rnorm(n = 1000, mean = 100, sd = 15))
+ my_data3 <- data.frame( CI = rnorm(1000, 100, 15)) # es posible pero no recomendable.
+
+```
+
+## Visualizar los datos
+
+La distribución se puede visualizar con "geom_density"
+
+```{r}
+my_data1 |> 
+  ggplot( aes( x = CI) )+ # aes = aesthetic -> estéstica
+  geom_density()
+```
+
+```{r}
+my_data2 |> 
+  ggplot(aes(x = CI))+
+  geom_density()
+```
+
+```{r}
+my_data1 |> 
+  ggplot(aes(x = CI))+
+  geom_histogram()
+```
+
+```{r}
+hist(my_data1$CI)
+```
+
+```{r}
+my_data1 |> 
+  ggplot(aes(CI))+
+  geom_histogram(binwidth = 10)
+```
+
+## Visualizar variables de "student data"
+
+```{r}
+#| include: false
+# cargar datos
+student_data <- readr::read_csv("../data/student-dataset.csv")
+```
+
+```{r}
+student_data |>
+  ggplot(aes(x = Weight_kg))+
+  geom_density()
+  
+```
+
+```{r}
+student_data |>
+  ggplot(aes(x = Weight_kg))+
+  geom_histogram()
+```
+
+```{r}
+datos_indec <- readr::read_delim("../data/usu_individual_T125.txt", delim = ";")
+```
+
+```{r}
+datos_indec |> 
+  ggplot(aes(CH06))+
+  geom_density()
+```
+
+```{r}
+datos_indec |> 
+  ggplot(aes(CH06))+
+  geom_histogram()
+```

@@ -1,0 +1,19 @@
+---
+title: "tarea-2025-08-26"
+author: "Aleksander Dietrichson"
+format: html
+---
+
+
+## Tarea para la próxima:
+
+* Escibir el codigo para cargar los datos del indec
+* Eligir tres variables de los datos del indec 
+* Eventualmente hacer la transformación (traducir al español)
+* Visualizar la distribución
+* Determinar si parece normal. En caso de que no sea normal especular por qué.
+
+## Lectura 
+
+Capítulo 5
+
