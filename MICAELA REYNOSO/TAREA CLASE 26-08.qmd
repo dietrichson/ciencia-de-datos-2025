@@ -1,0 +1,52 @@
+---
+title: "TAREA PARA CLASE 26-08"
+date: 2025-08-26
+author: "Micaela Reynoso"
+lang: es
+format: html
+---
+
+```{r}
+library(readr)
+library(dplyr)
+```
+
+```{r}
+df <- read_csv("../data/student-dataset.csv")
+```
+
+```{r}
+df <- df %>%
+  rename(
+    ID = ID,
+    Nombre = Name,
+    Genero = Gender,
+    Edad = Age,
+    Peso_kg = Weight_kg,
+    Altura_cm = Height_cm,
+    Bebida_Preferida = Preferred_Beverage,
+    Tamano_Hogar = Household_Size
+  )
+```
+
+```{r}
+df <- df %>%
+  mutate(
+    Genero = case_when(
+      Genero == "Female" ~ "Femenino",
+      Genero == "Male"   ~ "Masculino",
+      TRUE ~ Genero
+    ),
+    Bebida_Preferida = case_when(
+      Bebida_Preferida == "Coffee" ~ "Café",
+      Bebida_Preferida == "Tea"    ~ "Té",
+      Bebida_Preferida == "Mate"   ~ "Mate",
+      TRUE ~ Bebida_Preferida
+    )
+  )
+
+```
+
+```{r}
+head(df)
+```
