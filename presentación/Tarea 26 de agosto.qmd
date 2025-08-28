@@ -1,0 +1,31 @@
+---
+title: "Untitled"
+format: html
+author: "Melina Varhulik"
+lang: es 
+---
+
+```{r}
+
+#| include: false
+library(readr)
+
+my_data<- read_csv("../data/student-dataset.csv")
+```
+
+```{r}
+library(tidyverse)
+
+my_data<- my_data |>
+  rename(
+    DNI = ID,
+    Nombre = Name,
+    sexo = Gender,
+    edad = Age,
+    Peso = Weight_kg,
+    Altura = Height_cm,
+    Bebida_preferida = Preferred_Beverage,
+    Tamano_del_Hogar = Household_Size
+  ) |>
+  mutate(sexo = ifelse(sexo == "Female", "Mujer", "Hombre"))
+```
