@@ -1,0 +1,49 @@
+---
+title: "Tarea para agosto 20"
+author: "Paula Lugones"
+date: 2025-08-12
+output: html_document
+---
+
+## Tarea para la próxima
+
+En el conjunto de datos que vimos hoy (**latam-cellular.csv**) hay ocho columnas (variables) relacionadas con empresas de telecomunicaciones en América Latina.
+
+1.  Describir cada una de las ocho variables en cuanto a su **nivel de medición** (nominal, ordinal, intervalo o razón).\
+2.  Indicar si las variables son **continuas o discretas**.\
+3.  Elegir *al menos una variable* y visualizarla (tabla o gráfico).
+
+------------------------------------------------------------------------
+
+## 1 y 2. Descripción de variables
+
+| Variable | Descripción | Nivel de medición | Tipo |
+|------------------|------------------|------------------|------------------|
+| `empresa` | Nombre de la compañía de telefonía móvil | Nominal | Discreta |
+| `pais` | País en el que opera la empresa | Nominal | Discreta |
+| `anio_ingreso` | Año en que la empresa ingresó al mercado local | Razón | Discreta |
+| `clientes_millones` | Cantidad estimada de clientes (en millones) | Razón | Continua |
+| `ingresos_anuales_usd` | Ingresos anuales de la empresa (en dólares estadounidenses) | Razón | Continua |
+| `tipo_plan_principal` | Tipo de plan que más vende la empresa (prepago, pospago, mixto) | Nominal | Discreta |
+| `market_share` | Porcentaje estimado del mercado que posee la empresa en ese país | Razón | Continua |
+| `operador_omv` | ¿Es un operador móvil virtual? (Sí / No) | Nominal dicotómica | Discreta |
+
+------------------------------------------------------------------------
+
+## 3. Visualización
+
+\`\`\`{r} \# Cargar datos desde la misma carpeta del Rmd datos \<- read.csv("latam-cellular.csv")
+
+# Ver estructura del dataset
+
+str(datos)
+
+# Gráfico: número de compañías por país
+
+barplot(table(datos\$pais), main = "Cantidad de compañías de telefonía móvil por país", xlab = "País", ylab = "Número de compañías", las = 3)
+
+```         
+    # Histograma del porcentaje de market share
+```
+
+hist(datos\$market_share, main = "Distribución del market share", xlab = "Porcentaje del mercado")
