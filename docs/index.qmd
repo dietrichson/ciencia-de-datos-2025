@@ -25,3 +25,6 @@ format:
 * [tarea-2025-08-20](tarea-2025-08-20.html)
 * [Notas de la clase 2025-08-26](notas-2025-08-26.html)
 * [tarea-2025-08-26](tarea-2025-08-26.html)
+
+### Clase 6: Probabilidad y estimación de parámetros
+* [Probabilidad y estimación de parámetros](presentaciones/6-probabilidad-y-estimacion-de-parametros.html)
