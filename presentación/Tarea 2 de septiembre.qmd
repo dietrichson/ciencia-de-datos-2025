@@ -1,0 +1,64 @@
+---
+title: "Tarea 2 de septiembre"
+format: html
+editor: visual
+author: Melina Varhulik
+---
+
+## Tarea
+
+Escribir el codigo para cargar los datos del indec
+
+Elegir tres variables de los datos del indec
+
+Eventualmente hacer la transformación (traducir al español)
+
+Visualizar la distribución
+
+Determinar si parece normal. En caso de que no sea normal especular por qué.
+
+```{r}
+#| include: false
+library(tidyverse)
+```
+
+```{r}
+
+indec <- read_delim(
+  "data/usu_individual_T125.txt",
+  delim = ";",
+  quote = "\"")
+```
+
+```{r}
+datos <- indec %>%
+  select(CH04, CH06, ITF) %>%
+  rename(
+    edad = CH04,
+    educacion = CH06,
+    ingreso_total = ITF
+  )
+```
+
+```{r}
+colnames(indec) <- gsub("\"", "", colnames(indec))
+```
+
+```{r}
+
+```
+
+```{r}
+ggplot(datos, aes(x = ingreso_total)) +
+  geom_density()
+```
+
+```{r}
+ggplot(datos, aes(x = educacion)) +
+  geom_bar()
+```
+
+```{r}
+ggplot(datos, aes(x = ingreso_total)) +
+  geom_density()
+```
