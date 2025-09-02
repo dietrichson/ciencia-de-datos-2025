@@ -1,6 +1,7 @@
 ---
 title: "Probabilidad y estimación de parámetros"
 author: "Aleksander Dietrichson, PhD"
+date: 2025-09-02
 format: 
   revealjs: 
     code-line-numbers: false
@@ -26,8 +27,6 @@ options(scipen=999)
 -   Tareas de limpieza
 
 -   Revisión de las tares
-
--   $\chi^2$ para tablas de más de 2 $\times$ 2
 
 -   Probabilidad y estimación de parámetros
 
@@ -115,7 +114,7 @@ tmp %>%
 
 ## Variables normalizadas
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 $$
   z = {x-\bar{x}\over{\sigma}}
@@ -132,7 +131,7 @@ $$
 -   $\bar{x}$: la media de las observaciones
 -   $\sigma$ o s: la desviación estándar
 :::
-:::
+:::::
 
 ## Variables normalizada: ejemplo
 
@@ -192,7 +191,7 @@ tmp %>%
 
 ## Error estándar
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 $$
 SE = {\sigma\over{\sqrt{N}}}
@@ -208,7 +207,7 @@ $$
 -   $\sigma$ o s: la desviación estándar de la población
 -   N: número de observaciones de la muestra
 :::
-:::
+:::::
 
 ## Error estándar: ejemplo
 

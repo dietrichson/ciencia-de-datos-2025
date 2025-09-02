@@ -1,0 +1,109 @@
+---
+title: "Clase 26.08 "
+format: html
+author:Trinidad Loncarica
+date: 26.08
+---
+
+## Tarea para la próxima:
+
+-   Escibir el codigo para cargar los datos del indec
+
+```{r}
+library(readr)
+library(dplyr)
+
+datos_indec <- readr::read_delim("../data/usu_individual_T125.txt", delim = ";")
+```
+
+-   Eligir tres variables de los datos del indec
+
+    **CH04** → **Sexo**
+
+    **CH06** → **Edad**
+
+    **P21** → **Salario**
+
+<!-- -->
+
+-   Eventualmente hacer la transformación (traducir al español)
+
+```{r}
+library(dplyr)
+
+minidatos <- datos_indec |>
+  select(CH04, CH06, PP08D1) |>
+  rename(
+    sexo = CH04,
+    edad = CH06,
+    salario = PP08D1
+  ) |>
+  mutate(
+    sexo = recode(sexo,
+                  `1` = "Masculino",
+                  `2` = "Femenino"),
+    # Salario a numérico (algunos vienen como texto)
+    salario = as.numeric(salario),
+    edad = as.numeric(edad)
+  )
+
+glimpse(minidatos)
+```
+
+-   Visualizar la distribución
+
+Sexo –\> geom_bar
+
+```{r}
+minidatos |>
+  ggplot(aes(x = sexo)) +
+  geom_bar(fill = "orange", alpha = 0.7)
+```
+
+Edad –\> geom_histogram
+
+```{r}
+datos_indec |>
+  ggplot(aes(x = CH06)) + #Tuve un problema con el reconocimiento de "edad"
+  geom_histogram(binwidth = 5, fill = "skyblue", color = "white")
+```
+
+Determinar si parece normal. En caso de que no sea normal especular por qué.
+
+En el caso de la variable **sexo**, la distribución no puede considerarse normal porque se trata de una variable categórica nominal (masculino/femenino). El gráfico de barras muestra simplemente la cantidad de personas en cada categoría, lo cual no se ajusta a una curva normal, sino que refleja la composición de la población por sexo.
+
+En el caso de la variable **edad**, la distribución no es normal. El histograma muestra mayor concentración en edades jóvenes y adultas, con menos casos en los extremos. Esto responde a la estructura demográfica de la población (más personas en edad laboral, menos en edades muy altas o muy bajas) y a que la encuesta se aplica a población urbana.
+
+***Notas de clase \| No leer***
+
+Generar una distribucion normal
+
+"rnorm" –\> Generar distribucion normal
+
+R = random NORM= normal
+
+N = Cuantas obsevaciones vamos a crear ?
+
+SD= Cual es la desviacion estandar ?
+
+Mean = Cual es el promedio ?
+
+```{r}
+rnorm (n= 1000, mean = 100, sd = 15)
+Coeficiente intelecutal 
+CI = rnorm (n= 1000, mean = 100, sd = 15)
+my_data <- data.frame ( CI=CI )
+my_data <- data.frame ( CI = rnorm (n= 1000, mean = 100, sd = 15))
+```
+
+```{r}
+#| include: false
+
+library(readr)
+my_data<- read_csv("../data/student-dataset.csv")
+```
+
+```{r}
+my_data |>
+  geom_density(aes())
+```
