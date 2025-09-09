@@ -33,3 +33,5 @@ format:
 
 ### Clase 6: Método científico. Manipulación de datos.
 * [Método científico. Manipulación de datos.](presentaciones/6-metodo-científico.html)
+* [notas-de-la-clase-2025-09-09](notas-de-la-clase-2025-09-09.html)
+* [tarea-2025-09-09](tarea-2025-09-09.html)

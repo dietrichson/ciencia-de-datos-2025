@@ -1,0 +1,68 @@
+---
+title: "notas-de-la-clase-2025-09-09"
+date: 2025-09-09
+author: "Aleksander Dietrichson"
+lang: es
+format: html
+---
+
+## Metodo Cientifico
+
+```{r}
+library(dplyr)
+my_data <- readr::read_csv("../data/student-dataset.csv")
+
+my_data <- my_data |> 
+  rename(Sexo = Gender) |> 
+  rename(Estatura = Height_cm)
+my_data$Sexo <- ifelse(my_data$Sexo == "Male", "Hombre", "Mujer")
+my_data$Sexo1 <- ifelse(my_data$Sexo == "Male", "Hombre", "Mujer")
+my_data$Sexo2 <- ifelse(my_data$Sexo != "Female", "Hombre", "Mujer")
+
+my_data$Sexo1 == my_data$Sexo2
+```
+
+```{r}
+# Operador !
+
+2 == 2
+!(2==3)
+
+# my_data  <- my_data |> filter(!is.na(variable))
+```
+
+## Hipotesis
+
+$H_0: \mu(M)=\mu(H)$
+
+$H_1: \mu(M) < \mu(H)$
+
+Nuestra hipótesis nula es que no existe diferencia de estatura entre hombres y mujeres. La alterntativa es que sí es existe y que los hombres son más altos.
+
+### Visualización
+
+```{r}
+library(ggplot2)
+
+my_data |> 
+  group_by(Sexo) |> 
+  summarise(
+    Estatura = mean(Estatura)
+  ) |> 
+  ggplot(aes(Sexo, Estatura, fill=Sexo))+
+  geom_col()
+```
+
+## Test de T
+
+```{r}
+
+hombres <- my_data |> 
+  filter(Sexo == "Hombre")
+mujeres <- my_data |> 
+  filter(Sexo == "Mujer")
+
+t.test(hombres$Estatura, mujeres$Estatura)
+```
+
+En vista del test estadístico que hicimos el valor de p\<0.000000001, rechazamos la hipótesis nula. Y nos quedamos con la alternativa de que en promedio los hombres miden....
