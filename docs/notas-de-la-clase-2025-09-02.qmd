@@ -1,0 +1,82 @@
+---
+title: "Notas dela clase 2025-09-02"
+date: 2025-09-02
+author: "Aleksander Dietrichson"
+lang: es
+format: html
+---
+
+```{r}
+#| include: false
+library(tidyverse)
+source("../R/poner-genero.R")
+my_data <- readr::read_delim("../data/usu_individual_T125.txt", delim = ";")
+my_data <- my_data |> 
+  poner_genero()
+```
+
+
+## Armar funciones en R
+
+Se puede hacer inline o en un archivo R
+```{r}
+my_fun <- function(x){
+  x+1
+}
+```
+
+
+
+
+## Variables normalizadas
+
+```{r}
+my_data <- my_data |> 
+  rename(edad = CH06) |> # alternativa mutate 
+  rename(ingreso = P21) # alternative mutate
+
+```
+
+
+
+```{r}
+my_data |> 
+  ggplot(aes(scale(edad)))+
+  geom_density()
+```
+
+
+## Calculo del nivel de confianza
+
+```{r}
+media_edad <- mean(my_data$edad)
+sd_edad <- sd(my_data$edad)
+
+SE <- sd_edad/nrow(my_data)
+
+SE
+```
+
+```{r}
+conf_95 <- c( media_edad + SE * 1.96, media_edad - SE * 1.96)
+conf_95
+```
+
+```{r}
+my_data2 <- my_data |> 
+  sample_n(300)
+```
+
+
+
+```{r}
+media_edad <- my_data2$edad |> mean()
+media_edad
+sd_edad <- my_data2$edad |> sd()
+```
+```{r}
+SE <- sd_edad/nrow(my_data2)
+conf_95 <- c( media_edad + SE * 1.96, media_edad - SE * 1.96)
+conf_95
+```
+
