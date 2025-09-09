@@ -1,0 +1,63 @@
+---
+title: "Tarea 9 de septiembre"
+format: html
+author: Melina Varhulik
+lang: es
+---
+
+Elegir una variable de los datos del indec, sacar el promedio, visualizarla, y calcular el nivel de confianza al 95% de la estimación del promedio.
+
+```{r}
+#| include: false
+library(tidyverse)
+```
+
+```{r}
+indec <- read_delim("../data/usu_individual_T125.txt",
+  delim = ";")
+```
+
+```{r}
+ggplot(datos_indec, aes(x =ITF)) +
+  geom_density()+scale_x_continuous(breaks =c(10^6,10^7)
+  )
+
+```
+
+```{r}
+list(datos_indec)
+```
+
+```{r}
+media_INGRESOS <- mean(datos_indec$ITF)
+sd_INGRESOS <- sd(datos_indec$ITF)
+
+SE <- sd_INGRESOS/nrow(datos_indec)
+
+SE
+```
+
+```{r}
+conf_95 <- c( media_INGRESOS + SE * 1.96, media_INGRESOS - SE * 1.96)
+conf_95
+```
+
+```{r}
+datos_indec2<- datos_indec|> 
+  sample_n(300)
+```
+
+```{r}
+media_INGRESOS<- datos_indec2$ITF|> mean()
+media_INGRESOS
+sd_media_INGRESOS <- datos_indec2$media_INGRESOS |> sd()
+```
+
+```{r}
+SE <- media_INGRESOS/nrow(datos_indec2)
+conf_95 <- c( media_INGRESOS + SE * 1.96, media_INGRESOS - SE * 1.96)
+conf_95
+```
+
+```{}
+```
