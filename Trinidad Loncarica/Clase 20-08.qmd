@@ -42,8 +42,7 @@ my_data <- my_data |>
                               "mate"   = "Mate",
                               "coffee" = "Café",
                               "tea"    = "Té")
-  ) 
-)
+  )
 ```
 
 # Datos del INDEC (notas clase) (no leer)
