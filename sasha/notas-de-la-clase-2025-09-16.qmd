@@ -1,0 +1,81 @@
+---
+title: "notas-de-la-clase-2025-09-16"
+author: "Aleksander Dietrihcson"
+date: 2025-09-16
+format: html
+---
+
+```{r}
+#! include: false
+library(tidyverse)
+my_data<- readr::read_csv("../data/student-dataset.csv")
+```
+
+Hipotesis nula: No hay diferencia de *housing size* entre hombres y mujeres.
+
+Dos alternativas:
+
+1\) Las mujeres tienden a vivir en casas con mas gente
+
+2\) Los hombres tienden a vivir en casas con mas gente
+
+## Parametros
+
+```{r}
+hombres <- my_data |> 
+  filter(Gender == "Male")
+
+mujeres <- my_data |>
+  filter(Gender == "Female")
+```
+
+### Var test
+
+```{r}
+var.test(hombres$Household_Size,mujeres$Household_Size )
+```
+
+### Test de normalidad
+
+```{r}
+shapiro.test(hombres$Household_Size)
+shapiro.test(mujeres$Household_Size)
+```
+
+### Usar el test de T
+
+```{r}
+t.test(hombres$Household_Size,mujeres$Household_Size)
+```
+
+El test de T no. nos permite rechazar la hipótesis nula y concluimos que no hay diferencia significativa en el "household_size".
+
+## Edad y sexo
+
+```{r}
+my_data2 <- readr::read_delim("../data/usu_individual_T125.txt")
+```
+
+```{r}
+source("../R/poner-genero.R")
+my_data2 <- my_data2 |> 
+  poner_genero_y_edad()
+
+hombres2 <- my_data2 |> 
+  filter(sexo == "Hombre")
+mujeres2 <- my_data2 |> 
+  filter(sexo == "Mujer")
+
+```
+
+### Test de t
+
+```{r}
+t.test(hombres2$edad, mujeres2$edad)
+```
+
+Rechazamos la hipotesis nula y concluimos que las mujeres en promedio tienen más edad que los hombres.
+
+```{r}
+t.test(mujeres2$edad, hombres2$edad)
+```

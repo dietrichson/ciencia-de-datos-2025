@@ -1,0 +1,15 @@
+---
+title: "Tarea-2025-09-16"
+date: 2025-09-16
+format: html
+---
+
+
+
+## Lecturas:
+
+Capítulo 8 del libro
+
+## Tareas
+
+Eligir dos variables del los datos del indec. Una tiene que se dicotómica (sexo, pro ejemplo). Formular hipotesis y eligir con justificación el test estadistico para utilizar para intentar rechazar la hipotesis nula. 
