@@ -1,0 +1,22 @@
+---
+title: "TAREA PARA CLASE 09-09"
+date: 2025-09-09
+author: "Micaela Reynoso"
+lang: es
+format: html
+---
+
+1- Eligir una variable de los datos del indec, sacar el promedio, visualizarla, y calcular el nivel de confianza al 95% de la estimación del promedio.
+
+```{r}
+#| include: false
+library(tidyverse)
+```
+
+```{r}
+```
+
+```{r}
+indec %>%
+  summarise(promedio_edad = mean(CH06, na.rm = TRUE))
+```
