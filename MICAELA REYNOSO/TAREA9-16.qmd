@@ -1,0 +1,11 @@
+---
+title: "TAREA9-16"
+format: html
+---
+
+## Tarea
+
+Basado en un conjunto de datos (puede ser Indec, los datos sintéticos u otro)
+
+* Formular una teoría que se puede refutar con los datos elegidos.
+* Formular hipótesis nula y alternativa

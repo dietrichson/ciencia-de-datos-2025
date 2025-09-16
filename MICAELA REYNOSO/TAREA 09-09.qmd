@@ -14,9 +14,63 @@ library(tidyverse)
 ```
 
 ```{r}
+library(readr)
+library(dplyr)
+
+indec <- readr::read_delim("../data/usu_individual_T125.txt", delim = ";")
 ```
 
 ```{r}
 indec %>%
   summarise(promedio_edad = mean(CH06, na.rm = TRUE))
+```
+
+```{r}
+indec %>%
+  count(CH06) %>%
+  mutate(prop = n / sum(n))
+```
+
+```{r}
+library(ggplot2)
+library(dplyr)
+
+indec %>%
+  ggplot(aes(x = as.factor(CH06))) +
+  geom_bar(fill = "skyblue", alpha = 0.7) +
+  labs(x = "Edad",
+       y = "Cantidad",
+       title = "Distribución de la variable CH06 (Edad)") +
+  theme_minimal()
+
+```
+
+```{r}
+# Extraer solo la variable
+x <- indec$CH06
+
+# Eliminar valores faltantes
+x <- na.omit(x)
+
+# Calcular promedio
+media <- mean(x)
+
+# Calcular desvío estándar
+desvio <- sd(x)
+
+# Tamaño muestral
+n <- length(x)
+
+# Error estándar
+se <- desvio / sqrt(n)
+
+# Intervalo de confianza al 95%
+error_margin <- qnorm(0.975) * se   # 0.975 porque es bilateral
+
+ic_lower <- media - error_margin
+ic_upper <- media + error_margin
+
+c(media = media,
+  IC95_inferior = ic_lower,
+  IC95_superior = ic_upper)
 ```
