@@ -59,5 +59,5 @@ conf_95 <- c( media_INGRESOS + SE * 1.96, media_INGRESOS - SE * 1.96)
 conf_95
 ```
 
-```{}
+```         
 ```

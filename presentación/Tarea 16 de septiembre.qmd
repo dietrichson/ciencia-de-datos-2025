@@ -49,12 +49,7 @@ my_data |>
 ```
 
 ```{r}
-hombres <- datos_indec |> 
-  filter(sexo == "Hombre")
-mujeres <- datos_indec |> 
-  filter(sexo == "Mujer")
 
-t.test(mujeres$edad, hombres$edad)
 
 
 

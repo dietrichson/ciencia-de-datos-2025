@@ -3,6 +3,7 @@ title: "Tarea 2 de septiembre"
 format: html
 editor: visual
 author: Melina Varhulik
+date: 2/9/2025
 ---
 
 ## Tarea
@@ -34,8 +35,8 @@ indec <- read_delim(
 datos <- indec %>%
   select(CH04, CH06, ITF) %>%
   rename(
-    edad = CH04,
-    educacion = CH06,
+    sexo = CH04,
+    edad = CH06,
     ingreso_total = ITF
   )
 ```
@@ -50,15 +51,41 @@ colnames(indec) <- gsub("\"", "", colnames(indec))
 
 ```{r}
 ggplot(datos, aes(x = ingreso_total)) +
-  geom_density()
+  geom_density()+scale_x_continuous(breaks =c(10^6,10^7)
+  )
+
 ```
 
 ```{r}
-ggplot(datos, aes(x = educacion)) +
+ggplot(datos, aes(x = sexo)) +
   geom_bar()
 ```
 
 ```{r}
-ggplot(datos, aes(x = ingreso_total)) +
+ggplot(datos, aes(x = edad)) +
   geom_density()
+```
+
+```{r}
+list(datos_indec)
+```
+
+```{r}
+datos|>
+  ggplot(aes(ingreso_total,edad))+
+  geom_point()
+  
+```
+
+```{r}
+datos_indec <- readr::read_delim("../data/usu_individual_T125.txt", delim = ";")
+
+```
+
+```{r}
+source("R/poner_genero.R")
+datos<- readr::read_delim("../data/usu_individual_T125.txt",delim = ";" )
+datos<- datos |>
+  poner_genero ()
+
 ```
