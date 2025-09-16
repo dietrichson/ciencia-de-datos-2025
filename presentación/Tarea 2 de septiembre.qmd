@@ -24,13 +24,11 @@ library(tidyverse)
 ```
 
 ```{r}
-
 indec <- read_delim(
   "../data/usu_individual_T125.txt",
   delim = ";")
-```
 
-```{r}
+
 datos <- indec %>%
   select(CH04, CH06, ITF) %>%
   rename(
