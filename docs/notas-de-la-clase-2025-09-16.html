@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Aleksander Dietrihcson">
+<meta name="dcterms.date" content="2025-09-16">
 
-<title>Seminario de Ciencia de Datos</title>
+<title>notas-de-la-clase-2025-09-16</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,24 +22,58 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="index_files/libs/clipboard/clipboard.min.js"></script>
-<script src="index_files/libs/quarto-html/quarto.js" type="module"></script>
-<script src="index_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="index_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="index_files/libs/quarto-html/popper.min.js"></script>
-<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="index_files/libs/quarto-html/anchor.min.js"></script>
-<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="index_files/libs/bootstrap/bootstrap-be9000ead4eca69e3f10d2234a75ef31.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script src="notas-de-la-clase-2025-09-16_files/libs/clipboard/clipboard.min.js"></script>
+<script src="notas-de-la-clase-2025-09-16_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="notas-de-la-clase-2025-09-16_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="notas-de-la-clase-2025-09-16_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="notas-de-la-clase-2025-09-16_files/libs/quarto-html/popper.min.js"></script>
+<script src="notas-de-la-clase-2025-09-16_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="notas-de-la-clase-2025-09-16_files/libs/quarto-html/anchor.min.js"></script>
+<link href="notas-de-la-clase-2025-09-16_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="notas-de-la-clase-2025-09-16_files/libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="notas-de-la-clase-2025-09-16_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="notas-de-la-clase-2025-09-16_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="notas-de-la-clase-2025-09-16_files/libs/bootstrap/bootstrap-6a8e6d95bfcd174082ff54166b04dcf7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
-<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="fullcontent quarto-light">
@@ -48,14 +84,26 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Seminario de Ciencia de Datos</h1>
+<h1 class="title">notas-de-la-clase-2025-09-16</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Aleksander Dietrihcson </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 16, 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -65,57 +113,175 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="presentaciones-y-notas" class="level2">
-<h2 class="anchored" data-anchor-id="presentaciones-y-notas">Presentaciones y Notas</h2>
-<section id="clase-1-arranque" class="level3">
-<h3 class="anchored" data-anchor-id="clase-1-arranque">Clase 1: Arranque</h3>
-<ul>
-<li><a href="presentaciones/1-inicio-y-setup.html">Arranque</a></li>
-<li><a href="presentacion.html">presentacion</a></li>
-<li><a href="tarea-2025-08-04.html">Tarea para el 11 de agosto 2025</a></li>
-</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#! include: false</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.2     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.1.0     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>my_data<span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"../data/student-dataset.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 30 Columns: 8
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (3): Name, Gender, Preferred_Beverage
+dbl (5): ID, Age, Weight_kg, Height_cm, Household_Size
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<p>Hipotesis nula: No hay diferencia de <em>housing size</em> entre hombres y mujeres.</p>
+<p>Dos alternativas:</p>
+<p>1) Las mujeres tienden a vivir en casas con mas gente</p>
+<p>2) Los hombres tienden a vivir en casas con mas gente</p>
+<section id="parametros" class="level2">
+<h2 class="anchored" data-anchor-id="parametros">Parametros</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>hombres <span class="ot">&lt;-</span> my_data <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">"Male"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>mujeres <span class="ot">&lt;-</span> my_data <span class="sc">|&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">"Female"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="var-test" class="level3">
+<h3 class="anchored" data-anchor-id="var-test">Var test</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var.test</span>(hombres<span class="sc">$</span>Household_Size,mujeres<span class="sc">$</span>Household_Size )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    F test to compare two variances
+
+data:  hombres$Household_Size and mujeres$Household_Size
+F = 0.95388, num df = 9, denom df = 19, p-value = 0.9905
+alternative hypothesis: true ratio of variances is not equal to 1
+95 percent confidence interval:
+ 0.3312031 3.5134702
+sample estimates:
+ratio of variances 
+         0.9538821 </code></pre>
+</div>
+</div>
 </section>
-<section id="clase-2-admin-y-r" class="level3">
-<h3 class="anchored" data-anchor-id="clase-2-admin-y-r">Clase 2: Admin y R</h3>
-<ul>
-<li><a href="presentaciones/2-sincronizar-repositorios-primer-codigo-y-analysis.html">Admin y R</a></li>
-<li><a href="notas-2025-08-12.html">Notas de la clase 12 de agosto 2025</a></li>
-<li><a href="tarea-para-la-agosto-20.html">Tarea para agosto 20</a></li>
-</ul>
+<section id="test-de-normalidad" class="level3">
+<h3 class="anchored" data-anchor-id="test-de-normalidad">Test de normalidad</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(hombres<span class="sc">$</span>Household_Size)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  hombres$Household_Size
+W = 0.95194, p-value = 0.6915</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(mujeres<span class="sc">$</span>Household_Size)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  mujeres$Household_Size
+W = 0.92583, p-value = 0.1283</code></pre>
+</div>
+</div>
 </section>
-<section id="clase-3-revisión-de-la-teoría" class="level3">
-<h3 class="anchored" data-anchor-id="clase-3-revisión-de-la-teoría">Clase 3: Revisión de la teoría</h3>
-<ul>
-<li><a href="presentaciones/3-centralizacion-y-dispersión.html">Revisión de la teoría</a></li>
-<li><a href="notas-2025-08-20.html">notas-2025-08-20</a></li>
-<li><a href="tarea-2025-08-20.html">tarea-2025-08-20</a></li>
-<li><a href="notas-2025-08-26.html">Notas de la clase 2025-08-26</a></li>
-<li><a href="tarea-2025-08-26.html">tarea-2025-08-26</a></li>
-</ul>
+<section id="usar-el-test-de-t" class="level3">
+<h3 class="anchored" data-anchor-id="usar-el-test-de-t">Usar el test de T</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(hombres<span class="sc">$</span>Household_Size,mujeres<span class="sc">$</span>Household_Size)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  hombres$Household_Size and mujeres$Household_Size
+t = -0.10697, df = 18.5, p-value = 0.916
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -1.0300762  0.9300762
+sample estimates:
+mean of x mean of y 
+     3.10      3.15 </code></pre>
+</div>
+</div>
+<p>El test de T no. nos permite rechazar la hipótesis nula y concluimos que no hay diferencia significativa en el “household_size”.</p>
 </section>
-<section id="clase-5-probabilidad-y-estimación-de-parámetros" class="level3">
-<h3 class="anchored" data-anchor-id="clase-5-probabilidad-y-estimación-de-parámetros">Clase 5: Probabilidad y estimación de parámetros</h3>
-<ul>
-<li><a href="presentaciones/5-probabilidad-y-estimacion-de-parametros.html">Probabilidad y estimación de parámetros</a></li>
-<li><a href="notas-de-la-clase-2025-09-02.html">Notas dela clase 2025-09-02</a></li>
-<li><a href="tarea-2025-09-02.html">tarea-2025-09-02</a></li>
-</ul>
 </section>
-<section id="clase-6-método-científico.-manipulación-de-datos." class="level3">
-<h3 class="anchored" data-anchor-id="clase-6-método-científico.-manipulación-de-datos.">Clase 6: Método científico. Manipulación de datos.</h3>
-<ul>
-<li><a href="presentaciones/6-metodo-científico.html">Método científico. Manipulación de datos.</a></li>
-<li><a href="notas-de-la-clase-2025-09-09.html">notas-de-la-clase-2025-09-09</a></li>
-<li><a href="tarea-2025-09-09.html">tarea-2025-09-09</a></li>
-</ul>
-</section>
-<section id="clase-7-pruebas-de-independencia" class="level3">
-<h3 class="anchored" data-anchor-id="clase-7-pruebas-de-independencia">Clase 7: Pruebas de independencia</h3>
-<ul>
-<li><a href="presentaciones/7-pruebas-de-independencia.html">Pruebas de independencia</a></li>
-<li><a href="notas-de-la-clase-2025-09-16.html">notas-de-la-clase-2025-09-16</a></li>
-<li><a href="Tarea-2025-09-16.html">Tarea-2025-09-16</a></li>
-</ul>
+<section id="edad-y-sexo" class="level2">
+<h2 class="anchored" data-anchor-id="edad-y-sexo">Edad y sexo</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>my_data2 <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_delim</span>(<span class="st">"../data/usu_individual_T125.txt"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: One or more parsing issues, call `problems()` on your data frame for details,
+e.g.:
+  dat &lt;- vroom(...)
+  problems(dat)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 45425 Columns: 235
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ";"
+chr   (5): CODUSU, MAS_500, CH05, CH14, PP09C_ESP
+dbl (228): ANO4, TRIMESTRE, NRO_HOGAR, COMPONENTE, H15, REGION, AGLOMERADO, ...
+num   (1): IPCF
+lgl   (1): PP09A_ESP
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../R/poner-genero.R"</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>my_data2 <span class="ot">&lt;-</span> my_data2 <span class="sc">|&gt;</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">poner_genero_y_edad</span>()</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>hombres2 <span class="ot">&lt;-</span> my_data2 <span class="sc">|&gt;</span> </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sexo <span class="sc">==</span> <span class="st">"Hombre"</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>mujeres2 <span class="ot">&lt;-</span> my_data2 <span class="sc">|&gt;</span> </span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sexo <span class="sc">==</span> <span class="st">"Mujer"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="test-de-t" class="level3">
+<h3 class="anchored" data-anchor-id="test-de-t">Test de t</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(hombres2<span class="sc">$</span>edad, mujeres2<span class="sc">$</span>edad)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  hombres2$edad and mujeres2$edad
+t = -13.367, df = 45370, p-value &lt; 2.2e-16
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -3.174449 -2.362564
+sample estimates:
+mean of x mean of y 
+ 35.35323  38.12173 </code></pre>
+</div>
+</div>
+<p>Rechazamos la hipotesis nula y concluimos que las mujeres en promedio tienen más edad que los hombres.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(mujeres2<span class="sc">$</span>edad, hombres2<span class="sc">$</span>edad)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  mujeres2$edad and hombres2$edad
+t = 13.367, df = 45370, p-value &lt; 2.2e-16
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ 2.362564 3.174449
+sample estimates:
+mean of x mean of y 
+ 38.12173  35.35323 </code></pre>
+</div>
+</div>
 </section>
 </section>
 

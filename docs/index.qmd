@@ -38,3 +38,5 @@ format:
 
 ### Clase 7: Pruebas de independencia
 * [Pruebas de independencia](presentaciones/7-pruebas-de-independencia.html)
+* [notas-de-la-clase-2025-09-16](notas-de-la-clase-2025-09-16.html)
+* [Tarea-2025-09-16](Tarea-2025-09-16.html)
