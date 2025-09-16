@@ -35,3 +35,6 @@ format:
 * [Método científico. Manipulación de datos.](presentaciones/6-metodo-científico.html)
 * [notas-de-la-clase-2025-09-09](notas-de-la-clase-2025-09-09.html)
 * [tarea-2025-09-09](tarea-2025-09-09.html)
+
+### Clase 7: Pruebas de independencia
+* [Pruebas de independencia](presentaciones/7-pruebas-de-independencia.html)
