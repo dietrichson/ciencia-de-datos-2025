@@ -1,5 +1,5 @@
 ---
-title: "Tarea 16 de septiembre"
+title: "Tarea 16 y 23 de septiembre"
 format: html
 name: Melina Varhulik
 lang: es
@@ -7,15 +7,20 @@ lang: es
 
 Hipotesis nula: Mujeres y Hombres = edad
 
-Hipotesis alternativa: Mujeres más jóvenes que los hombres
+Hipotesis alternativa: Mujeres más jóvenes que los hombres 
+
+Hipotesis alternativa 2: Hombres más jóvenes que las mujeres
 
 ```{r}
 #| include: false
 library(tidyverse)
+source("../R/poner-genero.R")
 ```
 
 ```{r}
-datos_indec <- read_delim("usu_individual_T125.txt", delim = ";")
+datos_indec <- read_delim("../data/usu_individual_T125.txt", delim = ";")
+datos_indec <- datos_indec |>
+  poner_genero()
 
 ```
 
@@ -23,17 +28,14 @@ datos_indec <- read_delim("usu_individual_T125.txt", delim = ";")
 colnames(datos_indec)
 ```
 
-```{r}
-datos_indec <- datos_indec |> 
-  select(-`sexo == 1`, -Hombre, -Mujer)
+
 ```
 
 datos_indec \<- datos_indec \|\>
 
 mutate(sexo = ifelse(sexo == "1", "Hombre", "Mujer"))
 
-```{r}
-unique(datos_indec$`sexo == 1`)
+
 ```
 
 ```{r}
