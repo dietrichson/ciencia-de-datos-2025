@@ -1,0 +1,42 @@
+---
+title: "Tarea 16.09 "
+format: html
+---
+
+## Tarea
+
+Basado en un conjunto de datos (puede ser Indec, los datos sintéticos u otro)
+
+```{r}
+#| include: false
+
+library(readr)
+my_data<- read_csv("../data/student-dataset.csv")
+```
+
+-   Formular una teoría que se puede refutar con los datos elegidos.
+    -   “El tamaño del hogar en el que viven los estudiantes difiere según el género: los estudiantes varones tienden a vivir en hogares más grandes que las estudiantes mujeres.”
+
+```{r}
+library(ggplot2)
+
+ggplot(my_data, aes(x = Gender, y = Household_Size)) +
+  geom_boxplot() +
+  geom_jitter(width = 0.15, alpha = 0.3) +
+  labs(
+    title = "Tamaño del hogar por género",
+    x = "Género",
+    y = "Tamaño del hogar (personas)"
+  ) 
+```
+
+-   Formular hipótesis nula y alternativa
+    -   **Hipótesis nula :** No existe diferencia significativa en el tamaño del hogar entre estudiantes hombres y mujeres.
+
+        **Hipótesis alternativa :** Existe una diferencia significativa en el tamaño del hogar entre estudiantes hombres y mujeres.
+
+## Tarea 2
+
+Ponerse al día con las demás tareas
+
+-   LISTO
