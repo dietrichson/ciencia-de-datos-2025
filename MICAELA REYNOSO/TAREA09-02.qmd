@@ -18,69 +18,71 @@ format: html
 library(readr)
 library(dplyr)
 
-datos_indec <- readr::read_delim("../data/usu_individual_T125.txt", delim = ";")
-```
-
-```{r}
-datos_indec |> 
-  ggplot(aes(CH06))+
-  geom_density()
-```
-
-```{r}
-datos_indec |> 
-  ggplot(aes(CH06))+
-  geom_histogram()
+indec <- readr::read_delim("../data/usu_individual_T125.txt", delim = ";")
 ```
 
 2 -Eligir tres variables de los datos del indec
 
--   **CH04** → **Sexo**
+CH06 = Edad
 
--   **CH06** → **Edad**
+CH04=SEXO
 
--   **P21** → **Salario**
+IPCF = Ingreso per cápita familiar
+
+```{r}
+datos <- indec %>%
+  select(CH06, IPCF, CH04) %>%   # CH04 = sexo
+  rename(
+    edad = CH06,
+    ingreso_percapita = IPCF,
+    sexo = CH04
+  ) %>%
+  filter(!is.na(edad), !is.na(ingreso_percapita), ingreso_percapita > 0, !is.na(sexo))
+```
 
 3- Realizar la transformación (traducir al español)
 
 ```{r}
-
-library(dplyr)
-
-minidatos <- datos_indec |>
-  select(CH04, CH06, PP08D1) |>
-  rename(
-    sexo = CH04,
-    edad = CH06,
-    salario = PP08D1
-  ) |>
-  mutate(
-    sexo = recode(sexo,
-                  `1` = "Masculino",
-                  `2` = "Femenino"),
-    # Salario a numérico (algunos vienen como texto)
-    salario = as.numeric(salario),
-    edad = as.numeric(edad)
-  )
-
-glimpse(minidatos)
-
+datos <- datos %>%
+  mutate(log_ingreso = log(ingreso_percapita))
 ```
 
 4- Visualizar la distribución
 
+a\) Edad
+
 ```{r}
-minidatos |> ggplot(aes(x = sexo)) + geom_bar(fill = "green", alpha = 0.7)
+ggplot(datos, aes(x = edad, fill = factor(sexo))) +
+  geom_histogram(bins = 50, alpha = 0.6, position = "identity") +
+  labs(title = "Distribución de la edad por sexo", x = "Edad", y = "Frecuencia", fill = "Sexo")
+```
+
+b)  Ingreso per cápita familiar
+
+```{r}
+ggplot(datos, aes(x = ingreso_percapita, fill = factor(sexo))) +
+  geom_histogram(bins = 50, alpha = 0.6, position = "identity") +
+  labs(title = "Distribución del ingreso per cápita por sexo", x = "Ingreso per cápita", y = "Frecuencia", fill = "Sexo")
+
+```
+
+c)  Log ingreso per cápita familiar
+
+```{r}
+ggplot(datos, aes(x = log_ingreso, fill = factor(sexo))) +
+  geom_histogram(bins = 50, alpha = 0.6, position = "identity") +
+  labs(title = "Distribución del log ingreso per cápita por sexo", x = "Log ingreso per cápita", y = "Frecuencia", fill = "Sexo")
+
 ```
 
 ```{r}
-datos_indec |>
-  ggplot(aes(x = CH06)) + #Tuve un problema con el reconocimiento de "edad"
-  geom_histogram(binwidth = 5, fill = "red", color = "yellow")
+ggplot(datos, aes(x = log_ingreso)) +
+  geom_histogram(bins = 50, fill = "lightgreen", color = "white") +
+  labs(title = "Distribución del log ingreso per cápita familiar", 
+       x = "Log ingreso per cápita", y = "Frecuencia")
 ```
 
-5- Determinar si parece normal. En caso de que no sea normal especular por qué.
+\
+5. Determinar normalidad
 
-Para la variable **sexo**, la distribución no puede considerarse normal, ya que se trata de una variable nominal (masculino/femenino). El gráfico de barras refleja la cantidad de personas en cada categoría, lo que no se ajusta a una distribución normal, sino que al contrario, evidencia la composición de la población según el sexo.
-
-En cuanto a la **edad**, la distribución tampoco sigue una forma normal. Revela mayor concentración de personas en edades jóvenes y adultas, con una disminución progresiva hacia los extremos de la distribución. Este patrón responde a la estructura demográfica de la población, donde predominan los individuos en edad laboral, mientras que hay menos personas en los rangos de edad muy baja o muy alta. Además, creo que este comportamiento se puede atribuir a que la encuesta se aplica principalmente a una población urbana.
+Se muestra que la edad no sigue una distribución normal, ya que presenta **picos en ciertos rangos etarios** para hombres y mujeres. Esto sugiere la presencia de **grupos etarios distintos**, generando una distribución multimodal. Tambien muestra un **fuerte sesgo a la derecha** tanto en hombres como en mujeres, lo que indica que la mayoría de los hogares tiene ingresos bajos o medios, mientras que unos pocos concentran ingresos muy altos. La distribución se **aproxima más a la normalidad**, con una forma más simétrica para ambos sexos. Sin embargo, aún se observan colas largas debido a la desigualdad económica.
