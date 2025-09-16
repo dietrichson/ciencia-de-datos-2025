@@ -1,0 +1,16 @@
+---
+title: "tarea-2025-09-02"
+date: 2025-09-02
+author: "Aleksander Dietrichson"
+lang: es
+format: html
+---
+
+## Lectura
+
+Capítulo 6 del libro del texto. 
+
+## Tarea
+
+Eligir una variable de los datos del indec, sacar el promedio, visualizarla, y calcular el nivel de confianza al 95% de la estimación del promedio. 
+

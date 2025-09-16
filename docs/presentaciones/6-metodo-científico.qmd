@@ -1,6 +1,7 @@
 ---
 title: "Método científico. Manipulación de datos."
 author: "Aleksander Dietrichson, PhD"
+date: 2025-09-09
 format: 
   revealjs: 
     code-line-numbers: false
@@ -20,9 +21,9 @@ editor: visual
 
     -   La hipótesis nula y alternativas
 
--   Manipular datos con `dplyr`
+-   Revisar lo que sabemos de `dplyr`
 
--   VIsualizar datos con ggplot2
+-   Revisar la visualización de datos con ggplot2
 
 ## Método científico
 
@@ -40,7 +41,7 @@ editor: visual
 
 -   ¿es refutable?
 
--   ¿cuales son las hipótesis falsificables que puedo sacar de la teoría?
+-   ¿cuales son las hipótesis falseables que puedo sacar de la teoría?
 
 -   ¿cómo la evaluo?
 

@@ -28,7 +28,9 @@ my_data <- read_csv("../data/student-dataset.csv")
 
 ```
 
-```{library(ggplot2)}
+```{r}
+
+library(ggplot2)
 
 ggplot(my_data, aes(x = Gender, y = Age)) +
   geom_boxplot() +
@@ -46,6 +48,7 @@ ggplot(my_data, aes(x = Gender, y = Age)) +
 ---
 title: "Tarea 20 de agosto"
 format: html
-autor: Melina Varhulik
+author: Melina Varhulik
+lang: es
 date: 20/08/2025
 ---

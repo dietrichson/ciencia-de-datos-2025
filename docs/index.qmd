@@ -26,5 +26,15 @@ format:
 * [Notas de la clase 2025-08-26](notas-2025-08-26.html)
 * [tarea-2025-08-26](tarea-2025-08-26.html)
 
-### Clase 6: Probabilidad y estimación de parámetros
-* [Probabilidad y estimación de parámetros](presentaciones/6-probabilidad-y-estimacion-de-parametros.html)
+### Clase 5: Probabilidad y estimación de parámetros
+* [Probabilidad y estimación de parámetros](presentaciones/5-probabilidad-y-estimacion-de-parametros.html)
+* [Notas dela clase 2025-09-02](notas-de-la-clase-2025-09-02.html)
+* [tarea-2025-09-02](tarea-2025-09-02.html)
+
+### Clase 6: Método científico. Manipulación de datos.
+* [Método científico. Manipulación de datos.](presentaciones/6-metodo-científico.html)
+* [notas-de-la-clase-2025-09-09](notas-de-la-clase-2025-09-09.html)
+* [tarea-2025-09-09](tarea-2025-09-09.html)
+
+### Clase 7: Pruebas de independencia
+* [Pruebas de independencia](presentaciones/7-pruebas-de-independencia.html)

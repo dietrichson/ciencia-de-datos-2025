@@ -1,6 +1,7 @@
 ---
 title: "Pruebas de independencia"
 author: "Aleksander Dietrichson, PhD"
+date: 2025-09-16
 format: 
   revealjs: 
     code-line-numbers: false
@@ -27,8 +28,6 @@ set.seed(98)
 -   Prueba the T de Student
 
 -   Prueba de U de Mann-Whitney
-
--   Nuevos datos
 
 -   Revisión de las tares
 
@@ -84,7 +83,7 @@ $$
 {\sigma²_1\over{\sigma²_2}} = 1
 $$
 
--   Si las varianzas de las dos muestras son iguales su ration debe ser 1.
+-   Si las varianzas de las dos muestras son iguales su ratio debe ser 1.
 
 ## ¿Tienen la misma varianza?
 
@@ -145,7 +144,7 @@ La prueba de T de Student **NO** es apropriado para comparar los ingresos de est
 
 Se ordenan las observaciones por magnitud (Se rankean?). Si no hay diferencia ($H_0$) entre las dos muestras deberían aparecer intercaladamente. Si hay diferencia una de las dos muestras va a predominar uno en el lado inferior y otra en el lado superior.
 
-Ej: beberían aparecer GPGPGPGPGPGPGPG.... ($H_0$)
+Ej: deberían aparecer GPGPGPGPGPGPGPG.... ($H_0$)
 
 ## Ejemplo
 
@@ -165,27 +164,4 @@ Rechazamos la hipótesis nula y nos quedamos con la hipotesis alternativa de una
 
 Si R tira una `warning` la vamos a ignorar por ahora (hay otro paquete que podemos usar más adelante para tener un valor p exacto).
 
-## Datos nuevos
-
-Hay datos «frescos» del indec. Son del cuarto trimestre de 2023.
-
-Vamos a acceder a la encuesta *individual* ya que tiene algunas variables adicionales que pueden ser interesantes:
-
--   Sexo (genero)
-
--   Nivel educativo
-
--   Escolaridad
-
--   etc...
-
-## Datos nuevos ETL
-
-```{r}
-#| eval: false
-# ETL para procesar datos del indec
-library(tidyverse)
-my_data <- readr::read_delim("./data/usu_individual_T423.txt",
-                             delim = ";", guess_max = 10000)
-readr::write_rds(my_data, file = "./data/usu_individual_T423.rds")
-```
+## 

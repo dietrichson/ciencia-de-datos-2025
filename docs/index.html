@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.29">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -26,14 +26,15 @@ ul.task-list li input[type="checkbox"] {
 <script src="index_files/libs/clipboard/clipboard.min.js"></script>
 <script src="index_files/libs/quarto-html/quarto.js" type="module"></script>
 <script src="index_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="index_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="index_files/libs/quarto-html/popper.min.js"></script>
 <script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="index_files/libs/quarto-html/anchor.min.js"></script>
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-dark-748b535e376f14d4692bf2b2e5fd6380.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="index_files/libs/bootstrap/bootstrap-489438d73ee9fcbaf9f366878debe9da.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="index_files/libs/bootstrap/bootstrap-be9000ead4eca69e3f10d2234a75ef31.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 
 
 <link rel="stylesheet" href="styles.css">
@@ -92,10 +93,26 @@ ul.task-list li input[type="checkbox"] {
 <li><a href="tarea-2025-08-26.html">tarea-2025-08-26</a></li>
 </ul>
 </section>
-<section id="clase-6-probabilidad-y-estimación-de-parámetros" class="level3">
-<h3 class="anchored" data-anchor-id="clase-6-probabilidad-y-estimación-de-parámetros">Clase 6: Probabilidad y estimación de parámetros</h3>
+<section id="clase-5-probabilidad-y-estimación-de-parámetros" class="level3">
+<h3 class="anchored" data-anchor-id="clase-5-probabilidad-y-estimación-de-parámetros">Clase 5: Probabilidad y estimación de parámetros</h3>
 <ul>
-<li><a href="presentaciones/6-probabilidad-y-estimacion-de-parametros.html">Probabilidad y estimación de parámetros</a></li>
+<li><a href="presentaciones/5-probabilidad-y-estimacion-de-parametros.html">Probabilidad y estimación de parámetros</a></li>
+<li><a href="notas-de-la-clase-2025-09-02.html">Notas dela clase 2025-09-02</a></li>
+<li><a href="tarea-2025-09-02.html">tarea-2025-09-02</a></li>
+</ul>
+</section>
+<section id="clase-6-método-científico.-manipulación-de-datos." class="level3">
+<h3 class="anchored" data-anchor-id="clase-6-método-científico.-manipulación-de-datos.">Clase 6: Método científico. Manipulación de datos.</h3>
+<ul>
+<li><a href="presentaciones/6-metodo-científico.html">Método científico. Manipulación de datos.</a></li>
+<li><a href="notas-de-la-clase-2025-09-09.html">notas-de-la-clase-2025-09-09</a></li>
+<li><a href="tarea-2025-09-09.html">tarea-2025-09-09</a></li>
+</ul>
+</section>
+<section id="clase-7-pruebas-de-independencia" class="level3">
+<h3 class="anchored" data-anchor-id="clase-7-pruebas-de-independencia">Clase 7: Pruebas de independencia</h3>
+<ul>
+<li><a href="presentaciones/7-pruebas-de-independencia.html">Pruebas de independencia</a></li>
 </ul>
 </section>
 </section>
@@ -153,13 +170,14 @@ ul.task-list li input[type="checkbox"] {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
