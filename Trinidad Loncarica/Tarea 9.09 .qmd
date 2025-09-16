@@ -1,0 +1,80 @@
+---
+title: "Tarea 9.09 "
+format: html
+---
+
+# TAREA
+
+##### Elegir una variable de los datos del indec
+
+```{r}
+library(readr)
+library(dplyr)
+
+datos_indec <- readr::read_delim("../data/usu_individual_T125.txt", delim = ";")
+```
+
+-   **CH04** → **Sexo**
+
+##### Sacar el promedio
+
+```{r}
+library(dplyr)
+
+datos_indec %>%
+  summarise(promedio_sexo = mean(CH04, na.rm = TRUE))
+```
+
+```{r}
+datos_indec %>%
+  count(CH04) %>%
+  mutate(prop = n / sum(n))
+```
+
+##### Visualizarla
+
+```{r}
+library(ggplot2)
+library(dplyr)
+
+# Gráfico de barras de la variable CH04 (sexo)
+datos_indec %>%
+  ggplot(aes(x = as.factor(CH04))) +
+  geom_bar(fill = "skyblue", alpha = 0.7) +
+  labs(x = "Sexo (1 = Varón, 2 = Mujer)",
+       y = "Cantidad",
+       title = "Distribución de la variable CH04 (Sexo)") +
+  theme_minimal()
+```
+
+##### Calcular el nivel de confianza al 95% de la estimación del promedio.
+
+```{r}
+# Extraer solo la variable
+x <- datos_indec$CH04
+
+# Eliminar valores faltantes
+x <- na.omit(x)
+
+# Calcular promedio
+media <- mean(x)
+
+# Calcular desvío estándar
+desvio <- sd(x)
+
+# Tamaño muestral
+n <- length(x)
+
+# Error estándar
+se <- desvio / sqrt(n)
+
+# Intervalo de confianza al 95%
+error_margin <- qnorm(0.975) * se   # 0.975 porque es bilateral
+
+ic_lower <- media - error_margin
+ic_upper <- media + error_margin
+
+c(media = media,
+  IC95_inferior = ic_lower,
+  IC95_superior = ic_upper)
+```

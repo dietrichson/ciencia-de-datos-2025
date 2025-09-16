@@ -1,0 +1,20 @@
+---
+title: "tarea-2025-09-09"
+date: 2025-09-09
+format: html
+---
+
+## Lectura 
+
+Capítulo 6 del libro
+
+## Tarea
+
+Basado en un conjunto de datos (puede ser Indec, los datos sintéticos u otro)
+
+* Formular una teoría que se puede refutar con los datos elegidos.
+* Formular hipótesis nula y alternativa
+
+## Tarea 2
+
+Ponerse al día con las demás tareas.
