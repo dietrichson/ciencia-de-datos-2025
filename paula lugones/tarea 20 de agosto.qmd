@@ -1,0 +1,26 @@
+---
+title: "Notas - Paula Lugones"
+author: "Paula Lugones"
+date: 2025-09-02
+format: html
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+\`\`\`{r} \# Librerías necesarias library(readr) library(dplyr)
+library(ggplot2)
+
+# Leer datos
+
+my_data \<- read_csv("student-dataset.csv")
+
+# Renombrar columnas y traducir etiquetas al español
+
+mis_datos \<- my_data \|\> rename( id = ID, nombre = Name, sexo =
+Gender, edad = Age, peso_kg = Weight_kg, altura_cm = Height_cm,
+bebida_preferida = Preferred_Beverage, tamano_hogar = Household_Size )
+\|\> transform( sexo = ifelse(sexo == "Female", "Mujer", "Hombre"),
+bebida_preferida = case_when( bebida_preferida == "Coffee" \~ "Café",
+bebida_preferida == "Tea" \~ "Té", bebida_preferida == "Mate" \~ "Mate"
+) )
