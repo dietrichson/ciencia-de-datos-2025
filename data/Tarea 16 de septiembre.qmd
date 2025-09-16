@@ -1,0 +1,61 @@
+---
+title: "Tarea 16 de septiembre"
+format: html
+name: Melina Varhulik
+lang: es
+---
+
+Hipotesis nula: Mujeres y Hombres = edad
+
+Hipotesis alternativa: Mujeres más jóvenes que los hombres
+
+```{r}
+#| include: false
+library(tidyverse)
+```
+
+```{r}
+datos_indec <- read_delim("usu_individual_T125.txt", delim = ";")
+
+```
+
+```{r}
+colnames(datos_indec)
+```
+
+```{r}
+datos_indec <- datos_indec |> 
+  select(-`sexo == 1`, -Hombre, -Mujer)
+```
+
+datos_indec \<- datos_indec \|\>
+
+mutate(sexo = ifelse(sexo == "1", "Hombre", "Mujer"))
+
+```{r}
+unique(datos_indec$`sexo == 1`)
+```
+
+```{r}
+library(ggplot2)
+
+my_data |> 
+  group_by(sexo) |> 
+  summarise(edad_promedio = mean(edad, na.rm=TRUE)) |> 
+  ggplot(aes(sexo, edad_promedio, fill=sexo)) +
+  geom_col() +
+  labs(title="Edad promedio según sexo",
+       y="Edad promedio (años)")
+```
+
+```{r}
+hombres <- datos_indec |> 
+  filter(sexo == "Hombre")
+mujeres <- datos_indec |> 
+  filter(sexo == "Mujer")
+
+t.test(mujeres$edad, hombres$edad)
+
+
+
+```
