@@ -1,0 +1,91 @@
+---
+title: "TAREA PARA CLASE 02-09"
+date: 2025-09-02
+author: "Micaela Reynoso"
+lang: es
+format: html
+---
+
+TAREA
+
+Escibir el codigo para cargar los datos del indec
+
+Eligir tres variables de los datos del indec
+
+Eventualmente hacer la transformación (traducir al español)
+
+Visualizar la distribución
+
+Determinar si parece normal. En caso de que no sea normal especular por qué.
+
+```{r}
+library(readr)
+library(dplyr)
+
+indec <- readr::read_delim("../data/usu_individual_T125.txt", delim = ";")
+```
+
+2 -Eligir tres variables de los datos del indec
+
+CH06 = Edad
+
+CH04=SEXO
+
+IPCF = Ingreso per cápita familiar
+
+```{r}
+datos <- indec %>%
+  select(CH06, IPCF, CH04) %>%   # CH04 = sexo
+  rename(
+    edad = CH06,
+    ingreso_percapita = IPCF,
+    sexo = CH04
+  ) %>%
+  filter(!is.na(edad), !is.na(ingreso_percapita), ingreso_percapita > 0, !is.na(sexo))
+```
+
+3- Realizar la transformación (traducir al español)
+
+```{r}
+datos <- datos %>%
+  mutate(log_ingreso = log(ingreso_percapita))
+```
+
+4- Visualizar la distribución
+
+a\) Edad
+
+```{r}
+ggplot(datos, aes(x = edad, fill = factor(sexo))) +
+  geom_histogram(bins = 50, alpha = 0.6, position = "identity") +
+  labs(title = "Distribución de la edad por sexo", x = "Edad", y = "Frecuencia", fill = "Sexo")
+```
+
+b)  Ingreso per cápita familiar
+
+```{r}
+ggplot(datos, aes(x = ingreso_percapita, fill = factor(sexo))) +
+  geom_histogram(bins = 50, alpha = 0.6, position = "identity") +
+  labs(title = "Distribución del ingreso per cápita por sexo", x = "Ingreso per cápita", y = "Frecuencia", fill = "Sexo")
+
+```
+
+c)  Log ingreso per cápita familiar
+
+```{r}
+ggplot(datos, aes(x = log_ingreso, fill = factor(sexo))) +
+  geom_histogram(bins = 50, alpha = 0.6, position = "identity") +
+  labs(title = "Distribución del log ingreso per cápita por sexo", x = "Log ingreso per cápita", y = "Frecuencia", fill = "Sexo")
+```
+
+```{r}
+ggplot(datos, aes(x = log_ingreso)) +
+  geom_histogram(bins = 50, fill = "lightgreen", color = "white") +
+  labs(title = "Distribución del log ingreso per cápita familiar", 
+       x = "Log ingreso per cápita", y = "Frecuencia")
+```
+
+\
+5. Determinar normalidad
+
+Se muestra que la edad no sigue una distribución normal, ya que presenta **picos en ciertos rangos etarios** para hombres y mujeres. Esto sugiere la presencia de **grupos etarios distintos**, generando una distribución multimodal. Tambien muestra un **fuerte sesgo a la derecha** tanto en hombres como en mujeres, lo que indica que la mayoría de los hogares tiene ingresos bajos o medios, mientras que unos pocos concentran ingresos muy altos. La distribución se **aproxima más a la normalidad**, con una forma más simétrica para ambos sexos. Sin embargo, aún se observan colas largas debido a la desigualdad económica.
