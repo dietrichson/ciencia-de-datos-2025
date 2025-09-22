@@ -1,5 +1,8 @@
 ---
-title: "TAREA9-16"
+title: "TAREA PARA CLASE 16-09"
+date: 2025-09-09
+author: "Micaela Reynoso"
+lang: es
 format: html
 ---
 
@@ -7,5 +10,43 @@ format: html
 
 Basado en un conjunto de datos (puede ser Indec, los datos sintéticos u otro)
 
-* Formular una teoría que se puede refutar con los datos elegidos.
-* Formular hipótesis nula y alternativa
+```{r}
+#| include: false
+library(tidyverse)
+```
+
+```{r}
+library(readr)
+library(dplyr)
+
+indec <- readr::read_delim("../data/usu_individual_T125.txt", delim = ";")
+```
+
+-   Formular una teoría que se puede refutar con los datos elegidos.
+
+    TEORIA: “En Argentina, durante el año 2023, el nivel de ingreso mensual individual **no depende del sexo de la persona**.”
+
+```{r}
+datos <- indec%>%
+  select(Sexo = CH04, Ingreso = CH06) %>%
+  filter(!is.na(Sexo), !is.na(Ingreso)) %>%
+  mutate(Sexo = ifelse(Sexo == 1, "Hombre", "Mujer"))
+```
+
+```{r}
+ggplot(datos, aes(x = Sexo, y = Ingreso, fill = Sexo)) +
+  geom_boxplot(alpha = 0.7, outlier.shape = NA) +
+  geom_jitter(width = 0.2, alpha = 0.4, color = "green") +
+  scale_fill_manual(values = c("lightblue", "red")) +
+  labs(
+    title = "Comparación de ingresos individuales según sexo (INDEC 2023)",
+    x = "Sexo",
+    y = "Ingreso mensual ($)"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(legend.position = "none")
+```
+
+-   **HIPOTESIS NULA :** La distribución del ingreso mensual individual es igual para hombres y mujeres (no hay diferencias significativas).
+
+-   **HIPOTESIS ALTERNATIVA:** La distribución del ingreso mensual individual difiere entre hombres y mujeres (sí hay diferencias significativas).
