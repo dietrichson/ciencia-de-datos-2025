@@ -29,20 +29,27 @@ Formular hipotesis
 y eligir con justificación el test estadistico para utilizar para intentar rechazar la hipotesis nula.
 
 ```{r}
-library(readr)
-library(ggplot2)
 
-# Leer datos
-datos_indec <- read_delim("../data/usu_individual_T125.txt", delim = ";")
+# Seleccionar variables y renombrar
+datos <- datos_indec[, c("CH04", "CH06")]
+colnames(datos) <- c("sexo", "edad")
+
+# Convertir sexo en factor (1 = Varón, 2 = Mujer)
+datos$sexo <- factor(datos$sexo, levels = c(1, 2), labels = c("Varón", "Mujer"))
+
+# Test t de Welch (unilateral: mujeres > varones)
+t.test(edad ~ sexo, data = datos, alternative = "greater")
+```
+
+```{r}
+library(ggplot2)
 
 # Selección y renombre
 datos <- datos_indec[, c("CH04", "CH06")]
 colnames(datos) <- c("sexo", "edad")
 
-# Convertir sexo en factor
 datos$sexo <- factor(datos$sexo, levels = c(1, 2), labels = c("Varón", "Mujer"))
 
-# Boxplot con colores
 ggplot(datos, aes(x = sexo, y = edad, fill = sexo)) +
   geom_boxplot() +
   scale_fill_manual(values = c("Varón" = "skyblue", "Mujer" = "pink")) +
