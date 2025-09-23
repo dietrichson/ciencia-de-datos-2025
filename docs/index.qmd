@@ -40,3 +40,6 @@ format:
 * [Pruebas de independencia](presentaciones/7-pruebas-de-independencia.html)
 * [notas-de-la-clase-2025-09-16](notas-de-la-clase-2025-09-16.html)
 * [Tarea-2025-09-16](Tarea-2025-09-16.html)
+
+### Clase 8: Pruebas de independencia II
+* [Pruebas de independencia II](presentaciones/8-pruebas-de-independencia-2.html)
