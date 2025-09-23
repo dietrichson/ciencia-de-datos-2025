@@ -49,7 +49,7 @@ my_data |>
   labs(title="Edad promedio según sexo",
        y="Edad promedio (años)")
 ```
-
+La hipotesis nula queda rechazada con el grafico
 ```{r}
 
 
