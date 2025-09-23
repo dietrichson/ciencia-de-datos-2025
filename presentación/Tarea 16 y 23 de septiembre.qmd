@@ -20,7 +20,7 @@ source("../R/poner-genero.R")
 ```{r}
 datos_indec <- read_delim("../data/usu_individual_T125.txt", delim = ";")
 datos_indec <- datos_indec |>
-  poner_genero()
+  poner_genero_y_edad()
 
 ```
 
@@ -31,9 +31,6 @@ colnames(datos_indec)
 
 ```
 
-datos_indec \<- datos_indec \|\>
-
-mutate(sexo = ifelse(sexo == "1", "Hombre", "Mujer"))
 
 
 ```
