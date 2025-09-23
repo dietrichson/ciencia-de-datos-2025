@@ -41,18 +41,26 @@ mutate(sexo = ifelse(sexo == "1", "Hombre", "Mujer"))
 ```{r}
 library(ggplot2)
 
-my_data |> 
-  group_by(sexo) |> 
-  summarise(edad_promedio = mean(edad, na.rm=TRUE)) |> 
-  ggplot(aes(sexo, edad_promedio, fill=sexo)) +
-  geom_col() +
-  labs(title="Edad promedio según sexo",
-       y="Edad promedio (años)")
+my_data |>
+  group_by(sexo) |>
+  summarise(edad_promedio = mean(edad, na.rm = TRUE)) |>
+  ggplot(aes(x = sexo, y = edad_promedio, fill = sexo)) +
+  geom_col(width = 0.6, show.legend = FALSE) +
+  geom_text(aes(label = round(edad_promedio, 1)), 
+            vjust = -0.5, size = 4) +
+  labs(
+    title = "Edad promedio según sexo",
+    x = "Sexo",
+    y = "Edad promedio (años)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+
+
+
+
 ```
 La hipotesis nula queda rechazada con el grafico
-```{r}
-
-
-
-
-```
