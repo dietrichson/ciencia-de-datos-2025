@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Aleksander Dietrichson">
 
-<title>Seminario de Ciencia de Datos</title>
+<title>Análisis de Prueba</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,24 +21,78 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="index_files/libs/clipboard/clipboard.min.js"></script>
-<script src="index_files/libs/quarto-html/quarto.js" type="module"></script>
-<script src="index_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="index_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="index_files/libs/quarto-html/popper.min.js"></script>
-<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="index_files/libs/quarto-html/anchor.min.js"></script>
-<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="index_files/libs/bootstrap/bootstrap-be9000ead4eca69e3f10d2234a75ef31.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script src="notas-de-la-clase-2025-09-23_files/libs/clipboard/clipboard.min.js"></script>
+<script src="notas-de-la-clase-2025-09-23_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="notas-de-la-clase-2025-09-23_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="notas-de-la-clase-2025-09-23_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="notas-de-la-clase-2025-09-23_files/libs/quarto-html/popper.min.js"></script>
+<script src="notas-de-la-clase-2025-09-23_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="notas-de-la-clase-2025-09-23_files/libs/quarto-html/anchor.min.js"></script>
+<link href="notas-de-la-clase-2025-09-23_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="notas-de-la-clase-2025-09-23_files/libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="notas-de-la-clase-2025-09-23_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="notas-de-la-clase-2025-09-23_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="notas-de-la-clase-2025-09-23_files/libs/bootstrap/bootstrap-6a8e6d95bfcd174082ff54166b04dcf7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
-<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="fullcontent quarto-light">
@@ -48,14 +103,27 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Seminario de Ciencia de Datos</h1>
+<h1 class="title">Análisis de Prueba</h1>
+<p class="subtitle lead">Un análisis de datos del indec del 2022 y 2023</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>Aleksander Dietrichson </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Fecha de publicación</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">23 de septiembre de 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -65,60 +133,87 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="presentaciones-y-notas" class="level2">
-<h2 class="anchored" data-anchor-id="presentaciones-y-notas">Presentaciones y Notas</h2>
-<section id="clase-1-arranque" class="level3">
-<h3 class="anchored" data-anchor-id="clase-1-arranque">Clase 1: Arranque</h3>
-<ul>
-<li><a href="presentaciones/1-inicio-y-setup.html">Arranque</a></li>
-<li><a href="presentacion.html">presentacion</a></li>
-<li><a href="tarea-2025-08-04.html">Tarea para el 11 de agosto 2025</a></li>
-</ul>
+<section id="datos" class="level2">
+<h2 class="anchored" data-anchor-id="datos">Datos</h2>
+<p>Conseguimos datos del Indec <span class="citation" data-cites="indec">(<a href="#ref-indec" role="doc-biblioref">Instituto de Estadísticas y Censos 2022, 2023</a>)</span> que contienen el Ingreso Familiar Total del último trimestre del 2022 y 2023.</p>
 </section>
-<section id="clase-2-admin-y-r" class="level3">
-<h3 class="anchored" data-anchor-id="clase-2-admin-y-r">Clase 2: Admin y R</h3>
-<ul>
-<li><a href="presentaciones/2-sincronizar-repositorios-primer-codigo-y-analysis.html">Admin y R</a></li>
-<li><a href="notas-2025-08-12.html">Notas de la clase 12 de agosto 2025</a></li>
-<li><a href="tarea-para-la-agosto-20.html">Tarea para agosto 20</a></li>
-</ul>
+<section id="pregunta-de-investigación" class="level2">
+<h2 class="anchored" data-anchor-id="pregunta-de-investigación">Pregunta de investigación</h2>
+<p>Hay usa diferencia notable entre los dos puntos en cuanto al ITF</p>
 </section>
-<section id="clase-3-revisión-de-la-teoría" class="level3">
-<h3 class="anchored" data-anchor-id="clase-3-revisión-de-la-teoría">Clase 3: Revisión de la teoría</h3>
-<ul>
-<li><a href="presentaciones/3-centralizacion-y-dispersión.html">Revisión de la teoría</a></li>
-<li><a href="notas-2025-08-20.html">notas-2025-08-20</a></li>
-<li><a href="tarea-2025-08-20.html">tarea-2025-08-20</a></li>
-<li><a href="notas-2025-08-26.html">Notas de la clase 2025-08-26</a></li>
-<li><a href="tarea-2025-08-26.html">tarea-2025-08-26</a></li>
-</ul>
+<section id="metodología" class="level2">
+<h2 class="anchored" data-anchor-id="metodología">Metodología</h2>
+<p>Usamos R <span class="citation" data-cites="r">(<a href="#ref-r" role="doc-biblioref">R Core Team 2025</a>)</span> con Tidyverse <span class="citation" data-cites="tidyverse">(<a href="#ref-tidyverse" role="doc-biblioref">Wickham et&nbsp;al. 2019</a>)</span> para analizar los datos.</p>
+<section id="análisis" class="level3">
+<h3 class="anchored" data-anchor-id="análisis">Análisis</h3>
+<div id="tbl-anonymous-5892239" class="cell anchored" data-tbl-cap="Ingreso Total Familiar" data-tbl-subcap="Comparación 2022 y 2023">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>my_data22 <span class="sc">|&gt;</span> </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(my_data23) <span class="sc">|&gt;</span> </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ANO4) <span class="sc">|&gt;</span> </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">ITF =</span> <span class="fu">mean</span>(ITF)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Comparación 2022 y 2023 {#tbl-anonymous-5892239-1}</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">ANO4</th>
+<th style="text-align: right;">ITF</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">2022</td>
+<td style="text-align: right;">118415.9</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2023</td>
+<td style="text-align: right;">315955.5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Ingreso Total Familiar</p>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-ingreso" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ingreso-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="notas-de-la-clase-2025-09-23_files/figure-html/fig-ingreso-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ingreso-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1: Ingreso Familiar Total
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="clase-5-probabilidad-y-estimación-de-parámetros" class="level3">
-<h3 class="anchored" data-anchor-id="clase-5-probabilidad-y-estimación-de-parámetros">Clase 5: Probabilidad y estimación de parámetros</h3>
-<ul>
-<li><a href="presentaciones/5-probabilidad-y-estimacion-de-parametros.html">Probabilidad y estimación de parámetros</a></li>
-<li><a href="notas-de-la-clase-2025-09-02.html">Notas dela clase 2025-09-02</a></li>
-<li><a href="tarea-2025-09-02.html">tarea-2025-09-02</a></li>
-</ul>
 </section>
-<section id="clase-6-método-científico.-manipulación-de-datos." class="level3">
-<h3 class="anchored" data-anchor-id="clase-6-método-científico.-manipulación-de-datos.">Clase 6: Método científico. Manipulación de datos.</h3>
-<ul>
-<li><a href="presentaciones/6-metodo-científico.html">Método científico. Manipulación de datos.</a></li>
-<li><a href="notas-de-la-clase-2025-09-09.html">notas-de-la-clase-2025-09-09</a></li>
-<li><a href="tarea-2025-09-09.html">tarea-2025-09-09</a></li>
-</ul>
+<section id="análisis-exploratorio" class="level2">
+<h2 class="anchored" data-anchor-id="análisis-exploratorio">Análisis exploratorio</h2>
+<p>Por el gráfico <a href="#fig-ingreso" class="quarto-xref">Figura&nbsp;1</a> paraece existir una diferencia importante. Vamos a ponerlo a prueba estadistica.</p>
 </section>
-<section id="clase-7-pruebas-de-independencia" class="level3">
-<h3 class="anchored" data-anchor-id="clase-7-pruebas-de-independencia">Clase 7: Pruebas de independencia</h3>
-<ul>
-<li><a href="presentaciones/7-pruebas-de-independencia.html">Pruebas de independencia</a></li>
-<li><a href="notas-de-la-clase-2025-09-23.html">Análisis de Prueba</a></li>
-</ul>
-</section>
+<section id="análisis-estádístico" class="level2">
+<h2 class="anchored" data-anchor-id="análisis-estádístico">Análisis estádístico</h2>
+<p>Para contestar la pregunta de investigación deberíamos realizar un ajuste por inflación en uno de los conjuntos de datos. Y luego realizar un test de T para determinar si hubo un aumento o descenso en el ITF o si quedó igual (Hipotesis nula)</p>
+
 </section>
 
-</main>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Referencias</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-indec" class="csl-entry" role="listitem">
+Instituto de Estadísticas y Censos. 2022, 2023. <span>«Encuenta permanente de hogares»</span>.
+</div>
+<div id="ref-r" class="csl-entry" role="listitem">
+R Core Team. 2025. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
+</div>
+<div id="ref-tidyverse" class="csl-entry" role="listitem">
+Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy D’Agostino McGowan, Romain François, Garrett Grolemund, et&nbsp;al. 2019. <span>«Welcome to the <span></span>tidyverse<span></span>»</span> 4: 1686. <a href="https://doi.org/10.21105/joss.01686">https://doi.org/10.21105/joss.01686</a>.
+</div>
+</div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -145,12 +240,12 @@ ul.task-list li input[type="checkbox"] {
       // flash "checked"
       button.classList.add('code-copy-button-checked');
       var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copied!");
+      button.setAttribute("title", "Copiado");
       let tooltip;
       if (window.bootstrap) {
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copied!");
+        button.setAttribute("data-bs-title", "Copiado");
         tooltip = new bootstrap.Tooltip(button, 
           { trigger: "manual", 
             customClass: "code-copy-button-tooltip",
