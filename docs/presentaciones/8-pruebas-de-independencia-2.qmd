@@ -1,6 +1,7 @@
 ---
 title: "Pruebas de independencia II"
 subtitle: "Muestras pareadas"
+date: 2025-09-23
 author: "Aleksander Dietrichson, PhD"
 format: 
   revealjs: 
@@ -25,6 +26,8 @@ set.seed(98)
 
 ## Agenda de hoy
 
+-   Revisión de las Tareas
+
 -   Prueba the T de Student para muestras pareadas
 
 -   Alternativas no-paramétricas
@@ -40,8 +43,6 @@ set.seed(98)
     -   yaml
 
     -   bibliografía
-
--   Revisión de las tares
 
 ## Prueba de T de Student
 
@@ -71,7 +72,7 @@ SON LOS MISMOS
 
 ## ¿Qué estamos midiendo?
 
-::: columns
+::::: columns
 ::: {.column width="60%"}
 ```{r}
 #| echo: false
@@ -87,7 +88,7 @@ data.frame(antes = sample(1:10,10,TRUE),despues = sample(1:10,10,TRUE)) |>
 
 -   Si la diferencia ($\Delta$) es distinta a cero ($\Delta\neq0$) podemos calcular la probabilidad de que eso ocurra al azar.
 :::
-:::
+:::::
 
 ## Ejemplo
 
@@ -202,7 +203,7 @@ Nos da básicamente el mismo resultado, ¿qué diferencias hay?
 
 ## Student vs Wilcox
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 T de Student:
 
@@ -220,7 +221,7 @@ Wilcox:
 wilcox.test(usu_hogar_T423$ITF,usu_hogar_T422$ITF, paired = TRUE)
 ```
 :::
-:::
+:::::
 
 ## Presentación de resultados con Quarto
 
