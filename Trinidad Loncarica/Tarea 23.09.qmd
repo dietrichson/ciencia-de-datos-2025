@@ -1,0 +1,55 @@
+---
+title: "Tarea 23.09"
+format: html
+---
+
+## **Tarea** 
+
+Eligir dos variables del los datos del indec.
+
+```{r}
+library(readr)
+library(dplyr)
+
+datos_indec <- readr::read_delim("../data/usu_individual_T125.txt", delim = ";")
+```
+
+Una tiene que se dicotómica (sexo, pro ejemplo).
+
+-   (sexo=CH04)
+
+-   (edad=CH06)
+
+Formular hipotesis
+
+-   **Hipótesis nula :** la edad promedio de las mujeres y de los varones no difiere en la muestra del INDEC.
+
+-    **Hipótesis alternativa :** las mujeres relevadas por el INDEC tienen, en promedio, mayor edad que los varones, porque estadísticamente las mujeres tienden a tener una mayor esperanza de vida.
+
+y eligir con justificación el test estadistico para utilizar para intentar rechazar la hipotesis nula.
+
+```{r}
+library(readr)
+library(ggplot2)
+
+# Leer datos
+datos_indec <- read_delim("../data/usu_individual_T125.txt", delim = ";")
+
+# Selección y renombre
+datos <- datos_indec[, c("CH04", "CH06")]
+colnames(datos) <- c("sexo", "edad")
+
+# Convertir sexo en factor
+datos$sexo <- factor(datos$sexo, levels = c(1, 2), labels = c("Varón", "Mujer"))
+
+# Boxplot con colores
+ggplot(datos, aes(x = sexo, y = edad, fill = sexo)) +
+  geom_boxplot() +
+  scale_fill_manual(values = c("Varón" = "skyblue", "Mujer" = "pink")) +
+  labs(title = "Distribución de la edad según sexo",
+       x = "Sexo", y = "Edad (años)") +
+  theme_minimal()
+
+```
+
+-   La hipotesis nula queda rechazada con el grafico
