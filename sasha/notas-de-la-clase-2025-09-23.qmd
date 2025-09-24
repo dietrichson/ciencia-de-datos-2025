@@ -31,9 +31,10 @@ Usamos  R [@r] con Tidyverse [@tidyverse] para analizar los datos.
 ### Análisis
 
 ```{r}
-#| label: tabla-1
+#| label: tbl-tabla-ingreso
+#| echo: false
 #| tbl-cap: "Ingreso Total Familiar"
-#| tbl-subcap: "Comparación 2022 y 2023"
+
 my_data22 |> 
   bind_rows(my_data23) |> 
   group_by(ANO4) |> 
@@ -61,7 +62,7 @@ my_data22 |>
 
 ## Análisis exploratorio
 
-Por el gráfico @fig-ingreso paraece existir una diferencia importante. Vamos a ponerlo a prueba estadistica. 
+Por el gráfico @fig-ingreso y la @tbl-tabla-ingreso paraece existir una diferencia importante. Vamos a ponerlo a prueba estadistica. 
 
 ## Análisis estádístico
 
