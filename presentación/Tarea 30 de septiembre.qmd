@@ -1,0 +1,89 @@
+---
+title: "Tarea 30 de septiembre"
+format: html
+name: Melina Varhulik 
+lang: es
+---
+
+```{r}
+#| include: false
+library(tidyverse)
+```
+
+```{r}
+mis_datos<- readr::read_rds("../data/usu_hogar_T422.rds")
+mis_datos1 <- readr::read_rds("../data/usu_hogar_T423.rds")
+```
+
+```{r}
+glimpse(mis_datos)
+glimpse(mis_datos1)
+```
+
+```{r}
+datos <- bind_rows(
+  mis_datos  |> mutate(ANO4 = 2022),
+  mis_datos1 |> mutate(ANO4 = 2023)
+) |>
+  select(ANO4, IX_TOT) |>
+  filter(!is.na(IX_TOT))
+```
+
+## Datos
+
+Conseguimos datos del Indec \[\@indec\] que contienen el tamaño del hogar (`IX_TOT`) para el último trimestre del 2022 y 2023.
+
+## Pregunta de investigación
+
+¿Hay una diferencia notable entre los dos años en cuanto al tamaño promedio de los hogares?
+
+## Metodología
+
+Se realiza una comparación descriptiva y un test t de dos muestras independientes.
+
+### Análisis
+
+```{r}
+#| label: tabla-1
+#| tbl-cap: "Tamaño del hogar (IX_TOT)"
+#| tbl-subcap: "Comparación 2022 y 2023"
+datos |>
+  group_by(ANO4) |>
+  summarise(
+    media   = mean(IX_TOT, na.rm = TRUE),
+    mediana = median(IX_TOT, na.rm = TRUE),
+    sd      = sd(IX_TOT, na.rm = TRUE),
+    n       = n(),
+    .groups = "drop"
+  ) |>
+  knitr::kable()
+
+```
+
+```{r}
+#| echo: false
+#| label: fig-ingreso
+#| fig-cap: "Tamaño promedio del hogar por año"
+datos |>
+  group_by(ANO4) |>
+  summarise(media = mean(IX_TOT, na.rm = TRUE), .groups = "drop") |>
+  ggplot(aes(x = factor(ANO4), y = media, fill = factor(ANO4))) +
+  geom_col(show.legend = FALSE) +
+  labs(x = "Año", y = "IX_TOT promedio")
+```
+
+Hipótesis:
+
+**HIPOTESIS NULA:** no hay diferencia en el tamaño promedio de los hogares entre 2022 y 2023.
+
+**HIPOTESIS ALTERNATIVA:** sí hay diferencia en el tamaño promedio de los hogares entre 2022 y 2023.
+
+```{r}
+#| label: test-t
+res_t <- t.test(IX_TOT ~ ANO4, data = datos)
+broom::tidy(res_t)
+```
+
+```{r}
+
+```
