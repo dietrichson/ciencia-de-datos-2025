@@ -1,6 +1,7 @@
 ---
 title: "La prueba de $\\chi^2$"
 author: "Aleksander Dietrichson, PhD"
+date: 2025-09-30
 format: 
   revealjs: 
     code-line-numbers: false
@@ -18,6 +19,8 @@ library(tidyverse)
 ```
 
 ## Agenda de hoy
+
+-   "Bug Report"
 
 -   Revisión de las tares
 
@@ -175,4 +178,4 @@ table(my_data$Pais,my_data$pref) |>
   chisq.test()
 ```
 
-Con estos datos **NO** logramos refutar la hipótesis nula.
+¿Conclusión?
