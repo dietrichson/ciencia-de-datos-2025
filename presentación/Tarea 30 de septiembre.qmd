@@ -85,5 +85,5 @@ broom::tidy(res_t)
 ```
 
 ```{r}
-
+## Aunque gráficamente se aprecien diferencias, no se encontró evidencia suficiente para afirmar que el tamaño promedio de los hogares cambió entre 2022 y 2023. ##
 ```
