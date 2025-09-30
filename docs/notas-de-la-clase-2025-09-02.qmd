@@ -9,7 +9,7 @@ format: html
 ```{r}
 #| include: false
 library(tidyverse)
-source("../R/poner-genero.R")
+source("../R/poner-genero_sasha.R")
 my_data <- readr::read_delim("../data/usu_individual_T125.txt", delim = ";")
 my_data <- my_data |> 
   poner_genero()
