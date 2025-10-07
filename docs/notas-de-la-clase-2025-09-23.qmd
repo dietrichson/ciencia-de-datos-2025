@@ -1,0 +1,71 @@
+---
+title: "Análisis de Prueba"
+author: "Aleksander Dietrichson"
+subtitle: "Un análisis de datos del indec del 2022 y 2023"
+lang: es
+date: 2025-09-23
+format: html
+bibliography: references.bib
+---
+
+```{r}
+#| include: false
+#| label: initial
+library(tidyverse)
+my_data22 <- readr::read_rds("../data/usu_hogar_T422.rds")
+my_data23 <- readr::read_rds("../data/usu_hogar_T423.rds")
+```
+
+## Datos
+
+Conseguimos datos del Indec [@indec] que contienen el Ingreso Familiar Total del último trimestre del 2022 y 2023.
+
+## Pregunta de investigación
+
+Hay usa diferencia notable entre los dos puntos en cuanto al ITF
+
+## Metodología
+
+Usamos  R [@r] con Tidyverse [@tidyverse] para analizar los datos.
+
+### Análisis
+
+```{r}
+#| label: tbl-tabla-ingreso
+#| echo: false
+#| tbl-cap: "Ingreso Total Familiar"
+
+my_data22 |> 
+  bind_rows(my_data23) |> 
+  group_by(ANO4) |> 
+  summarize(
+    ITF = mean(ITF)
+  ) |> 
+  knitr::kable()
+
+```
+
+```{r}
+#| echo: false
+#| label: fig-ingreso
+#| fig-cap: "Ingreso Familiar Total"
+my_data22 |> 
+  bind_rows(my_data23) |> 
+  group_by(ANO4) |> 
+  summarize(
+    ITF = mean(ITF)
+  ) |> 
+  rename(anno=ANO4) |> 
+  ggplot(aes(anno,ITF))+
+  geom_col()
+```
+
+## Análisis exploratorio
+
+Por el gráfico @fig-ingreso y la @tbl-tabla-ingreso paraece existir una diferencia importante. Vamos a ponerlo a prueba estadistica. 
+
+## Análisis estádístico
+
+Para contestar la pregunta de investigación deberíamos realizar un ajuste por inflación en uno de los conjuntos de datos. Y luego realizar un test de T para determinar si hubo un aumento o descenso en el ITF o si quedó igual (Hipotesis nula)
+
+

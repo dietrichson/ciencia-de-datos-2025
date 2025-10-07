@@ -7,7 +7,7 @@ lang: es
 
 Hipotesis nula: Mujeres y Hombres = edad
 
-Hipotesis alternativa: Mujeres más jóvenes que los hombres 
+Hipotesis alternativa: Mujeres más jóvenes que los hombres
 
 Hipotesis alternativa 2: Hombres más jóvenes que las mujeres
 
@@ -28,6 +28,7 @@ datos_indec <- datos_indec |>
 colnames(datos_indec)
 ```
 
+<<<<<<< HEAD
 
 ```
 
@@ -35,10 +36,12 @@ colnames(datos_indec)
 
 ```
 
+=======
+>>>>>>> 1ae052c62376da733fb6fdb04d73815853078ce1
 ```{r}
 library(ggplot2)
 
-my_data |>
+datos_indec |>
   group_by(sexo) |>
   summarise(edad_promedio = mean(edad, na.rm = TRUE)) |>
   ggplot(aes(x = sexo, y = edad_promedio, fill = sexo)) +
@@ -60,4 +63,5 @@ my_data |>
 
 
 ```
+
 La hipotesis nula queda rechazada con el grafico
