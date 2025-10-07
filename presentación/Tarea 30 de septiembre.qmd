@@ -179,14 +179,14 @@ tt
 
 La interpretación depende del **valor p** obtenido:
 
--    Si *p* \< 0.05 → se **rechaza H₀**, indicando una diferencia significativa entre los ingresos reales de ambos años.
+-   Si *p* \< 0.05 → se **rechaza H₀**, indicando una diferencia significativa entre los ingresos reales de ambos años.
 
 -   Si *p* ≥ 0.05 → **no se rechaza H₀**, lo que sugiere que no hay evidencia suficiente para afirmar una diferencia real.
 
-## Conclusión 
+## Conclusión
 
 -   En términos **nominales**, los ingresos familiares muestran un incremento entre 2022 y 2023.
 
 <!-- -->
 
--    Luego de ajustar por inflación, el aumento NO refleja una mejora real del poder adquisitivo –\> No se rechaza la hipotesis nula
+-   Luego de ajustar por inflación, el aumento NO refleja una mejora real del poder adquisitivo –\> No se rechaza la hipotesis nula
