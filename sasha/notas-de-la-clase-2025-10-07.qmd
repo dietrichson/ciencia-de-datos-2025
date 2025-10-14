@@ -1,0 +1,40 @@
+---
+title: "Notas de la clase 2025-10-07"
+date: 2025-10-07
+author: "Aleksander Dietrichson"
+lang: es
+format: html
+---
+
+## Cargamos datos
+
+```{r}
+#| include: false
+my_data <- readr::read_delim("../data/usu_individual_T125.txt")
+# Transformar
+# 1 = Primario incompleto (incluye educación especial)
+# 2 = Primario completo
+# 3 = Secundario incompleto
+# 4 = Secundario completo
+# 5 = Superior y universitario incompleto
+# 6 = Superior y universitario completo
+# 7 = Sin instrucción
+
+my_data$edu_binario <- 
+  ifelse(my_data$NIVEL_ED<=2,"Primario solo", "Secundario+")
+my_data$edu_binario <- 
+  ifelse(my_data$NIVEL_ED == 7, "Primario solo", my_data$edu_binario)
+```
+
+
+```{r}
+table(my_data$edu_binario, my_data$MAS_500)
+```
+```{r}
+table(my_data$edu_binario, my_data$MAS_500) |> 
+  chisq.test()
+```
+
+## Tarea para la proxima
+
+REalizar un test de Chi-cuadrado con algun dato que tengamos en el repositorio. 
