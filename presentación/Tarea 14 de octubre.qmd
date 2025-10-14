@@ -70,8 +70,6 @@ indec |>
 
 ## Conclusión
 
-El test de Chi-cuadrado dio un **p-valor menor a 0.05**, por lo que **rechazo la hipótesis nula**.\
+Como el p-valor (0.005) es menor que 0.05, **rechazo la hipótesis nula**.\
 
-Esto indica que existe una **asociación significativa** entre el **sexo** y la **condición de ocupación**.\
-
-El gráfico muestra que las proporciones de ocupados y desocupados **no son iguales** entre varones y mujeres, lo cual respalda el resultado del test.
+Esto indica que **sí hay una relación significativa** entre el sexo y la condición de ocupación en los datos analizados.
