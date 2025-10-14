@@ -1,0 +1,77 @@
+---
+title: "Tarea 14 de octubre"
+author: Melina Varhulik
+lang: es
+format: html
+---
+
+# Modelos Estadísticos
+
+```{r}
+#| include: false
+library(tidyverse)
+```
+
+### **Hipótesis nula (H₀):**
+
+No existe relación entre el sexo de las personas y su condición de ocupación; es decir, ser varón o mujer no influye en la probabilidad de estar ocupado o desocupado.
+
+**Hipótesis alternativa (H₁):**\
+Sí existe una relación entre el sexo y la condición de ocupación; el hecho de ser varón o mujer influye en la probabilidad de estar ocupado o desocupado.
+
+```         
+```
+
+```{r}
+
+indec <- readr::read_delim("../presentación/usu_individual_T125.txt",
+                           delim = ";") |>
+  select(CH04, ESTADO) |>
+  filter(ESTADO %in% c(1, 2)) |>
+  mutate(
+    sexo = ifelse(CH04 == 1, "varón", "mujer"),
+    ocupacion = ifelse(ESTADO == 1, "ocupado", "desocupado")
+  ) |>
+  select(sexo, ocupacion) |>
+  drop_na()
+```
+
+```{r}
+tabla <- table(indec$sexo, indec$ocupacion)
+tabla
+```
+
+## Test de Independencia
+
+```{r}
+chi <- chisq.test(tabla)
+chi
+```
+
+```{r}
+library(scales)  
+
+indec |>
+  count(sexo, ocupacion) |>
+  group_by(sexo) |>
+  mutate(prop = n/sum(n)) |>
+  ungroup() |>
+  ggplot(aes(x = sexo, y = prop, fill = ocupacion)) +
+  geom_col(width = 0.6) +
+  geom_text(aes(label = percent(prop, accuracy = 0.1)),
+            position = position_stack(vjust = 0.5), size = 3.6) +
+  scale_y_continuous(labels = percent) +
+  labs(title = "Condición de ocupación por sexo (proporciones)",
+       x = NULL, y = NULL, fill = "Ocupación") +
+  theme_dark() +
+  theme(legend.position = "top",
+        plot.title = element_text(face = "bold"))
+```
+
+## Conclusión
+
+El test de Chi-cuadrado dio un **p-valor menor a 0.05**, por lo que **rechazo la hipótesis nula**.\
+
+Esto indica que existe una **asociación significativa** entre el **sexo** y la **condición de ocupación**.\
+
+El gráfico muestra que las proporciones de ocupados y desocupados **no son iguales** entre varones y mujeres, lo cual respalda el resultado del test.
