@@ -1,0 +1,37 @@
+---
+title: "Notas de la clase 2025-09-30"
+author: "Aleksander Dietrichson"
+format: html
+lang: es
+editor: visual
+---
+
+## Tablas
+
+```{r}
+#| include: false
+library(tidyverse)
+```
+
+
+```{r}
+#| label: tbl-mi-tabla
+#| echo: false
+#| layout-ncol: 2
+#| tbl-cap: "Titulo"
+#| tbl-subcap: 
+#|   - "Primera"
+#|   - "Segunda"
+
+mtcars |> 
+  select(mpg, cyl) |> 
+  head(4) |> knitr::kable()
+
+mtcars |> 
+  select( cyl,hp) |> 
+  head(5) |> 
+  knitr::kable()
+
+```
+
+Como vemos en [@tbl-mi-tabla] hay dos tablas.
