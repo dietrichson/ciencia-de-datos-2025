@@ -1,0 +1,87 @@
+---
+title: "Tarea 30.09 "
+format: html
+---
+
+## Tarea:
+
+-   Escibir el codigo para cargar los datos del indec
+
+```{r}
+library(readr)
+library(dplyr)
+
+datos_indec <- readr::read_delim("../data/usu_individual_T125.txt", delim = ";")
+```
+
+-   Eligir tres variables de los datos del indec
+
+<!-- -->
+
+-   **CH04** → **Sexo**
+-   **CH06** → Edad
+-   **P21** → **Salario**
+
+<!-- -->
+
+-   Eventualmente hacer la transformación (traducir al español)
+
+```{r}
+library(dplyr)
+
+minidatos <- datos_indec |>
+  select(CH04, CH06, PP08D1) |>
+  rename(
+    sexo = CH04,
+    edad = CH06,
+    salario = PP08D1
+  ) |>
+  mutate(
+    sexo = recode(as.character(sexo),
+                  `1` = "Masculino",
+                  `2` = "Femenino"),
+    # Conversión segura a numérico
+    salario = as.numeric(as.character(salario)),
+    edad = as.numeric(as.character(edad))
+  )
+
+```
+
+-   Visualizar la distribución
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+# Distribución por sexo
+minidatos |> 
+  ggplot(aes(x = sexo)) +
+  geom_bar(fill = "lightblue", alpha = 0.8)
+
+```
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+# Distribución de salario
+minidatos |>
+  ggplot(aes(x = salario)) +
+  geom_histogram(bins = 30, fill = "lightpink", color = "white")
+```
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+# Distribución de edad
+minidatos |>
+  ggplot(aes(x = edad)) +
+  geom_histogram(binwidth = 5, fill = "lightgreen", color = "white")
+
+```
+
+-   Determinar si parece normal. En caso de que no sea normal especular por qué.
+
+La variable **sexo** una variable nominal, por lo que **no aplica** evaluar su normalidad. La **edad** no es normal, ya que su distribución es **asimétrica y truncada en cero**. El **salario**, en escala original, también es **asimétrico a la derecha** (muchos valores bajos y pocos altos), aunque **al aplicar logaritmo** puede aproximarse a una forma más **simétrica**.

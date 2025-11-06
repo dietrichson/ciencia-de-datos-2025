@@ -38,3 +38,8 @@ format:
 
 ### Clase 7: Pruebas de independencia
 * [Pruebas de independencia](presentaciones/7-pruebas-de-independencia.html)
+* [Análisis de Prueba](notas-de-la-clase-2025-09-23.html)
+* [Análisis de Prueba](test.html)
+
+### Clase 9: La prueba de $\chi^2$
+* [La prueba de $\chi^2$](presentaciones/9-chi-cuadrado.html)

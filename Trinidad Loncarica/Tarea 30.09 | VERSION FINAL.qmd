@@ -1,0 +1,154 @@
+---
+title: "Tarea 30.09 | VERSION FINAL"
+format: html
+author: "Trinidad Loncarica"
+---
+Datos
+
+Se utilizaron microdatos provistos por el INDEC [@indec] correspondientes al último trimestre de 2022 y 2023. En particular, se emplearon los archivos usu_hogar_T422.rds y usu_hogar_T423.rds, que contienen información de hogares y la variable ITF (Ingreso Total Familiar).
+El objetivo del análisis fue comparar el nivel promedio del ITF entre ambos trimestres y determinar si existe una diferencia estadísticamente significativa.
+
+
+```{r}
+# Carga de librerías y bases de datos
+library(tidyverse)
+
+my_data22 <- readr::read_rds("../data/usu_hogar_T422.rds")
+my_data23 <- readr::read_rds("../data/usu_hogar_T423.rds")
+
+```
+
+Pregunta de investigación
+
+¿Existe una diferencia significativa en el Ingreso Total Familiar (ITF) entre el 4° trimestre de 2022 y el 4° trimestre de 2023?
+
+La hipótesis nula (H₀) plantea que no hay diferencias entre los promedios de ambos años.
+La hipótesis alternativa (H₁) sostiene que los promedios difieren.
+
+Primero, se unieron las bases y se seleccionaron las variables relevantes: año (ANO4) e ITF. Luego, se eliminaron los valores faltantes o negativos.
+
+```{r}
+# Unificación y limpieza de datos
+base <- bind_rows(my_data22, my_data23) %>%
+  mutate(
+    ANO4 = as.integer(ANO4),
+    ITF = suppressWarnings(as.numeric(ITF))
+  ) %>%
+  filter(!is.na(ITF), ITF >= 0, ANO4 %in% c(2022, 2023))
+```
+
+Se calcularon los valores promedio y mediano nominales para cada año:
+
+```{r}
+# Cálculo de promedios y medianas nominales
+tabla_nominal <- base %>%
+  group_by(ANO4) %>%
+  summarise(
+    n = n(),
+    ITF_prom = mean(ITF, na.rm = TRUE),
+    ITF_med = median(ITF, na.rm = TRUE)
+  )
+
+knitr::kable(tabla_nominal, digits = 1)
+```
+
+Se representó gráficamente la diferencia aparente entre los dos años:
+
+```{r}
+# Gráfico de barras nominal
+tabla_nominal %>%
+  ggplot(aes(x = factor(ANO4), y = ITF_prom)) +
+  geom_col(fill = "steelblue") +
+  labs(x = "Año", y = "ITF promedio (pesos nominales)",
+       title = "Ingreso Total Familiar (sin ajuste por inflación)") +
+  theme_minimal()
+```
+
+A partir de la tabla y el gráfico, se observó una diferencia nominal importante, por lo que fue necesario ajustar por inflación para evaluar si dicha diferencia se mantiene en términos reales.
+
+
+Ajuste por inflación
+
+Para asegurar la comparabilidad de los ingresos entre años, se realizó un ajuste por inflación utilizando el Índice de Precios al Consumidor (IPC) del INDEC, expresado en base 2016=100.
+Cada valor de ITF fue transformado a precios constantes del 4° trimestre de 2023.
+
+```{r}
+# IPC promedio del trimestre (base 2016=100)
+ipc_q <- tribble(
+  ~ANO4, ~ipc_prom_trimestre,
+  2022, 120.6,  # promedio oct-nov-dic 2022
+  2023, 264.2   # promedio oct-nov-dic 2023
+)
+```
+```{r}
+# Deflactar los ingresos
+ipc_base_2023 <- 264.2
+
+base_real <- base %>%
+  left_join(ipc_q, by = "ANO4") %>%
+  mutate(
+    ITF_real_2023Q4 = ITF * (ipc_base_2023 / ipc_prom_trimestre)
+  ) %>%
+  filter(!is.na(ITF_real_2023Q4))
+```
+
+Resultados en valores reales
+
+Se calcularon los promedios y errores estándar de los ingresos ajustados por inflación:
+
+```{r}
+# Promedios reales por año
+tabla_real <- base_real %>%
+  group_by(ANO4) %>%
+  summarise(
+    n = n(),
+    ITF_prom_real = mean(ITF_real_2023Q4, na.rm = TRUE),
+    sd_real = sd(ITF_real_2023Q4, na.rm = TRUE),
+    se_real = sd_real / sqrt(n)
+  )
+
+knitr::kable(tabla_real, digits = 1)
+```
+
+Y se graficaron las medias reales con barras de error (±1 error estándar):
+
+```{r}
+# Gráfico del ITF real con error estándar
+tabla_real %>%
+  ggplot(aes(x = factor(ANO4), y = ITF_prom_real)) +
+  geom_col(fill = "darkgreen") +
+  geom_errorbar(aes(ymin = ITF_prom_real - se_real,
+                    ymax = ITF_prom_real + se_real),
+                width = 0.2) +
+  labs(x = "Año", y = "ITF promedio real (precios 4T-2023)",
+       title = "Ingreso Total Familiar ajustado por inflación") +
+  theme_minimal()
+```
+
+Análisis estadístico
+
+Para determinar si la diferencia observada es estadísticamente significativa, se aplicó una prueba t de Student (Welch) para muestras independientes.
+Esta prueba contrasta la igualdad de medias entre los ingresos reales de 2022 y 2023.
+
+```{r}
+# Definición de las muestras
+x2022 <- base_real %>% filter(ANO4 == 2022) %>% pull(ITF_real_2023Q4)
+x2023 <- base_real %>% filter(ANO4 == 2023) %>% pull(ITF_real_2023Q4)
+
+# Prueba t de Welch
+tt <- t.test(x2023, x2022, alternative = "two.sided", var.equal = FALSE)
+
+# Resultados principales
+tt
+```
+
+En función de los resultados de la prueba t, si el p-valor es menor a 0.05, se rechaza la hipótesis nula, concluyendo que existe una diferencia estadísticamente significativa entre los ingresos reales del 4° trimestre de 2022 y 2023.
+De lo contrario, si el p-valor es mayor o igual a 0.05, no se rechaza H₀, indicando que no hay evidencia suficiente para afirmar una diferencia real entre ambos períodos.
+
+En síntesis:
+
+Se observó una diferencia nominal visible en el ITF.
+
+Tras ajustar por inflación, se verificó mediante una prueba t si dicha diferencia es real o sólo aparente.
+
+La interpretación final depende del resultado del test (valor p).

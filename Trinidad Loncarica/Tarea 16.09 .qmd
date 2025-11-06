@@ -20,20 +20,23 @@ my_data<- read_csv("../data/student-dataset.csv")
 ```{r}
 library(ggplot2)
 
-ggplot(my_data, aes(x = Gender, y = Household_Size)) +
-  geom_boxplot() +
-  geom_jitter(width = 0.15, alpha = 0.3) +
+ggplot(my_data, aes(x = Gender, y = Household_Size, fill = Gender)) +
+  geom_boxplot(alpha = 0.7, outlier.shape = NA) +  # suaviza cajas
+  geom_jitter(width = 0.15, alpha = 0.4, color = "black") +  # puntos más claros
+  scale_fill_manual(values = c("pink", "lightblue")) +  # colores por género
   labs(
-    title = "Tamaño del hogar por género",
+    title = "Comparación del tamaño del hogar según género",
     x = "Género",
     y = "Tamaño del hogar (personas)"
-  ) 
+  ) +
+  theme_minimal(base_size = 14) +  # estilo limpio
+  theme(legend.position = "none")  # quita leyenda repetida
 ```
 
 -   Formular hipótesis nula y alternativa
-    -   **Hipótesis nula :** No existe diferencia significativa en el tamaño del hogar entre estudiantes hombres y mujeres.
+    -   **Hipótesis nula:** No existe diferencia significativa en el tamaño del hogar entre estudiantes hombres y mujeres.
 
-        **Hipótesis alternativa :** Existe una diferencia significativa en el tamaño del hogar entre estudiantes hombres y mujeres.
+        **Hipótesis alternativa:** Existe una diferencia significativa en el tamaño del hogar entre estudiantes hombres y mujeres.
 
 ## Tarea 2
 

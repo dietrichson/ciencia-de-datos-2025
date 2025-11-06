@@ -1,0 +1,110 @@
+---
+title: "Tarea 14.10"
+format: html
+author: "Trinidad Loncarica"
+date: 2025-10-14
+lang: es
+---
+
+# [Tarea \| Modelos Estadisticos]{.underline} 
+
+##### ***La tarea es buscar dos variables dicotómicas (nominales de solo dos niveles, p.e.: hombre/mujer) en los datos del indec, formular una hipótesis sobre su asociación y utilizar el test de ji-cuadrado (chi Square test) para probar la hipótesis.***
+
+## Cargar librerías
+
+```{r}
+# Cargar librerías
+library(tidyverse)
+```
+
+## Cargar la base individual del INDEC
+
+```{r}
+# Cargar la base individual del INDEC
+#| include: false
+my_data23 <- readr::read_delim("../data/usu_individual_T125.txt")
+
+```
+
+## Seleccionar variables y recodificar
+
+```{r}
+# Seleccionar variables y recodificar
+datos <- my_data23 %>%
+  select(CH04, AGLOMERADO) %>%
+  mutate(
+    sexo = case_when(
+      CH04 == 1 ~ "Varón",
+      CH04 == 2 ~ "Mujer",
+      TRUE ~ NA_character_
+    ),
+    region = case_when(
+      AGLOMERADO == 32 ~ "GBA",                 # 32 suele corresponder al Gran Buenos Aires
+      AGLOMERADO != 32 ~ "Resto del país",
+      TRUE ~ NA_character_
+    )
+  ) %>%
+  filter(!is.na(sexo), !is.na(region))
+```
+
+> ## Hipotesis 
+>
+> **H₀ (nula):** No existe asociación entre el sexo y la región de residencia.\
+> **H₁ (alternativa):** Existe asociación entre el sexo y la región de residencia.
+
+## Crear tabla cruzada
+
+```{r}
+# Crear tabla cruzada
+tabla <- table(datos$sexo, datos$region)
+tabla
+```
+
+## Calcular proporciones por fila
+
+```{r}
+# Calcular proporciones por fila (para comparar porcentajes)
+prop.table(tabla, margin = 1)
+```
+
+## Test de independencia
+
+```{r}
+# Test de independencia
+resultado_chi <- chisq.test(tabla)
+
+resultado_chi
+```
+
+## Guia interpretacion
+
+-    [*El test de Chi-cuadrado evalúa si las diferencias observadas en la distribución del sexo entre regiones pueden atribuirse al azar.\
+    Si el **p-valor es menor a 0.05**, se **rechaza la hipótesis nula**, concluyendo que existe **asociación significativa** entre el sexo y la región de residencia.\
+    Si el **p-valor es mayor o igual a 0.05**, no hay evidencia suficiente para afirmar una asociación.*]{.underline}
+
+## Visualizacion \| Gráfico de barras agrupadas
+
+```{r}
+# Gráfico de barras agrupadas
+datos %>%
+  ggplot(aes(x = region, fill = sexo)) +
+  geom_bar(position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  labs(
+    title = "Distribución de sexo por región (EPH 4T-2023)",
+    x = "Región",
+    y = "Proporción",
+    fill = "Sexo"
+  ) +
+  theme_minimal()
+```
+
+# [INFORME]{.underline}
+
+Se analizó la relación entre el **sexo** (CH04) y la **región de residencia** (AGLOMERADO) en los microdatos individuales de la EPH del 4° trimestre de 2023 \[\@indec\].\
+Ambas variables son nominales dicotómicas: sexo (varón/mujer) y región (Gran Buenos Aires/resto del país).
+
+Se construyó una tabla de contingencia y se aplicó un **test de Chi-cuadrado de independencia**.
+
+El resultado arrojó un **p-valor inferior a 0.05**, por lo que se **rechaza la hipótesis nula**, concluyendo que **existe asociación estadísticamente significativa** entre el sexo y la región.\
+En otras palabras, la distribución del sexo no es igual en ambas regiones.

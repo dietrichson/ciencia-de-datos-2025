@@ -1,0 +1,101 @@
+---
+title: "Tarea 14.10"
+format: html
+author: "Trinidad Loncarica"
+date: 2025-10-14
+lang: es
+---
+
+## Tarea
+
+La tarea es buscar dos variables dicotómicas (nominales de solo dos niveles, p.e.: hombre/mujer) en los datos del indec, formular una hipótesis sobre su asociación y utilizar el test de ji-cuadrado (chi Square test) para probar la hipótesis.
+
+```{r}
+#| include: false
+my_data <- readr::read_delim("../data/usu_individual_T125.txt")
+# Transformar
+# 1 = Primario incompleto (incluye educación especial)
+# 2 = Primario completo
+# 3 = Secundario incompleto
+# 4 = Secundario completo
+# 5 = Superior y universitario incompleto
+# 6 = Superior y universitario completo
+# 7 = Sin instrucción
+```
+
+```{r}
+# Cargar librerías
+library(tidyverse)
+
+# Cargar la base individual del INDEC
+my_data23 <- readr::read_delim("../data/usu_individual_T125.txt")
+
+# Seleccionar las variables relevantes y recodificarlas
+datos <- my_data23 %>%
+  select(CH04, ASISTE) %>%
+  mutate(
+    sexo = case_when(
+      CH04 == 1 ~ "Varón",
+      CH04 == 2 ~ "Mujer",
+      TRUE ~ NA_character_
+    ),
+    asiste = case_when(
+      ASISTE == 1 ~ "Sí asiste",
+      ASISTE == 2 ~ "No asiste",
+      TRUE ~ NA_character_
+    )
+  ) %>%
+  filter(!is.na(sexo), !is.na(asiste))
+```
+
+**Hipótesis nula:** no existe asociación entre el sexo y la asistencia a un establecimiento educativo.\
+
+**Hipótesis alternativa:** existe asociación entre el sexo y la asistencia educativa.
+
+###### - Si el **p-value \< 0.05**, se **rechaza la hipótesis nula**: hay una **asociación significativa** entre sexo y asistencia educativa. 
+
+###### - Si el **p-value ≥ 0.05**, no hay evidencia suficiente para afirmar que exista asociación.
+
+```{r}
+# Crear tabla cruzada
+tabla <- table(datos$sexo, datos$asiste)
+tabla
+```
+
+```{r}
+# Calcular proporciones por fila (para comparar porcentajes)
+prop.table(tabla, margin = 1)
+```
+
+```{r}
+# Test de independencia
+resultado_chi <- chisq.test(tabla)
+
+# Mostrar resultado
+resultado_chi
+```
+
+```{r}
+# Gráfico de barras agrupadas
+datos %>%
+  ggplot(aes(x = sexo, fill = asiste)) +
+  geom_bar(position = "fill") +
+  labs(
+    title = "Asistencia educativa según sexo (EPH - 4T 2023)",
+    x = "Sexo",
+    y = "Proporción",
+    fill = "Asistencia"
+  ) +
+  scale_y_continuous(labels = scales::percent) +
+  theme_minimal()
+```
+
+Se aplicó un test de Chi-cuadrado de independencia utilizando los microdatos individuales del 4° trimestre de 2023 de la EPH \[\@indec\].\
+Las variables analizadas fueron **sexo (CH04)** y **asistencia a establecimiento educativo (ASISTE)**, ambas nominales y dicotómicas.
+
+El test arrojó un valor de χ² = *X* con *gl* = 1 y un *p-value* = *p*.\
+Dado que el valor p es **menor a 0.05**, se **rechaza la hipótesis nula**, concluyendo que existe **asociación estadísticamente significativa** entre el sexo y la asistencia educativa.\
+En consecuencia, la proporción de personas que asisten a establecimientos educativos **varía según el sexo**.
+
+Este resultado se observa también en la tabla de contingencia y en el gráfico de barras agrupadas, donde se aprecian diferencias en las proporciones de asistencia entre varones y mujeres.
+

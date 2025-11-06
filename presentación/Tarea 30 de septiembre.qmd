@@ -1,0 +1,192 @@
+---
+title: "Tarea 7 de octubre"
+format: html
+name: Melina Varhulik 
+lang: es
+---
+
+```{r}
+#| include: false
+library(tidyverse)
+```
+
+## Datos
+
+Para este trabajo se emplearon microdatos del INDEC [@indec], correspondientes al cuarto trimestre de 2022 y 2023.\
+En particular, se utilizaron los archivos `usu_hogar_T422.rds` y `usu_hogar_T423.rds`, que contienen información de los hogares argentinos y la variable **ITF (Ingreso Total Familiar)**.
+
+## Metodología
+
+Se realiza una comparación descriptiva y un test t de dos muestras independientes.
+
+```{r}
+mis_datos<- readr::read_rds("../data/usu_hogar_T422.rds")
+mis_datos1 <- readr::read_rds("../data/usu_hogar_T423.rds")
+```
+
+## Pregunta de investigación
+
+\
+El propósito fue comparar los ingresos familiares promedio entre ambos años y analizar si la diferencia observada resulta estadísticamente significativa.
+
+**HIPOTESIS NULA:** no hay diferencia entre los promedios del 2022 y 2023.
+
+**HIPOTESIS ALTERNATIVA:** sí hay diferencia en los promedios entre 2022 y 2023.
+
+```{r}
+glimpse(mis_datos)
+glimpse(mis_datos1)
+```
+
+```{r}
+base <- bind_rows(mis_datos, mis_datos1) %>%
+  mutate(
+    ANO4 = as.integer(ANO4),
+    ITF = suppressWarnings(as.numeric(ITF))
+  ) %>%
+  filter(!is.na(ITF), ITF >= 0, ANO4 %in% c(2022, 2023))
+
+```
+
+```{r}
+tabla_nominal <- base %>%
+  group_by(ANO4) %>%
+  summarise(
+    n = n(),
+    ITF_prom = mean(ITF, na.rm = TRUE),
+    ITF_med = median(ITF, na.rm = TRUE)
+  )
+
+knitr::kable(tabla_nominal, digits = 1)
+```
+
+## 
+
+### Análisis
+
+```{r}
+#| label: tabla-1
+#| tbl-cap: "Ingreso Familiar Total ajustado por inflación"
+#| tbl-subcap: "Comparación 2022 y 2023"
+mis_datos |>
+  group_by(ANO4) |>
+  summarise(
+    media   = mean(ITF, na.rm = TRUE),
+    mediana = median(ITF, na.rm = TRUE),
+    sd      = sd(ITF, na.rm = TRUE),
+    n       = n(),
+    .groups = "drop"
+  ) |>
+  knitr::kable()
+
+```
+
+### Gráfico que representa la diferencia entre los dos años:
+
+```{r}
+tabla_nominal %>%
+  ggplot(aes(x = factor(ANO4), y = ITF_prom, fill = factor(ANO4))) +
+  geom_col(width = 0.6) +
+  scale_fill_manual(values = c("#FFCDD2", "#F8BBD0")) +
+  labs(
+    x = "Año",
+    y = "ITF promedio (pesos nominales)",
+    title = "Evolución del Ingreso Total Familiar (nominal)",
+    fill = "Año"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(plot.title = element_text(face = "bold", color = "#AD1457"))
+```
+
+## Ajuste por inflación
+
+Se corrigieron los ingresos nominales según el Índice de Precios al Consumidor (IPC) del INDEC, expresado en base 2016=100, utilizando como referencia el promedio del cuarto trimestre de cada año.
+
+```{r}
+# IPC promedio del trimestre (base 2016=100)
+ipc_q <- tribble(
+  ~ANO4, ~ipc_prom_trimestre,
+  2022, 120.6,  # oct-nov-dic 2022
+  2023, 264.2   # oct-nov-dic 2023
+)
+```
+
+A partir de ello, todos los ingresos fueron llevados a precios constantes del 4° trimestre de 2023:
+
+```{r}
+ipc_base_2023 <- 264.2
+
+base_real <- base %>%
+  left_join(ipc_q, by = "ANO4") %>%
+  mutate(
+    ITF_real_2023Q4 = ITF * (ipc_base_2023 / ipc_prom_trimestre)
+  ) %>%
+  filter(!is.na(ITF_real_2023Q4))
+```
+
+Con los datos ya ajustados, se calcularon los promedios, desvíos y errores estándar del ITF real:
+
+```{r}
+tabla_real <- base_real %>%
+  group_by(ANO4) %>%
+  summarise(
+    n = n(),
+    ITF_prom_real = mean(ITF_real_2023Q4, na.rm = TRUE),
+    sd_real = sd(ITF_real_2023Q4, na.rm = TRUE),
+    se_real = sd_real / sqrt(n)
+  )
+
+knitr::kable(tabla_real, digits = 1)
+```
+
+Próximo gráfico con barra de error:
+
+```{r}
+tabla_real %>%
+  ggplot(aes(x = factor(ANO4), y = ITF_prom_real, fill = factor(ANO4))) +
+  geom_col(width = 0.6, color = "white") +
+  geom_errorbar(aes(ymin = ITF_prom_real - se_real,
+                    ymax = ITF_prom_real + se_real),
+                width = 0.15, color = "#4DB6AC") +
+  scale_fill_manual(values = c("#A5D6A7", "#80DEEA")) +
+  labs(
+    x = "Año",
+    y = "ITF promedio real (a precios 4T-2023)",
+    title = "Ingreso Total Familiar (valores reales)",
+    fill = "Año"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", color = "#00695C"),
+    axis.title = element_text(color = "#26A69A")
+  )
+```
+
+## Análisis estadístico
+
+Para contrastar formalmente si las medias reales difieren entre ambos años, se aplicó una **prueba t de Student (Welch)** para muestras independientes, que no asume varianzas iguales.
+
+```{r}
+x2022 <- base_real %>% filter(ANO4 == 2022) %>% pull(ITF_real_2023Q4)
+x2023 <- base_real %>% filter(ANO4 == 2023) %>% pull(ITF_real_2023Q4)
+
+
+tt <- t.test(x2023, x2022, alternative = "two.sided", var.equal = FALSE)
+
+
+tt
+```
+
+La interpretación depende del **valor p** obtenido:
+
+-   Si *p* \< 0.05 → se **rechaza H₀**, indicando una diferencia significativa entre los ingresos reales de ambos años.
+
+-   Si *p* ≥ 0.05 → **no se rechaza H₀**, lo que sugiere que no hay evidencia suficiente para afirmar una diferencia real.
+
+## Conclusión
+
+-   En términos **nominales**, los ingresos familiares muestran un incremento entre 2022 y 2023.
+
+<!-- -->
+
+-   Luego de ajustar por inflación, el aumento NO refleja una mejora real del poder adquisitivo –\> No se rechaza la hipotesis nula
