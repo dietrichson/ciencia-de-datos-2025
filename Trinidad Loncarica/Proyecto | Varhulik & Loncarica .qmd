@@ -1,0 +1,170 @@
+---
+title: "Proyecto | Varhulik & Loncarica "
+format: html
+author: "Melina Ayelen Varhulik & Maria Trinidad Loncarica"
+date: 2025-11-01
+lang: es
+---
+
+# Analisis de las 100 peliculas mejor calificadas por IMDb
+
+En el presente trabajo se llevara a cabo un analisis del siguiente conjunto de datos, el cual contiene información detallada sobre las 100 películas mejor calificadas en IMDb (hasta el año 2025).
+
+```{r}
+# Cargar el paquete necesario
+library(readr)
+
+# Leer el archivo CSV (ajustá el nombre exacto)
+imdb <- read_csv("top_100_movies_full_best_effort.csv")
+
+# Ver las primeras filas
+head(imdb)
+
+```
+
+```{r}
+# Intento mapear columnas típicas; editá si tu CSV usa otros nombres
+# Ejemplos comunes: title, year, rating, runtime_minutes, genres, director, country, votes
+#Utilice chat gpt
+cols_presentes <- names(imdb)
+
+col_title   <- cols_presentes[grepl("^title$|movie", cols_presentes, ignore.case = TRUE)][1]
+col_year    <- cols_presentes[grepl("^year$|release", cols_presentes, ignore.case = TRUE)][1]
+col_rating  <- cols_presentes[grepl("rating|imdb|score", cols_presentes, ignore.case = TRUE)][1]
+col_runtime <- cols_presentes[grepl("runtime|duration|minutes", cols_presentes, ignore.case = TRUE)][1]
+col_genres  <- cols_presentes[grepl("^genre$|genres", cols_presentes, ignore.case = TRUE)][1]
+col_direct  <- cols_presentes[grepl("director", cols_presentes, ignore.case = TRUE)][1]
+col_country <- cols_presentes[grepl("^country|countries", cols_presentes, ignore.case = TRUE)][1]
+col_votes   <- cols_presentes[grepl("votes", cols_presentes, ignore.case = TRUE)][1]
+
+# Construir un data frame ordenado con nombres consistentes
+imdb2 <- imdb %>%
+  transmute(
+    title   = .data[[col_title]],
+    year    = suppressWarnings(as.integer(.data[[col_year]])),
+    rating  = suppressWarnings(as.numeric(.data[[col_rating]])),
+    runtime = if (!is.na(col_runtime)) suppressWarnings(as.numeric(.data[[col_runtime]])) else NA_real_,
+    genres  = if (!is.na(col_genres)) as.character(.data[[col_genres]]) else NA_character_,
+    director= if (!is.na(col_direct)) as.character(.data[[col_direct]]) else NA_character_,
+    country = if (!is.na(col_country)) as.character(.data[[col_country]]) else NA_character_,
+    votes   = if (!is.na(col_votes)) suppressWarnings(as.numeric(.data[[col_votes]])) else NA_real_
+  ) %>%
+  mutate(
+    decade = ifelse(!is.na(year), paste0(floor(year/10)*10, "s"), NA),
+    genre_main = ifelse(!is.na(genres), str_trim(str_split_fixed(genres, ",", 2)[,1]), NA)
+  )
+
+glimpse(imdb2)
+
+```
+
+```{r}
+# Buscar un .csv que contenga "imdb" en el nombre
+archivos <- list.files(pattern = "(?i)imdb.*\\.csv$")
+if (length(archivos) == 0) stop("No encuentro un CSV con 'imdb' en el nombre en tu carpeta de trabajo. Usá list.files() para chequear.")
+if (length(archivos) > 1) message("Se encontraron varios CSV. Tomo el primero: ", archivos[1])
+
+imdb_raw <- readr::read_csv(archivos[1], show_col_types = FALSE)
+
+```
+
+*Top 10 por rating*
+TABLA no hay que graficar
+RANK Y LARGO DE LA PELICULA --> Si las pelis mas largas son mas buenas 
+```{r}
+# Top 10 por rating
+imdb %>%
+  arrange(desc(Rank), Title) %>%
+  slice_head(n = 10) %>%
+  select(Title, Year, Rank,`Runtime (mins)`, Director)
+
+```
+
+*Años con mas peliculas*
+hacer un grafico para illustrarlo 
+
+Demostrar los años dorados y los años que no tuvieron exito 
+
+```{r}
+# Años con más películas
+imdb %>%
+  count(Year, sort = TRUE) %>%
+  slice_head(n = 10)
+
+
+```
+
+
+
+Desdupliar los datos !!!! (97&73)
+```{r}
+#Mejores peliculas de 1957
+imdb |>
+  filter ( Year==1957)
+```
+
+Duracion: Media, mediana, etc...
+
+```{r}
+imdb %>%
+  summarise(
+    n_obs = n(),
+    rating_media = mean(`IMDb Rating`, na.rm = TRUE),
+    rating_mediana = median(`IMDb Rating`, na.rm = TRUE),
+    dur_media = mean(`Runtime (mins)`, na.rm = TRUE),
+    dur_mediana = median(`Runtime (mins)`, na.rm = TRUE)
+  )
+```
+
+*Frecuencia de genero principal*
+stringsplit
+```{r}
+# Frecuencia de género principal
+imdb %>%
+  filter(!is.na(genre_main), genre_main != "") %>%
+  count(genre_main, sort = TRUE)
+4) Gráficos base (ggplot2)
+r
+Copiar código
+library(ggplot2)
+library(forcats)
+```
+
+Distribución de ratings
+ ( Mejorar la estetica )
+QUe ek eje principal cubra todo
+DEcoradores para el usuario final para que no se vea el codigo
+
+```{r}
+ggplot(imdb2, aes(x = rating)) +
+  geom_histogram(bins = 20, fill = "red", color = "black") +
+  labs(title = "Distribución de calificaciones IMDb (Top 100)",
+       x = "Rating IMDb",
+       y = "Frecuencia") +
+  scale_x_continuous(limits = c(5, 10))+
+theme_bw()
+
+```
+
+Cantidad de películas por década
+
+```{# 4.2 Cantidad de películas por década{r}
+ggplot(imdb2 %>% filter(!is.na(decade)),
+       aes(x = fct_infreq(decade))) +
+  geom_bar() +
+  coord_flip() +
+  labs(title = "Películas por década",
+       x = "Década", y = "Cantidad")
+
+```
+
+Rating por género principal 
+
+```{r}
+imdb2 |> 
+  filter(!is.na(genre_main), genre_main != "") |>
+group_by(genre_main) |>
+summarize(
+Mean = mean(rating)
+)
+```
