@@ -6,7 +6,7 @@ date: 2025-11-01
 lang: es
 ---
 
-# Analisis de las 100 peliculas mejor calificadas por IMDb
+### Analisis de las 100 peliculas mejor calificadas por IMDb
 
 En el presente trabajo se llevara a cabo un analisis del siguiente conjunto de datos, el cual contiene información detallada sobre las 100 películas mejor calificadas en IMDb (hasta el año 2025).
 
@@ -68,7 +68,7 @@ imdb_raw <- readr::read_csv(archivos[1], show_col_types = FALSE)
 
 ```
 
-*Top 10 por rating*
+##*Top 10 por rating*
 TABLA no hay que graficar
 RANK Y LARGO DE LA PELICULA --> Si las pelis mas largas son mas buenas 
 ```{r}
@@ -79,7 +79,6 @@ imdb %>%
   select(Title, Year, Rank,`Runtime (mins)`, Director)
 
 ```
-
 *Años con mas peliculas*
 hacer un grafico para illustrarlo 
 
@@ -96,14 +95,14 @@ imdb %>%
 
 
 
-Desdupliar los datos !!!! (97&73)
+##Desdupliar los datos !!!! (97&73)
 ```{r}
 #Mejores peliculas de 1957
 imdb |>
   filter ( Year==1957)
 ```
 
-Duracion: Media, mediana, etc...
+##Duracion: Media, mediana, etc...
 
 ```{r}
 imdb %>%
@@ -116,7 +115,7 @@ imdb %>%
   )
 ```
 
-*Frecuencia de genero principal*
+##*Frecuencia de genero principal*
 stringsplit
 ```{r}
 # Frecuencia de género principal
@@ -130,23 +129,41 @@ library(ggplot2)
 library(forcats)
 ```
 
-Distribución de ratings
- ( Mejorar la estetica )
-QUe ek eje principal cubra todo
-DEcoradores para el usuario final para que no se vea el codigo
+##Distribución de ratings
 
 ```{r}
+library(ggplot2)
 ggplot(imdb2, aes(x = rating)) +
-  geom_histogram(bins = 20, fill = "red", color = "black") +
-  labs(title = "Distribución de calificaciones IMDb (Top 100)",
-       x = "Rating IMDb",
-       y = "Frecuencia") +
-  scale_x_continuous(limits = c(5, 10))+
-theme_bw()
-
+  geom_histogram(
+    bins = 20,
+    fill = "#E63946",      # rojo elegante
+    color = "white",
+    alpha = 0.9,
+    linewidth = 0.3
+  ) +
+  labs(
+    title = "Distribución de calificaciones IMDb (Top 100)",
+    subtitle = "La mayoría de las películas se concentra entre los ratings más altos (8–9.5)",
+    x = "Rating IMDb",
+    y = "Frecuencia"
+  ) +
+  scale_x_continuous(
+    limits = c(5, 10),
+    breaks = seq(5, 10, 0.5),
+    expand = c(0, 0)
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 15, hjust = 0.5),
+    plot.subtitle = element_text(size = 11, hjust = 0.5, color = "gray30"),
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "gray20"),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank(),
+    plot.background = element_rect(fill = "white",color=NA))
 ```
 
-Cantidad de películas por década
+##Cantidad de películas por década
 
 ```{# 4.2 Cantidad de películas por década{r}
 ggplot(imdb2 %>% filter(!is.na(decade)),
@@ -158,7 +175,7 @@ ggplot(imdb2 %>% filter(!is.na(decade)),
 
 ```
 
-Rating por género principal 
+##Rating por género principal 
 
 ```{r}
 imdb2 |> 
