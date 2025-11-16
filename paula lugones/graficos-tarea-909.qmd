@@ -1,0 +1,23 @@
+---
+title: "Gráficos INDEC - Ingresos por Sexo"
+author: "Paula Lugones"
+date: "2025-09-16"
+lang: es
+format: html
+---
+
+## Preparación de datos
+
+\`\`\`{r} library(dplyr) library(ggplot2) library(readr)
+
+# Cargo datos EPH
+
+indec \<- read_csv("../data/EPH.csv")
+
+# Selección y limpieza de variables
+
+datos \<- indec \|\> select(sexo = CH04, edad = CH06, ingreso = P21) \|\> filter(!is.na(ingreso), ingreso \> 0) \|\> mutate( sexo = ifelse(sexo == 1, "Hombre", "Mujer") )
+
+# Resumen para gráfico de barras
+
+resumen \<- datos \|\> group_by(sexo) \|\> summarise(Promedio = mean(ingreso, na.rm = TRUE)) ggplot(resumen, aes(x = sexo, y = Promedio, fill = sexo)) + geom_col(width = 0.6, alpha = 0.8) + labs(title = "Ingreso promedio por sexo", x = "Sexo", y = "Ingreso promedio") + theme_minimal() + theme(legend.position = "none") ggplot(datos, aes(x = sexo, y = ingreso, fill = sexo)) + geom_boxplot(alpha = 0.7, outlier.size = 0.8) + labs(title = "Distribución de ingresos por sexo", x = "Sexo", y = "Ingreso individual") + theme_minimal() + theme(legend.position = "none")
