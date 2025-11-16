@@ -1,0 +1,218 @@
+---
+title: "Proyecto | Varhulik & Loncarica "
+format: html
+author: "Melina Ayelen Varhulik & Maria Trinidad Loncarica"
+date: 2025-11-01
+lang: es
+---
+
+### Analisis de las 100 peliculas mejor calificadas por IMDb
+
+En el presente trabajo se llevara a cabo un analisis del siguiente conjunto de datos, el cual contiene información detallada sobre las 100 películas mejor calificadas en IMDb (hasta el año 2025).
+
+```{r}
+# Cargar el paquete necesario
+library(readr)
+
+# Leer el archivo CSV (ajustá el nombre exacto)
+imdb <- read_csv("top_100_movies_full_best_effort.csv")
+
+# Ver las primeras filas
+head(imdb)
+
+imdb <- read_delim("top_100_movies_full_best_effort.csv", delim = ";")
+
+```
+
+```{r}
+cols_presentes <- names(imdb)
+
+col_title   <- cols_presentes[grepl("title", cols_presentes, ignore.case = TRUE)][1]
+col_year    <- cols_presentes[grepl("year", cols_presentes, ignore.case = TRUE)][1]
+col_rating  <- cols_presentes[grepl("rating|imdb|score", cols_presentes, ignore.case = TRUE)][1]
+col_runtime <- cols_presentes[grepl("runtime|duration|minutes", cols_presentes, ignore.case = TRUE)][1]
+col_genres  <- cols_presentes[grepl("genre", cols_presentes, ignore.case = TRUE)][1]
+col_direct  <- cols_presentes[grepl("director", cols_presentes, ignore.case = TRUE)][1]
+col_country <- cols_presentes[grepl("country", cols_presentes, ignore.case = TRUE)][1]
+col_votes   <- cols_presentes[grepl("votes", cols_presentes, ignore.case = TRUE)][1]
+
+
+imdb2 <- imdb %>%
+  transmute(
+    title   = .data[[col_title]],
+    year    = suppressWarnings(as.integer(.data[[col_year]])),
+    rating  = suppressWarnings(as.numeric(.data[[col_rating]])),
+    runtime = if (!is.na(col_runtime)) suppressWarnings(as.numeric(.data[[col_runtime]])) else NA_real_,
+    genres  = if (!is.na(col_genres)) as.character(.data[[col_genres]]) else NA_character_,
+    director= if (!is.na(col_direct)) as.character(.data[[col_direct]]) else NA_character_,
+    country = if (!is.na(col_country)) as.character(.data[[col_country]]) else NA_character_,
+    votes   = if (!is.na(col_votes)) suppressWarnings(as.numeric(.data[[col_votes]])) else NA_real_
+  ) %>%
+  mutate(
+    decade = ifelse(!is.na(year), paste0(floor(year/10)*10, "s"), NA),
+    genre_main = ifelse(!is.na(genres), str_trim(str_split_fixed(genres, ",", 2)[,1]), NA)
+  )
+
+
+
+
+```
+
+##*Top 10 por rating*
+
+```{r}
+# Top 10 por rating
+imdb %>%
+  arrange(Rank) %>%        # menor Rank = mejor puesto
+  slice_head(n = 10) %>%
+  select(Title, Year, Rank, Director) %>%
+  knitr::kable(
+    caption = "Top 10 películas según Rank",
+    align = "c"
+  )
+
+```
+
+
+*¿Las películas más largas son mejores?*
+
+```{r}
+ggplot(
+  imdb %>%
+    mutate(
+      minutos = str_extract(`($M),Metacritic`, "^\\d+"), 
+      minutos = as.numeric(minutos),
+      Rank = as.numeric(Rank)
+    ) %>%
+    filter(!is.na(minutos), !is.na(Rank)),
+  aes(x = minutos, y = Rank)
+) +
+  geom_point(alpha = 0.6, size = 3, color = "#4C72B0") +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 1.2, color = "#C85C5C") +
+  scale_y_reverse() +  # Rank 1 = mejor película
+  labs(
+    title = "Relación entre la duración de la película y su Rank",
+    subtitle = "¿Las películas más largas son mejores?",
+    x = "Duración (minutos)",
+    y = "Rank IMDb"
+  ) +
+  theme_minimal(base_size = 15) +
+  theme(
+    plot.title = element_text(face = "bold", size = 18),
+    plot.subtitle = element_text(size = 13),
+    axis.title = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+
+```
+
+*Años dorados de mayor producción*
+
+```{r}
+
+    
+imdb_anios <- imdb %>%
+  mutate(Year = as.numeric(Year)) %>%
+  filter(!is.na(Year)) %>%
+  count(Year)
+
+ggplot(imdb_anios, aes(x = Year, y = n)) +
+  geom_col(fill = "#4C72B0") +
+  geom_smooth(method = "loess", se = FALSE, color = "#C85C5C", linewidth = 1.2) +
+  labs(
+    title = "Cantidad de películas por año",
+    subtitle = "Identificando los años dorados y los años de menor producción",
+    x = "Año",
+    y = "Cantidad de películas"
+  ) +
+  theme_minimal(base_size = 15) +
+  theme(
+    plot.title = element_text(face = "bold", size = 18),
+    plot.subtitle = element_text(size = 13)
+  )
+
+
+
+
+```
+
+##*Frecuencia de genero principal*
+stringsplit
+```{r}
+imdb <- imdb %>%
+  mutate(
+    genre_main = stringr::str_trim(
+      stringr::str_split_fixed(`Genre(s)`, ",", 2)[, 1]
+    )
+  )
+imdb %>%
+  filter(!is.na(genre_main), genre_main != "") %>%
+  count(genre_main, sort = TRUE)
+generos <- imdb %>%
+  filter(!is.na(genre_main), genre_main != "") %>%
+  count(genre_main, sort = TRUE)
+
+ggplot(generos, aes(x = fct_reorder(genre_main, n), y = n)) +
+  geom_col(fill = "#4C72B0") +
+  coord_flip() +
+  labs(
+    title = "Frecuencia del género principal",
+    x = "Género",
+    y = "Cantidad de películas"
+  ) +
+  theme_minimal(base_size = 14)
+
+
+```
+
+##Distribución de ratings
+
+```{r}
+ggplot(imdb2, aes(x = Rank)) +
+  geom_histogram(
+    bins = 20,
+    fill = "#E63946",
+    color = "white",
+    alpha = 0.9
+  ) +
+  labs(
+    title = "Distribución del Ranking IMDb",
+    x = "Rank IMDb",
+    y = "Frecuencia"
+  ) +
+  theme_minimal()
+```
+
+##Cantidad de películas por década
+
+```{# 4.2 Cantidad de películas por década{r}
+ggplot(imdb2 %>% filter(!is.na(decade)),
+       aes(x = fct_infreq(decade))) +
+  geom_bar() +
+  coord_flip() +
+  labs(title = "Películas por década",
+       x = "Década", y = "Cantidad")
+
+```
+
+```{r}
+imdb %>%
+  summarise(
+    n_obs = n(),
+    rating_media = mean(`IMDb Rating`, na.rm = TRUE),
+    rating_mediana = median(`IMDb Rating`, na.rm = TRUE),
+    dur_media = mean(`Runtime (mins)`, na.rm = TRUE),
+    dur_mediana = median(`Runtime (mins)`, na.rm = TRUE)
+  )
+```
+
+##Rating por género principal 
+
+```{r}
+imdb2 |> 
+  filter(!is.na(genre_main), genre_main != "") |>
+group_by(genre_main) |>
+summarize(
+Mean = mean(rating)
+)
+```
