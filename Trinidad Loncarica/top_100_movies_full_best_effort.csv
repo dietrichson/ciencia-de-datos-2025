@@ -1,0 +1,101 @@
+Rank,Title,Year,Genre(s),Director,Main Actor(s),Country,IMDb Rating,Rotten Tomatoes %,Runtime (mins),Language,Oscars Won,Box Office ($M),Metacritic Score
+1,The Shawshank Redemption,1994,Drama,Frank Darabont,Tim Robbins|Morgan Freeman,United States,9.3,91,142,English,0,58.0,82
+2,The Godfather,1972,Crime|Drama,Francis Ford Coppola,Marlon Brando|Al Pacino,United States,9.2,98,175,English,3,246.1,100
+3,The Dark Knight,2008,Action|Crime|Drama,Christopher Nolan,Christian Bale|Heath Ledger,United States|United Kingdom,9.0,94,152,English,2,1004.9,84
+4,The Godfather: Part II,1974,Crime|Drama,Francis Ford Coppola,Al Pacino|Robert De Niro,United States,9.0,97,202,English,6,48.5,90
+5,12 Angry Men,1957,Crime|Drama,Sidney Lumet,Henry Fonda|Lee J. Cobb,United States,9.0,100,96,English,0,1.0,96
+6,The Lord of the Rings: The Return of the King,2003,Adventure|Drama|Fantasy,Peter Jackson,Elijah Wood|Viggo Mortensen,New Zealand|United States|United Kingdom,8.9,94,201,English,11,1119.9,94
+7,Schindler's List,1993,Biography|Drama|History,Steven Spielberg,Liam Neeson|Ralph Fiennes,United States|Poland,8.9,98,195,English|German|Polish,7,322.1,95
+8,The Lord of the Rings: The Fellowship of the Ring,2001,Adventure|Drama|Fantasy,Peter Jackson,Elijah Wood|Ian McKellen,New Zealand|United States|United Kingdom,8.8,91,178,English,4,871.5,92
+9,Inception,2010,Action|Sci-Fi|Thriller,Christopher Nolan,Leonardo DiCaprio|Joseph Gordon-Levitt,United States|United Kingdom,8.8,87,148,English,4,836.8,74
+10,Star Wars: Episode V – The Empire Strikes Back,1980,Action|Adventure|Sci-Fi,Irvin Kershner,Mark Hamill|Harrison Ford,United States,8.7,94,124,English,0,538.4,82
+11,The Lord of the Rings: The Two Towers,2002,Adventure|Drama|Fantasy,Peter Jackson,Elijah Wood|Ian McKellen,New Zealand|United States|United Kingdom,8.7,95,179,English,2,926.0,87
+12,Fight Club,1999,Drama,David Fincher,Brad Pitt|Edward Norton,United States|Germany,8.8,79,139,English,0,100.9,66
+13,Forrest Gump,1994,Drama|Romance,Robert Zemeckis,Tom Hanks|Robin Wright,United States,8.8,71,142,English,6,678.2,82
+14,The Matrix,1999,Action|Sci-Fi,Lana Wachowski|Lilly Wachowski,Keanu Reeves|Laurence Fishburne,United States|Australia,8.7,87,136,English,4,466.3,73
+15,Goodfellas,1990,Biography|Crime|Drama,Martin Scorsese,Ray Liotta|Robert De Niro,United States,8.7,96,146,English,1,47.0,90
+16,One Flew Over the Cuckoo's Nest,1975,Drama,Miloš Forman,Jack Nicholson|Louise Fletcher,United States|United Kingdom,8.7,94,133,English,5,162.0,79
+17,Se7en,1995,Crime|Drama|Mystery,David Fincher,Morgan Freeman|Brad Pitt,United States,8.6,82,127,English,0,327.3,65
+18,Seven Samurai,1954,Action|Drama,Akira Kurosawa,Toshirō Mifune|Takashi Shimura,Japan,8.6,100,207,Japanese,0,0.0,
+19,City of God,2002,Crime|Drama,Fernando Meirelles|Kátia Lund,Alexandre Rodrigues|Leandro Firmino,Brazil,8.6,91,130,Portuguese,0,30.6,79
+20,Life Is Beautiful,1997,Comedy|Drama|Romance,Roberto Benigni,Roberto Benigni|Nicoletta Braschi,Italy,8.6,80,116,Italian|German,3,229.1,59
+21,The Silence of the Lambs,1991,Crime|Drama|Thriller,Jonathan Demme,Jodie Foster|Anthony Hopkins,United States,8.6,95,118,English,5,272.7,85
+22,It's a Wonderful Life,1946,Drama|Fantasy|Family,Frank Capra,James Stewart|Donna Reed,United States,8.6,94,130,English,0,3.3,93
+23,The Usual Suspects,1995,Crime|Mystery|Thriller,Bryan Singer,Kevin Spacey|Gabriel Byrne,United States|Germany,8.5,88,106,English,2,66.8,77
+24,Léon: The Professional,1994,Action|Crime|Drama,Luc Besson,Jean Reno|Natalie Portman,France|United States,8.5,74,110,English,0,,64
+25,Spirited Away,2001,Animation|Adventure|Family,Hayao Miyazaki,Rumi Hiiragi|Miyu Irino,Japan,8.6,97,125,Japanese,1,355.5,96
+26,Saving Private Ryan,1998,Drama|History|War,Steven Spielberg,Tom Hanks|Matt Damon,United States,8.6,93,169,English,5,481.8,91
+27,The Green Mile,1999,Crime|Drama|Fantasy,Frank Darabont,Tom Hanks|Michael Clarke Duncan,United States,8.6,78,189,English,0,286.8,61
+28,Parasite,2019,Comedy|Drama|Thriller,Bong Joon Ho,Song Kang-ho|Cho Yeo-jeong,South Korea,8.6,99,132,Korean,4,258.8,96
+29,Interstellar,2014,Adventure|Drama|Sci-Fi,Christopher Nolan,Matthew McConaughey|Anne Hathaway,United States|United Kingdom,8.6,72,169,English,1,677.5,74
+30,American History X,1998,Crime|Drama,Tony Kaye,Edward Norton|Edward Furlong,United States,8.5,83,119,English,0,23.9,62
+31,City Lights,1931,Comedy|Drama|Romance,Charlie Chaplin,Charlie Chaplin|Virginia Cherrill,United States,8.5,100,87,Silent (English intertitles),0,4.3,
+32,The Lion King,1994,Animation|Adventure|Drama,Roger Allers|Rob Minkoff,Matthew Broderick|Jeremy Irons,United States,8.5,93,88,English,2,968.5,88
+33,Back to the Future,1985,Adventure|Comedy|Sci-Fi,Robert Zemeckis,Michael J. Fox|Christopher Lloyd,United States,8.5,96,116,English,1,388.8,84
+34,Terminator 2: Judgment Day,1991,Action|Sci-Fi,James Cameron,Arnold Schwarzenegger|Linda Hamilton,United States,8.5,93,137,English,4,520.9,75
+35,Modern Times,1936,Comedy|Drama,Charlie Chaplin,Charlie Chaplin|Paulette Goddard,United States,8.5,96,87,Silent (English intertitles),0,1.5,
+36,Once Upon a Time in the West,1968,Western,Sergio Leone,Henry Fonda|Claudia Cardinale,Italy|United States,8.5,97,165,English,0,5.3,
+37,Alien,1979,Horror|Sci-Fi,Ridley Scott,Sigourney Weaver|Tom Skerritt,United Kingdom|United States,8.4,97,117,English,1,104.9,77
+38,The Pianist,2002,Biography|Drama|Music,Roman Polanski,Adrien Brody|Thomas Kretschmann,France|Poland|Germany,8.5,95,150,English|German|Polish,3,120.1,85
+39,The Departed,2006,Crime|Drama|Thriller,Martin Scorsese,Leonardo DiCaprio|Matt Damon,United States,8.5,91,151,English,4,291.5,85
+40,Gladiator,2000,Action|Adventure|Drama,Ridley Scott,Russell Crowe|Joaquin Phoenix,United States|United Kingdom,8.5,77,155,English,5,465.5,67
+41,Apocalypse Now,1979,Drama|War|Adventure,Francis Ford Coppola,Martin Sheen|Marlon Brando,United States,8.4,90,147,English|French|Vietnamese,2,,94
+42,Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb,1964,Comedy|Satire,Stanley Kubrick,Peter Sellers|George C. Scott,United Kingdom|United States,8.4,95,95,English,0,,
+43,The Great Dictator,1940,Comedy|Drama|Satire,Charlie Chaplin,Charlie Chaplin|Paulette Goddard,United States,8.4,,125,English,0,,
+44,Memento,2000,Crime|Mystery|Thriller,Christopher Nolan,Guy Pearce|Carrie-Anne Moss,United States,8.4,93,113,English,0,39.7,77
+45,Rashomon,1950,Drama|Mystery|Crime,Akira Kurosawa,Toshirō Mifune|Machiko Kyō,Japan,8.2,98,88,Japanese,0,,
+46,Chinatown,1974,Crime|Drama|Mystery,Roman Polanski,Jack Nicholson|Faye Dunaway,United States,8.2,99,131,English,1,29.2,94
+47,The Third Man,1949,Film-Noir|Mystery,Carol Reed,Joseph Cotten|Orson Welles,United Kingdom,8.1,100,104,English,1,,
+48,North by Northwest,1959,Action|Adventure|Mystery,Alfred Hitchcock,Cary Grant|Eva Marie Saint,United States,8.3,99,136,English,0,,
+49,Vertigo,1958,Drama|Mystery|Romance,Alfred Hitchcock,James Stewart|Kim Novak,United States,8.3,93,128,English,0,7.3,
+50,The Apartment,1960,Comedy|Drama|Romance,Billy Wilder,Jack Lemmon|Shirley MacLaine,United States,8.3,94,125,English,5,24.6,
+51,Rear Window,1954,Crime|Drama|Mystery,Alfred Hitchcock,James Stewart|Grace Kelly,United States,8.5,98,111,English,0,37.9,
+52,A Clockwork Orange,1971,Crime|Drama|Sci-Fi,Stanley Kubrick,Malcolm McDowell|Patrick Magee,United Kingdom|United States,8.3,86,136,English,4,114.0,
+53,Blade Runner,1982,Sci-Fi|Thriller,Ridley Scott,Harrison Ford|Rutger Hauer,United States|Hong Kong,8.2,90,117,English,2,32.9,
+54,Taxi Driver,1976,Crime|Drama|Thriller,Martin Scorsese,Robert De Niro|Jodie Foster,United States,8.3,96,114,English,1,28.3,94
+"55,""The Good, the Bad and the Ugly"",1966,Western,Sergio Leone,Clint Eastwood|Eli Wallach,Italy|Spain|West Germany,8.8,97,161,Italian|Spanish,0,25.1,"
+56,The Graduate,1967,Comedy|Drama|Romance,Mike Nichols,Dustin Hoffman|Anne Bancroft,United States,8.0,92,106,English,1,104.9,
+57,Heat,1995,Crime|Drama|Thriller,Michael Mann,Al Pacino|Robert De Niro,United States,8.2,87,170,English,0,187.4,76
+58,Amélie,2001,Comedy|Romance|Fantasy,Jean-Pierre Jeunet,Audrey Tautou|Mathieu Kassovitz,France|Germany,8.3,89,122,French,0,174.2,69
+59,Pan's Labyrinth,2006,Drama|Fantasy|War,Guillermo del Toro,Ivana Baquero|Sergi López,Spain|Mexico,8.2,95,118,Spanish,3,83.3,98
+60,The Social Network,2010,Biography|Drama,David Fincher,Jesse Eisenberg|Andrew Garfield,United States,7.7,96,120,English,3,224.9,95
+61,The Breakfast Club,1985,Comedy|Drama,John Hughes,Emilio Estevez|Anthony Michael Hall,United States,7.8,89,97,English,0,51.5,
+62,Raging Bull,1980,Biography|Drama|Sport,Martin Scorsese,Robert De Niro|Cathy Moriarty,United States,8.2,97,129,English,2,23.4,87
+63,The Princess Bride,1987,Adventure|Family|Fantasy,Rob Reiner,Cary Elwes|Robin Wright,United States,8.1,97,98,English,0,30.9,
+64,Babylon,1980,Drama,Unknown,Unknown,United States,,,,English,0,,
+65,The Big Lebowski,1998,Comedy|Crime,Joel Coen|Ethan Coen,Jeff Bridges|John Goodman,United States,8.1,82,117,English,0,46.7,69
+66,The Truman Show,1998,Comedy|Drama|Sci-Fi,Peter Weir,Jim Carrey|Ed Harris,United States,8.1,94,103,English,0,264.1,90
+67,The Handmaiden,2016,Drama|Mystery|Romance,Park Chan-wook,Kim Min-hee|Kim Tae-ri,South Korea,8.1,95,145,Korean,0,38.3,
+68,No Country for Old Men,2007,Crime|Drama|Thriller,Joel Coen|Ethan Coen,Tommy Lee Jones|Javier Bardem,United States,8.1,93,122,English,4,171.6,91
+69,There Will Be Blood,2007,Drama,Paul Thomas Anderson,Daniel Day-Lewis|Paul Dano,United States,8.1,91,158,English,2,76.2,93
+70,The Sting,1973,Crime|Drama|Comedy,George Roy Hill,Paul Newman|Robert Redford,United States,8.3,93,129,English,7,159.3,
+71,The Third Man (dup),1949,Film-Noir|Mystery,Carol Reed,Joseph Cotten|Orson Welles,United Kingdom,8.0,100,104,English,1,,
+72,The Great Escape,1963,Adventure|Drama|History,John Sturges,Steve McQueen|James Garner,United Kingdom|United States,8.2,93,172,English,0,11.7,
+73,The Bridge on the River Kwai,1957,Adventure|Drama|War,David Lean,William Holden|Alec Guinness,United Kingdom|United States,8.1,93,161,English,7,30.6,
+74,The Wizard of Oz,1939,Adventure|Family|Fantasy,Victor Fleming,Judy Garland|Ray Bolger,United States,8.0,98,101,English,2,400.0,
+75,The Great Dictator (dup),1940,Comedy|Drama|Satire,Charlie Chaplin,Charlie Chaplin|Paulette Goddard,United States,8.0,,125,English,0,,
+76,Paths of Glory,1957,Drama|War,Stanley Kubrick,Kirk Douglas|Adolphe Menjou,United States,8.4,98,88,English,0,,
+77,The Grapes of Wrath,1940,Drama,John Ford,Henry Fonda|Jane Darwell,United States,8.1,100,129,English,2,3.6,
+78,My Neighbor Totoro,1988,Animation|Family|Fantasy,Hayao Miyazaki,Hitoshi Takagi|Noriko Hidaka,Japan,8.2,94,86,Japanese,0,45.2,
+79,Rashomon (dup),1950,Drama|Mystery|Crime,Akira Kurosawa,Toshirō Mifune|Machiko Kyō,Japan,8.2,98,88,Japanese,0,,
+80,Die Hard,1988,Action|Thriller,John McTiernan,Bruce Willis|Alan Rickman,United States,8.2,94,132,English,0,140.8,
+81,Oldboy,2003,Action|Drama|Mystery,Park Chan-wook,Choi Min-sik|Yoo Ji-tae,South Korea,8.4,82,120,Korean,0,17.0,78
+82,Das Boot,1981,Adventure|Drama|Thriller,Wolfgang Petersen,Jürgen Prochnow|Herbert Grönemeyer,West Germany,8.3,98,149,German,0,11.7,
+83,The Thing,1982,Horror|Sci-Fi|Thriller,John Carpenter,Kurt Russell|Wilford Brimley,United States,8.1,85,109,English,0,19.6,
+84,The Seventh Seal,1957,Drama|Fantasy,Ingmar Bergman,Max von Sydow|Bengt Ekerot,Sweden,8.2,93,96,Swedish,0,,
+85,Wild Strawberries,1957,Drama,Ingmar Bergman,Victor Sjöström|Bibi Andersson,Sweden,8.0,95,91,Swedish,0,,
+86,Ikiru,1952,Drama,Akira Kurosawa,Takashi Shimura|Shinichi Himori,Japan,8.1,96,143,Japanese,0,,
+87,On the Waterfront,1954,Crime|Drama,Elia Kazan,Marlon Brando|Eva Marie Saint,United States,8.1,95,108,English,8,9.6,
+88,Sunset Boulevard,1950,Drama|Film-Noir,Billy Wilder,Gloria Swanson|William Holden,United States,8.4,98,110,English,3,5.3,
+89,Rebecca,1940,Drama|Mystery|Romance,Alfred Hitchcock,Laurence Olivier|Joan Fontaine,United Kingdom|United States,8.1,91,130,English,2,6.0,
+90,The Maltese Falcon,1941,Crime|Film-Noir|Mystery,John Huston,Humphrey Bogart|Mary Astor,United States,8.0,98,101,English,0,1.8,
+91,Touch of Evil,1958,Crime|Drama|Film-Noir,Orson Welles,Charlton Heston|Orson Welles,United States,8.0,96,95,English,0,,
+92,Paths of Glory (dup2),1957,Drama|War,Stanley Kubrick,Kirk Douglas|Adolphe Menjou,United States,8.4,98,88,English,0,,
+93,The Exorcist,1973,Horror,William Friedkin,Ellen Burstyn|Linda Blair,United States,8.0,86,122,English,2,441.3,
+94,The Shining,1980,Horror|Drama|Mystery,Stanley Kubrick,Jack Nicholson|Shelley Duvall,United Kingdom|United States,8.4,86,146,English,0,47.3,
+95,Citizen Kane,1941,Drama|Mystery,Orson Welles,Orson Welles|Joseph Cotten,United States,8.3,99,119,English,1,1.6,
+96,Lawrence of Arabia,1962,Adventure|Biography|Drama,David Lean,Peter O'Toole|Omar Sharif,United Kingdom,8.3,98,222,English,7,70.0,
+97,The Bridge on the River Kwai,1957,Adventure|Drama|War,David Lean,William Holden|Alec Guinness,United Kingdom|United States,8.1,93,161,English,7,30.6,
+98,Double Indemnity,1944,Crime|Drama|Film-Noir,Billy Wilder,Fred MacMurray|Barbara Stanwyck,United States,8.0,98,107,English,0,5.7,
+99,Annie Hall,1977,Comedy|Romance,Woody Allen,Woody Allen|Diane Keaton,United States,8.0,97,93,English,4,38.3,
+100,Some Like It Hot,1959,Comedy|Romance,Billy Wilder,Marilyn Monroe|Tony Curtis,United States,8.2,94,121,English,1,25.0,
