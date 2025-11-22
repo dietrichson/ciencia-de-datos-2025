@@ -14,13 +14,11 @@ En el presente trabajo se llevara a cabo un analisis del siguiente conjunto de d
 # Cargar el paquete necesario
 library(readr)
 
-# Leer el archivo CSV (ajustá el nombre exacto)
-imdb <- read_csv("top_100_movies_full_best_effort.csv")
 
 # Ver las primeras filas
-head(imdb)
 
-imdb <- read_delim("top_100_movies_full_best_effort.csv", delim = ";")
+imdb <- read_delim("top_100_oficial.csv", delim = ",")
+nrow(imdb)
 
 ```
 
@@ -63,7 +61,8 @@ imdb2 <- imdb %>%
 ```{r}
 # Top 10 por rating
 imdb %>%
-  arrange(Rank) %>%        # menor Rank = mejor puesto
+   arrange(rating, desc) %>% 
+
   slice_head(n = 10) %>%
   select(Title, Year, Rank, Director) %>%
   knitr::kable(
@@ -78,12 +77,7 @@ imdb %>%
 
 ```{r}
 ggplot(
-  imdb %>%
-    mutate(
-      minutos = str_extract(`($M),Metacritic`, "^\\d+"), 
-      minutos = as.numeric(minutos),
-      Rank = as.numeric(Rank)
-    ) %>%
+    imdb %>% mutate(minutos = `Runtime (mins)`)%>%
     filter(!is.na(minutos), !is.na(Rank)),
   aes(x = minutos, y = Rank)
 ) +
@@ -168,51 +162,84 @@ ggplot(generos, aes(x = fct_reorder(genre_main, n), y = n)) +
 ##Distribución de ratings
 
 ```{r}
-ggplot(imdb2, aes(x = Rank)) +
+
+library(dplyr)
+library(ggplot2)
+
+imdb2_clean <- imdb2 %>%
+  mutate(rating = as.numeric(rating)) %>%
+  filter(!is.na(rating))
+
+ggplot(imdb2_clean, aes(x = rating)) +
   geom_histogram(
-    bins = 20,
+    binwidth = diff(range(imdb2_clean$rating))/20,   
     fill = "#E63946",
     color = "white",
     alpha = 0.9
   ) +
   labs(
-    title = "Distribución del Ranking IMDb",
-    x = "Rank IMDb",
+    title = "Distribución de los ratings",
+    x = "Rating",
     y = "Frecuencia"
   ) +
-  theme_minimal()
+  scale_x_continuous(
+    breaks = scales::pretty_breaks(10),  
+    labels = scales::comma               
+  ) +
+  theme_minimal(base_size = 15) +
+  theme(
+    plot.title = element_text(face = "bold", size = 18, hjust = 0.5),
+    plot.subtitle = element_text(size = 13, hjust = 0.5, color = "gray30"),
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "gray20", size = 11),
+    panel.grid.minor = element_blank()
+  )
+
+
 ```
 
 ##Cantidad de películas por década
 
-```{# 4.2 Cantidad de películas por década{r}
-ggplot(imdb2 %>% filter(!is.na(decade)),
-       aes(x = fct_infreq(decade))) +
-  geom_bar() +
-  coord_flip() +
-  labs(title = "Películas por década",
-       x = "Década", y = "Cantidad")
-
-```
-
 ```{r}
-imdb %>%
-  summarise(
-    n_obs = n(),
-    rating_media = mean(`IMDb Rating`, na.rm = TRUE),
-    rating_mediana = median(`IMDb Rating`, na.rm = TRUE),
-    dur_media = mean(`Runtime (mins)`, na.rm = TRUE),
-    dur_mediana = median(`Runtime (mins)`, na.rm = TRUE)
+
+library(dplyr)
+library(ggplot2)
+library(forcats)
+
+ggplot(
+  imdb2 %>% filter(!is.na(decade)),
+  aes(x = fct_infreq(decade))
+) +
+  geom_bar(fill = "#457B9D") +
+  coord_flip() +
+  labs(
+    title = "Películas por década",
+    subtitle = "Distribución de películas agrupadas por década",
+    x = "Década",
+    y = "Cantidad"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(size = 12),
+    axis.text = element_text(color = "gray20")
   )
 ```
+
+
 
 ##Rating por género principal 
 
 ```{r}
-imdb2 |> 
-  filter(!is.na(genre_main), genre_main != "") |>
-group_by(genre_main) |>
-summarize(
-Mean = mean(rating)
-)
+
+library(dplyr)
+
+imdb2 %>% 
+  filter(!is.na(genre_main), genre_main != "") %>%
+  group_by(genre_main) %>%
+  summarize(
+    Mean_Rating = mean(rating, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(Mean_Rating))
 ```
