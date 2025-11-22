@@ -1,0 +1,364 @@
+---
+title: "Proyecto | Varhulik & Loncarica "
+format: html
+author: "Melina Ayelen Varhulik & Maria Trinidad Loncarica"
+date: 2025-11-01
+lang: es
+---
+
+# [*Analisis de las 100 peliculas mejor calificadas por IMDb*]{.underline}
+
+En el presente trabajo se llevara a cabo un analisis del siguiente conjunto de datos, el cual contiene información detallada sobre las 100 películas mejor calificadas en IMDb (hasta el año 2025).
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ## Nuestra Hipotesis:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
++=========================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================+
+| #### ***Las películas mejor calificadas en IMDb tienden a concentrarse en ciertos géneros específicos, en décadas con picos de producción destacados y presentan características comunes en su duración. Los datos muestran que algunos géneros aparecen con mayor frecuencia, que ciertas décadas acumulan más títulos dentro del Top 100 y que la relación entre duración y Rank presenta una tendencia débil pero observable. Por lo tanto, es probable que la valoración de una película esté influida por el género predominante y el contexto histórico de producción más que por su duración.*** |
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+```{r, echo=FALSE}
+# Cargar el paquete necesario
+library(readr)
+
+
+# Ver las primeras filas
+
+imdb <- read_delim("top_100_oficial.csv", delim = ",")
+nrow(imdb)
+
+```
+
+```{r, echo=FALSE}
+cols_presentes <- names(imdb)
+
+col_title   <- cols_presentes[grepl("title", cols_presentes, ignore.case = TRUE)][1]
+col_year    <- cols_presentes[grepl("year", cols_presentes, ignore.case = TRUE)][1]
+col_rating  <- cols_presentes[grepl("rating|imdb|score", cols_presentes, ignore.case = TRUE)][1]
+col_runtime <- cols_presentes[grepl("runtime|duration|minutes", cols_presentes, ignore.case = TRUE)][1]
+col_genres  <- cols_presentes[grepl("genre", cols_presentes, ignore.case = TRUE)][1]
+col_direct  <- cols_presentes[grepl("director", cols_presentes, ignore.case = TRUE)][1]
+col_country <- cols_presentes[grepl("country", cols_presentes, ignore.case = TRUE)][1]
+col_votes   <- cols_presentes[grepl("votes", cols_presentes, ignore.case = TRUE)][1]
+
+
+imdb2 <- imdb %>%
+  transmute(
+    title   = .data[[col_title]],
+    year    = suppressWarnings(as.integer(.data[[col_year]])),
+    rating  = suppressWarnings(as.numeric(.data[[col_rating]])),
+    runtime = if (!is.na(col_runtime)) suppressWarnings(as.numeric(.data[[col_runtime]])) else NA_real_,
+    genres  = if (!is.na(col_genres)) as.character(.data[[col_genres]]) else NA_character_,
+    director= if (!is.na(col_direct)) as.character(.data[[col_direct]]) else NA_character_,
+    country = if (!is.na(col_country)) as.character(.data[[col_country]]) else NA_character_,
+    votes   = if (!is.na(col_votes)) suppressWarnings(as.numeric(.data[[col_votes]])) else NA_real_
+  ) %>%
+  mutate(
+    decade = ifelse(!is.na(year), paste0(floor(year/10)*10, "s"), NA),
+    genre_main = ifelse(!is.na(genres), str_trim(str_split_fixed(genres, ",", 2)[,1]), NA)
+  )
+
+
+
+
+```
+
+## *Top 10 por rating*
+
+```{r}
+library(kableExtra)
+
+imdb %>%
+  arrange(desc(.data[[col_rating]])) %>%     
+  slice_head(n = 10) %>%                     
+  select(
+    Title  = .data[[col_title]],
+    Year   = .data[[col_year]],
+    Rank,
+    Director = .data[[col_direct]]
+  ) %>%
+  knitr::kable(
+    caption = "Top 10 películas con mejor rating",
+    align = "c",
+    booktabs = TRUE
+  ) %>%
+  kable_styling(
+    full_width = FALSE,
+    bootstrap_options = c("striped", "hover", "condensed"),
+    position = "center"
+  )
+```
+
+El código selecciona las ***10 películas con mejor rating*** del dataset.
+
+-   Primero ordena todas las películas según su puntaje, luego toma únicamente las primeras diez y muestra una tabla con su título, año, rank y director. El objetivo es *identificar rápidamente cuáles son las películas mejor calificadas.*
+
+## ¿Las películas más largas son mejores?
+
+```{r}
+library(dplyr)
+library(ggplot2)
+
+imdb_plot <- imdb %>%
+  mutate(
+    minutos = as.numeric(`Runtime (mins)`),
+    Rank = as.numeric(Rank)   # IMPORTANTE: pasar Rank a numérico
+  ) %>%
+  filter(!is.na(minutos), !is.na(Rank))
+
+ggplot(imdb_plot, aes(x = minutos, y = Rank)) +
+  geom_point(alpha = 0.6, size = 3, color = "#4C72B0") +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 1.2, color = "#C85C5C") +
+  scale_y_reverse() +  # Rank 1 = mejor película
+  labs(
+    title = "Relación entre la duración de la película y su Rank",
+    subtitle = "¿Las películas más largas son mejores?",
+    x = "Duración (minutos)",
+    y = "Rank IMDb"
+  ) +
+  theme_minimal(base_size = 15) +
+  theme(
+    plot.title = element_text(face = "bold", size = 18),
+    plot.subtitle = element_text(size = 13),
+    axis.title = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+El código explora la relación entre la ***duración de una película** y su **posición en el ranking de IMDb**.*
+
+-   Cada punto del gráfico representa una película, mostrando cuántos minutos dura y qué Rank ocupa. La línea de tendencia permite ver si *existe alguna relación general: por ejemplo, si las películas más largas suelen aparecer en mejores posiciones del ranking o no.*
+
+El gráfico de dispersión muestra una tendencia débil, indicada por la recta de regresión, lo que demuestra que:
+
+-   ***Las películas de mayor duración no empeoran su Rank, por lo que la longitud no es un factor negativo.***
+
+## Años dorados de mayor producción
+
+```{r}
+
+    
+imdb_anios <- imdb %>%
+  mutate(Year = as.numeric(Year)) %>%
+  filter(!is.na(Year)) %>%
+  count(Year)
+
+ggplot(imdb_anios, aes(x = Year, y = n)) +
+  geom_col(fill = "#4C72B0") +
+  geom_smooth(method = "loess", se = FALSE, color = "#C85C5C", linewidth = 1.2) +
+  labs(
+    title = "Cantidad de películas por año",
+    subtitle = "Identificando los años dorados y los años de menor producción",
+    x = "Año",
+    y = "Cantidad de películas"
+  ) +
+  theme_minimal(base_size = 15) +
+  theme(
+    plot.title = element_text(face = "bold", size = 18),
+    plot.subtitle = element_text(size = 13)
+  )
+
+
+
+
+```
+
+El código cuenta **cuántas películas se produjeron en cada año** y crea un gráfico para visualizar esa evolución.
+
+-   Las barras muestran la cantidad de películas por año, mientras que la línea suavizada permite identificar tendencias generales: **cuáles fueron los años dorados** con mayor producción y cuáles tuvieron una caída. El objetivo es observar *cómo varía la cantidad de estrenos a lo largo del tiempo y detectar los períodos de mayor actividad cinematográfica.*
+
+El gráfico por año exhibe picos claros de producción, lo que señala que determinadas épocas aportaron más películas al Top 100.
+
+-   ***Esto respalda que el contexto histórico y cultural influye en cuáles películas terminan siendo más valoradas.***
+
+## Frecuencia de genero principal 
+
+```{r}
+library(dplyr)
+library(stringr)
+library(kableExtra)
+
+# Limpiar géneros y extraer género principal
+imdb <- imdb %>%
+  mutate(
+    genres_clean = str_replace_all(`Genre(s)`, "&#124;", "|"),
+    genre_main   = str_trim(stringr::str_split_fixed(genres_clean, "\\|", 2)[, 1])
+  )
+
+# Tabla de frecuencias con porcentaje
+generos <- imdb %>%
+  filter(!is.na(genre_main), genre_main != "") %>%
+  count(genre_main, sort = TRUE) %>%
+  mutate(
+    Porcentaje = paste0(round(100 * n / sum(n), 1), "%")
+  )
+
+generos %>%
+  knitr::kable(
+    caption   = "Frecuencia del género principal en el Top 100 de IMDb",
+    col.names = c("Género principal", "Cantidad de películas", "Porcentaje"),
+    align     = c("l", "c", "c"),
+    booktabs  = TRUE
+  ) %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"),
+    full_width = FALSE,
+    position   = "center",
+    font_size  = 11
+  ) %>%
+  row_spec(0, bold = TRUE) %>%
+  column_spec(1, width = "6cm") %>%
+  column_spec(2, width = "3cm") %>%
+  column_spec(3, width = "3cm")
+
+```
+
+El cuadro presenta la frecuencia del **género principal** en las películas del Top 100 de IMDb, mostrando tanto la cantidad de títulos como el porcentaje que representa cada uno. Esto permite observar con claridad qué géneros predominan dentro de las películas mejor valoradas.
+
+-   Al analizar la tabla, se aprecia que algunos géneros aparecen con mucha más frecuencia que otros, lo que revela una distribución desigual. En particular, géneros como **Drama** concentran una parte significativa del total, mientras que otros tienen una presencia marginal.
+
+    -   Esta diferencia en la representación sugiere que el género efectivamente es un factor asociado a la valoración: ciertos géneros tienen más probabilidades de figurar entre las películas mejor calificadas, indicando una preferencia marcada del público y una tendencia histórica en el tipo de producciones que alcanzan las posiciones más altas del ranking.
+
+## Distribución de ratings
+
+```{r}
+
+library(dplyr)
+library(ggplot2)
+
+imdb2_clean <- imdb2 %>%
+  mutate(rating = as.numeric(rating)) %>%
+  filter(!is.na(rating))
+
+ggplot(imdb2_clean, aes(x = rating)) +
+  geom_histogram(
+    binwidth = diff(range(imdb2_clean$rating))/20,   
+    fill = "#E63946",
+    color = "white",
+    alpha = 0.9
+  ) +
+  labs(
+    title = "Distribución de los ratings",
+    x = "Rating",
+    y = "Frecuencia"
+  ) +
+  scale_x_continuous(
+    breaks = scales::pretty_breaks(10),  
+    labels = scales::comma               
+  ) +
+  theme_minimal(base_size = 15) +
+  theme(
+    plot.title = element_text(face = "bold", size = 18, hjust = 0.5),
+    plot.subtitle = element_text(size = 13, hjust = 0.5, color = "gray30"),
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "gray20", size = 11),
+    panel.grid.minor = element_blank()
+  )
+
+
+```
+
+El código crea un histograma para mostrar *cómo se distribuyen los **ratings** de las películas.*
+
+-   Primero convierte los valores de rating en numéricos y elimina los que faltan. Luego dibuja un gráfico donde el eje horizontal muestra los puntajes y el vertical indica cuántas películas tienen cada rango de rating. El objetivo es *visualizar la forma de la distribución: si los ratings están concentrados en ciertos valores, si son altos en general o si hay mucha variación entre películas.*
+
+Los ratings se concentran en valores altos, pero ***con variación dentro del rango***, lo que muestra que:
+
+-   Aun entre las 100 mejores, existen diferencias que justifican el análisis de predictores como género o década.
+
+## Cantidad de películas por década
+
+```{r}
+
+library(dplyr)
+library(ggplot2)
+library(forcats)
+
+ggplot(
+  imdb2 %>% filter(!is.na(decade)),
+  aes(x = fct_infreq(decade))
+) +
+  geom_bar(fill = "#457B9D") +
+  coord_flip() +
+  labs(
+    title = "Películas por década",
+    subtitle = "Distribución de películas agrupadas por década",
+    x = "Década",
+    y = "Cantidad"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(size = 12),
+    axis.text = element_text(color = "gray20")
+  )
+```
+
+El código genera un gráfico que muestra ***cuántas películas hay en cada década*** dentro del dataset.
+
+-   Primero selecciona solo los registros con década válida y luego crea un gráfico de barras donde cada barra representa una década y su altura indica la cantidad de películas pertenecientes a ese período. El objetivo es *visualizar la distribución de películas por década y ver en qué épocas se concentran más títulos.*
+
+El gráfico por década muestra que **la presencia no es homogénea**: Algunas décadas tienen más películas destacadas que otras.
+
+-   Esto apoya la idea de que ***el momento histórico afecta la probabilidad de que una película sea muy valorada**.*
+
+## Rating por género principal
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(stringr)
+
+ratings_por_genero <- imdb2 %>% 
+  mutate(
+    # limpiar el separador raro y dejarlo como |
+    genres_clean = str_replace_all(genres, "&#124;", "|"),
+    # tomar solo el primer género como género principal
+    genre_main   = str_trim(str_split_fixed(genres_clean, "\\|", 2)[, 1]),
+    # asegurarse de que rating sea numérico
+    rating       = as.numeric(rating)
+  ) %>%
+  filter(
+    !is.na(genre_main),
+    genre_main != "",
+    !is.na(rating)
+  ) %>%
+  group_by(genre_main) %>%
+  summarize(
+    Mean_Rating = mean(rating, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(Mean_Rating))
+
+ratings_por_genero
+ggplot(ratings_por_genero, aes(x = Mean_Rating, 
+                               y = reorder(genre_main, Mean_Rating))) +
+  geom_col() +
+  geom_text(aes(label = round(Mean_Rating, 2)), 
+            hjust = -0.1, size = 3.5) +
+  labs(
+    title = "Rating promedio por género principal",
+    subtitle = "Basado en el dataset de las 100 películas mejor calificadas en IMDb",
+    x = "Rating promedio",
+    y = "Género"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank()
+  ) +
+  xlim(0, max(ratings_por_genero$Mean_Rating) + 0.5)
+
+```
+
+El código reconstruye el género principal de cada película a partir de la variable de géneros, limpiando el formato original y tomando el primer género indicado como referencia. Luego selecciona solo las películas que tienen un género válido y un rating numérico, agrupa por género principal y calcula el rating promedio para cada uno.
+
+-   A partir de esos valores, el gráfico ordena los géneros de mayor a menor rating, lo que permite comparar cómo varía la calificación promedio según el tipo de película.
+
+    -   Los resultados muestran que los géneros no obtienen el mismo nivel de valoración: algunos concentran ratings promedio más altos que otros. Esto refuerza la idea de que el género está asociado al nivel de valoración que reciben las películas dentro del Top 100 de IMDb.
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ## Nuestra conclusion                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
++=======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================+
+| ##### *Los resultados obtenidos permiten sostener que la valoración de una película dentro del Top 100 de IMDb no depende únicamente de un rasgo aislado, sino que se relaciona con un conjunto de factores: el género predominante, la década de producción y la dinámica histórica del cine. Aunque la duración no muestra una relación fuerte con el ranking, sí se observa que ciertos géneros y épocas están sobrerrepresentados entre las películas mejor calificadas, respaldando así la hipótesis planteada.* |
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
