@@ -170,7 +170,7 @@ El gráfico por año exhibe picos claros de producción, lo que señala que dete
 
 -   ***Esto respalda que el contexto histórico y cultural influye en cuáles películas terminan siendo más valoradas.***
 
-## Frecuencia de genero principal 
+## Frecuencia de genero principal
 
 ```{r}
 library(dplyr)
