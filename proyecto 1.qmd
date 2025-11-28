@@ -1,0 +1,63 @@
+```         
+title: "proyecto 1"
+format: html
+```
+
+```{r}
+library(tidyverse)
+library(httr2)
+library(xml2)
+library(rvest)
+
+# 1) cargo tu script (asumiendo mismo repo)
+source("scripts/scrape_metacritic_albums.R")
+
+# 2) scrapeo 20 álbumes por género (top page)
+genres_urls <- tibble(
+  genre = c("pop","indie rock / alternative","hip hop / rap","electronic / dance","metal"),
+  url = c(
+    "https://www.metacritic.com/browse/albums/genre/pop/all/",
+    "https://www.metacritic.com/browse/albums/genre/alternative/all/",
+    "https://www.metacritic.com/browse/albums/genre/rap/all/",
+    "https://www.metacritic.com/browse/albums/genre/electronic/all/",
+    "https://www.metacritic.com/browse/albums/genre/metal/all/"
+  )
+)
+
+# función para scrapear UNA página por género
+scrape_genre <- function(g, u){
+  message("scrapeando: ", g)
+  Sys.sleep(3)
+  df <- scrape_metacritic_albums(url=u, delay=2, verbose=FALSE)
+  df$genre <- g
+  df
+}
+
+albums_all <- map2_df(genres_urls$genre, genres_urls$url, scrape_genre)
+
+# 3) limpiamos y nos quedamos con metascore
+albums_clean <- albums_all %>%
+  filter(!is.na(metascore))
+
+# 4) tabla resumen
+tabla_resumen <- albums_clean %>%
+  group_by(genre) %>%
+  summarise(
+    n = n(),
+    promedio_metascore = mean(metascore, na.rm = TRUE)
+  ) %>%
+  arrange(desc(promedio_metascore))
+
+tabla_resumen
+library(ggplot2)
+
+ggplot(tabla_resumen, aes(x=reorder(genre, promedio_metascore), y=promedio_metascore)) +
+  geom_col() +
+  coord_flip() +
+  theme_minimal(base_size = 14) +
+  labs(
+    title="Promedio de Metascore por Género (Top 20 por género)",
+    x="Género",
+    y="Metascore promedio"
+  )
+```

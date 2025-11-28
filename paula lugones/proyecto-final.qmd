@@ -1,0 +1,136 @@
+---
+title: "PROYECTO FINAL"
+format: html
+author: "Paula Lugones"
+date: 2025-11-01
+lang: es
+---
+
+# Introducción
+
+En este proyecto analizamos los 100 álbumes mejor valorados por Metacritic.\
+Nos interesa explorar: - Qué artistas reciben las mejores críticas.\
+- Qué décadas concentran más álbumes destacados.\
+- Cómo se distribuyen los metascores en general.
+
+# Hipótesis
+
+Nuestra hipótesis principal es que los álbumes mejor valorados se concentran en ciertas décadas y son producidos por un grupo reducido de artistas destacados. Esto lo evaluaremos examinando los top 10 por metascore, la distribución de puntuaciones, la frecuencia por década y los promedios por artista.
+
+#Analisis de datos
+
+```{r}
+library(tidyverse)
+albums <- read_csv("../data/metacritic_albums.csv")
+
+# Limpiar nombres si es necesario
+albums <- albums %>%
+  mutate(artist = str_remove(artist_name, "^by\\s+")) %>%
+  rename(album = album_title) %>%
+  select(-artist_name)
+
+# Top 10 por metascore
+albums %>%
+  arrange(desc(metascore)) %>%
+  select(album, artist, metascore, release_date) %>%
+  head(10)
+
+```
+
+```{r}
+library(ggplot2)
+
+# Histograma de metascore
+ggplot(albums, aes(x = metascore)) +
+  geom_histogram(bins = 20, fill = "#1D3557", color = "white", alpha = 0.9, na.rm = TRUE) +
+  labs(title = "Distribución de Metascore (Top 100 Álbumes)",
+       x = "Metascore",
+       y = "Frecuencia") +
+  scale_x_continuous(limits = c(50, 100), breaks = seq(50, 100, 5)) +
+  theme_minimal()
+```
+
+```{r}
+albums <- albums %>%
+  mutate(year = lubridate::year(lubridate::mdy(release_date)),
+         decade = floor(year / 10) * 10)
+
+# Conteo por década
+ggplot(albums %>% filter(!is.na(decade)), aes(x = factor(decade))) +
+  geom_bar(fill = "#457B9D") +
+  labs(title = "Cantidad de álbumes por década",
+       x = "Década",
+       y = "Cantidad de álbumes") +
+  theme_minimal()
+```
+
+```{r}
+albums %>%
+  group_by(artist) %>%
+  summarise(
+    mean_metascore = mean(metascore, na.rm = TRUE),
+    mean_user_score = mean(user_score, na.rm = TRUE)
+  ) %>%
+  arrange(desc(mean_metascore)) %>%
+  head(10)
+```
+
+```{r}
+ggplot(albums %>% filter(!is.na(decade)), aes(x = factor(decade), y = metascore)) +
+  geom_boxplot(fill = "#E63946", alpha = 0.7) +
+  labs(title = "Distribución de Metascore por Década",
+       x = "Década",
+       y = "Metascore") +
+  theme_minimal()
+```
+
+Nota sobre el análisis temporal
+
+El análisis por décadas no puede realizarse porque la columna release_date del dataset no contiene fechas válidas. Todos los valores se registran como NA, por lo que cualquier intento de calcular year o decade genera resultados incorrectos o vacíos. Para poder hacer un análisis temporal confiable, sería necesario trabajar con un dataset que incluya fechas completas y correctas en release_date.
+
+```{r}
+albums %>%
+count(artist) %>%
+arrange(desc(n)) %>%
+head(15) %>%
+ggplot(aes(x = reorder(artist, n), y = n)) +
+geom_col() +
+coord_flip() +
+labs(title = "Artistas con más álbumes en el dataset",
+x = "Artista",
+y = "Cantidad de álbumes") +
+theme_minimal()
+```
+
+```{r}
+albums <- albums %>%
+mutate(summary_length = nchar(summary))
+
+ggplot(albums, aes(x = summary_length)) +
+geom_histogram(bins = 20, color = "white", alpha = 0.9) +
+labs(title = "Distribución de la longitud de los summaries",
+x = "Cantidad de caracteres",
+y = "Frecuencia") +
+theme_minimal()
+```
+
+```{r}
+ggplot(albums, aes(x = summary_length, y = metascore)) +
+geom_point(alpha = 0.6) +
+geom_smooth(method = "lm", se = FALSE) +
+labs(title = "Relación entre longitud del summary y Metascore",
+x = "Longitud del summary",
+y = "Metascore") +
+theme_minimal()
+```
+
+**Nota sobre disponibilidad de datos**
+
+El dataset analizado no incluye información válida en las columnas `release_date` ni `user_score`.\
+Por este motivo:
+
+-   No es posible realizar análisis temporales (por año o década).
+-   No es posible comparar las evaluaciones de la crítica con las del público.
+
+Igualmente, se realizaron análisis alternativos basados en la información disponible:\
+Metascore, artista, álbum y descripción (summary). Estos permiten observar patrones relevantes aunque no haya datos temporales.
